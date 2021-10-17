@@ -1,0 +1,102 @@
+---
+title: "wfkelly2_Mod4_Peer_Review"
+author: "William Kelly"
+date: "6/28/2021"
+output: html_document
+---
+
+# Load Libraries Needed
+```{r}
+library(tidyverse)
+library(lubridate)
+```
+
+
+# Read in Module 4 Peer Review Data
+```{r}
+df <- read.csv("mod4_peer_rev_data.csv")
+summary(df)
+```
+
+# Update Column Datatypes
+```{r}
+df$Department <- as.factor(df$Department)
+df$Category <- as.factor(df$Category)
+df$Date <- mdy(df$Date)
+
+typeof(df$CustomerCode) # Character Type Check
+
+```
+
+# Summary of Quantity and Price Columns
+```{r}
+summary(df$Quantity)
+summary(df$Price)
+```
+As shown by the summary we can see that 
+for Quantity Max=24, Min=1, Mean=11.31 NA's=7
+for Price Max=50, Min=3, Mean=22.81 NA's=10
+
+
+# Display Count of NA's in Quantity and Price Columns
+```{r}
+sum(is.na(df$Quantity))
+sum(is.na(df$Price))
+```
+
+# Bar Chart - Category Column
+```{r}
+ggplot(data = df) +
+  geom_bar(mapping = aes(x = Category, fill=Category)) +
+  theme(axis.text = element_text(size=5)) +
+  xlab("Category") + ylab("Count Number") + ggtitle("Bar Chart of Category")
+```
+
+# Bar Chart - Departments and their Revenue
+```{r}
+df$Revenue <- df$Price * df$Quantity
+
+df %>% ggplot(aes(x= fct_reorder(Department,-Revenue), y=Revenue)) + 
+  geom_bar(stat="identity", color='skyblue',fill='steelblue') +
+  labs(title = 'Bar Plot-Revenue by Departments')
+```
+
+# Histogram (Price & Quantity)
+```{r}
+ggplot(df, aes(x=Price)) + 
+  geom_histogram(binwidth = 0.5) +
+  coord_cartesian(xlim = c(0, 35)) +
+  labs(title = 'Histogram of Price')
+
+ggplot(df, aes(x=Quantity)) + 
+  geom_histogram(binwidth = 0.5) +
+  labs(title = 'Histogram of Quantity')
+```
+
+# Box and Whisker Plots (Price & Quantity)
+```{r}
+ggplot(df, aes(x=Price)) + 
+  geom_boxplot() + 
+  coord_cartesian(xlim = c(0, 35)) +
+  labs(title = 'Box Plot-Price') +
+  xlab("Price") + ylab("Count")
+
+ggplot(df, aes(x=Quantity)) + 
+  geom_boxplot() + 
+  labs(title = 'Box Plot-Quantity') +
+  xlab("Quantity") + ylab("Count")
+```
+
+# Essay Strengths and Weaknesses PowerBI, Alteryx and R
+
+In terms of PowerBI, the tool does a great job simplifying the process of creating visualizations with the point and click interface. Also is good at sharing results with others.
+
+In terms of Alteryx, the tool does a good job analyzing the data with a simply UI but doesn't do as good of a job at creating Visualizations compared to PowerBI and R Studio. I really like how you can see each step of the process for analyzing data in graphical UI form.
+
+In terms of R Studio does a great job at providing built in libraries like Tidyverse to simplify and provide added abilities to create charts and analyze the data. In summary I feel like R studio is the best in terms of ability, sharing, and replicability. 
+
+
+
+
+
+

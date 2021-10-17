@@ -1,0 +1,124 @@
+---
+title: "Regression Data"
+output:
+  html_document:
+    df_print: paged
+---
+In this lesson you will be introduced to the data that will be used to answer this question which is, "How are quarterly sales affected by quarter of the year, region, and by product category (parent name)?" 
+
+## Preliminaries
+If you haven't already done so, then install the [tidyverse][1] collection of packages. There are eight packages in this collection:  
+1. dplyr - for dataframe manipulation  
+2. tidyr - for reshaping data  
+3. ggplot2 - for visualizations  
+4. readr - for reading and writing data  
+5. stringr - for working with character strings  
+6. forcats - for working with factors  
+7. tibble - an "improved" alternative to dataframes  
+8. purrr - for working with functions and vectors (we won't use this)  
+
+You only need to install these packages once on the machine that you're using. If you have not already done so, then you can do so by uncommenting the code chunk below and running it. If you *have* already done so, then you should *not* run the next code chunk.
+```{r}
+# install.packages('tidyverse')
+```
+
+Load the tidyverse collection of packages by running the next code chunk.
+```{r}
+library(tidyverse)
+```
+
+Make sure that you have also downloaded the tecaRegressionData.rds file into the same folder in which this file is saved. The .rds format has two benefits over a .csv format.
+1. It compresses the file so that it doesn't take up as much space, and also can be loaded into R faster.
+2. It preserves the data type. This is especially helpful with dates and columns that you want to keep as either factors or character strings. In a .csv format, these columns will either all be read in as a character string or factor format. 
+
+Use the next code chunk to read in the data and load it as a dataframe object.
+```{r}
+trd <- readRDS('tecaRegressionData.rds')
+```
+
+## Getting to Know the Data
+This data is based on the teca dataset that you may have used before. The original teca data is very granular and each row in that dataset represents a line item for a purchase at one of about 150 gas stations and convenience stores in the central United States.
+
+The data that we're using aggregates the data by store for each quarter of 2019. Thus, every store should have four rows of data that pertains to one row for each quarter.
+
+Let's explore the structure of the data by either clicking on the blue down arrow next to the trd dataframe, or by running the `str()` function. 
+```{r}
+str(trd)
+```
+We can see that there are 564 rows of data and 13 columns. The first six columns, site_name through totalRevenue should be pretty self explanatory while the last seven columns need more explanation. Regardless, we will explain each one of them:  
+1. **site_name** = a character string with the unique identifier of the store  
+2. **quarter** = a numeric value of the year and quarter of the data such that 2019.1 = first quarter of 2019   
+3. **quarterNoYear** = a factor data type that has a label of the quarter in a factor format. The value of First for the first observation that occurred in 2019 corresponds to 2019.1 in the quarter column.    
+4. **lat** = a factor data type that has a label to indicate whether the store falls in the Northern or Southern half of the stores  
+5. **long** = a factor data type that has a label to indicate whether the store falls in the Eastern or Western half of the stores  
+6. **totalRevenue** = the total amount of revenue for that store during the quarter. These numbers are low because it's only a sample of the data. *This is the main variable that we would like to predict and explain.*  
+7. **Pop_py1** = the percentage of totalRevenue from the same quarter during the prior year that came from the Pop parent name  
+8. **Fuel_py1** = the percentage of totalRevenue from the same quarter during the prior year that came from the Fuel parent name  
+9. **Juicetonics_py1** = the percentage of totalRevenue from the same quarter during the prior year that came from the Juicetonics parent name  
+10. **ColdDispensedBeverage_py1** = the percentage of totalRevenue from the same quarter during the prior year that came from the Fuel ColdDispensedBeverage parent name  
+11. **OffInvoiceCigs_py1** = the percentage of totalRevenue from the same quarter during the prior year that came from the OffInvoiceCigs parent name  
+12. **Lottery_py1** = the percentage of totalRevenue from the same quarter during the prior year that came from the Lottery parent name  
+13. **Other_py1** = the percentage of totalRevenue from the same quarter during the prior year that came from one of the other parent names  
+
+## Check for Missing Values and Completeness  
+Let's now check to see if there are any missing values in the data by adding up the number of missing values using the `sum()` and `is.na()` functions.
+```{r}
+sum(is.na(trd))
+```
+The result is zero, so there are no missing values.
+
+The sum of the last six columns should add up to 1, meaning 100% of revenue during the same quarter of the prior year. Let's check to see if the rows of the last six columns add up to 1.
+```{r}
+rowSums(trd[,7:13]) # This returns the sum of the last six columns for every row.
+sum(rowSums(trd[,7:13])) # This adds up the prior values. Should equal 564--1 for each row.
+```
+Now let's see how many unique stores there are.
+```{r}
+n_distinct(trd$site_name)
+```
+If there are four observations for each store, then that would correspond to the 564 rows in the **trd** dataframe $(141*4=564)$. It looks like we have a dataframe that is complete and ready for analysis.
+
+## Descriptive Statistics  
+We will now evaluate the univariate statstics for each column using the `summary()` function.
+```{r}
+summary(trd)
+```
+* The values for quarter appear to be rounded to the nearest integer. We can visually explore the data to check that there is a value in the tenths place for the quarter.  
+* quarterNoYear has 141 observations for each quarter, which is what we would expect
+* lat and long are not quite evenly split because there is an odd number of sites, so one category will have four more observations
+* totalRevenue indicates that the values range from 2885 to 41,026. The mean and median are pretty close to each other, so we would expect the distribution to be symmetric.
+* If we look at the median values in the last six columns, we can see that Fuel and Other contributed the most to the totalRevenue values from the same quarter last year
+
+#### Visualizations  
+Those summary statistics are helpful, but the relative distributions can be identified much quicker by using box plots.
+```{r}
+trd %>%
+  pivot_longer(cols = 7:13, names_to = 'parent', values_to = 'pctSales') %>%
+  mutate(parent = abbreviate(parent, 10)) %>%
+  ggplot(aes(x = parent, y = pctSales)) +
+  geom_boxplot()
+```
+
+This is a much faster way of communicating the relative percentage of sales that each parent makes up. It also helps us see that Lottery and OffInvoiceCigs contribute a little more to revenue last year relative to Pop, Juicetonics, and ColdDispensedBeverages.
+
+##### Distribution of Parent Name by Region  
+To get a quick idea of whether the parent categories make up a different percentage of revenue by region, we can use the `facet_grid()` function along with the lat and long columns.
+```{r}
+trd %>%
+  pivot_longer(cols = 7:13, names_to = 'parent', values_to = 'pctSales') %>%
+  mutate(parent = abbreviate(parent, 6)) %>%
+  ggplot(aes(x = parent, y = pctSales)) +
+  geom_boxplot() +
+  # facet_grid(~lat + long)
+  facet_wrap(facets = vars(lat, long), nrow = 2)
+```
+
+There appears to be minor variations, but nothing major. The biggest difference appears to be in the South-Eastern region where there are often more lottery tickets sold than off-invoice cigs.
+
+## Concluding Comments  
+It's always to get a good idea of the data that you have before you analyze it. There would typically be a lot more data wrangling tasks, but this data has already been cleaned up so that we can focus on the analysis.
+
+
+
+
+[1]: https://www.tidyverse.org/packages/

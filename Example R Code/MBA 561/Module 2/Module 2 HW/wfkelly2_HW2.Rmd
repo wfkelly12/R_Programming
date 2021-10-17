@@ -1,0 +1,85 @@
+---
+title: "HW2"
+author: "William Kelly"
+date: "4/22/2021"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+## Install and or load all the required packages here
+```{r}
+ #install.packages("dplyr") # remove "#" if the package is not already installed. 
+library(dplyr)
+```
+
+## Q1 – Read in the ities.csv datafile as a dataframe object, df. 
+
+```{r}
+df <- read.csv('ities.csv')     # Read "ities.csv" file and assign to data frame variable "df"
+```
+No descriptive answer is needed.
+
+
+## Q2 – Display the number of rows and columns in the dataset using an appropriate R function. Below the output, identify which numbers from the output correspond to the number of rows and columns. 
+
+```{r}
+dim(df)   # Reading dimension of dataset
+```
+This dataframe contains 438151 as number of rows and 13 as number of columns
+
+
+## Q3 – Display the structure of the dataframe, df. Below the output, briefly summarize one or two main points about the dataframe structure.
+
+```{r}
+str(df)      # Function to display structure of data frame
+```
+This data frame has 13 columns (variables) and 438151 rows (observations)
+The data frame has 13 unique categories of data & contains chr, num, int types
+
+
+## Q4 – What is the unit of observation in the dataset? 
+Display at least one calculation in the code chunk below. Below the calculation(s), briefly explain how the output of your calculation(s) supports your conclusion.
+
+```{r}
+unique(df$Category)           # Function displays unique observations in the Category column
+length(unique(df$Category))   # Function length presents number of unique observations in Category 
+```
+The number of observations for 'Category' is 21 based on the length function
+
+## Q5 – If we were to consider each transaction as the unit of observation, comment on whether the provided data is in a tidy format. (No code is needed)
+
+The Data is Tidy because each column contains a variable corresponding to a unique piece of information
+i.e. Date, Price, Quantity, Total Due
+And each column represents a feature of the observations
+
+
+
+## Q6 – Display the summaries of the Price, Quantity and TotalDue columns. Below the output, provide a brief interpretation of the output.
+
+```{r}
+summary(df[,c('Price','Quantity','TotalDue')])    # Show summaries of Price Quantity and TotalDue
+```
+Minimum Price is $-5740.51 and Max price is $21449.97
+The average quantity is 1.177 and max quantity is 815
+Median total due is $11.80 and max total due is $21449.97
+
+## Q7 – Display the boxplots of the log values for the Price, Quantity and Total Due columns. Below the output, provide a brief interpretation of the output.   
+
+```{r}
+boxplot(log10(df$Price))    # Displays box plot of Price, Quantity, TotalDue
+boxplot(log10(df$Quantity))
+boxplot(log10(df$TotalDue))
+```
+
+Price and Total Due box plots have similar distribution of data
+Median value falls at 1 and outliers range from -1 and 4
+Min w/o outliers is 0 and Max w/o outliers is 2
+Slight indication of right skew towards larger values 
+  
+The quantity box plot has a smaller distribution and median IQR at 0
+Outliers ranging from 0 to 3 and skew towards larger values
+  
+
+
+

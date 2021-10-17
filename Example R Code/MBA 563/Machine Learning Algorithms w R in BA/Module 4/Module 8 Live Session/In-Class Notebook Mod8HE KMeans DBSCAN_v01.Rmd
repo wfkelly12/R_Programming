@@ -1,0 +1,108 @@
+************************************************************************
+# Title: In-Class Notebook Mod8HE K-Means DBSCAN
+Course: MBA563
+Term: Summer 2021
+Mooc or HE?: HE
+Module: 08
+Author: William Kelly
+************************************************************************
+
+*********K-Means & DBSCAN*******************************************************
+ In Class
+*********K-Means & DBSCAN*******************************************************
+
+**********K-MEANS ***************************
+# Install packages and read in data
+```{r}
+#install.packages('tidyverse') #only install once
+library(tidyverse)
+#install.packages('factoextra') #only install once
+library(factoextra)
+# read in data
+clustering_input1 <- read_rds("clustering_input1")
+clustering_input2 <- read_rds("clustering_input2")
+```
+
+# Z-score standardization
+```{r}
+clustering_input2 <- as.data.frame(scale(clustering_input2))
+```
+
+# Find a suitable epsilon
+```{r}
+set.seed(777)
+# Within-cluster sum of square method
+factoextra::fviz_nbclust(clustering_input2, kmeans, method = "wss")
+# Silhouette approach
+factoextra::fviz_nbclust(clustering_input2, kmeans, method = "silhouette")
+```
+
+# Run the model
+```{r}
+set.seed(777)
+clusters <- kmeans(clustering_input2, centers=4, iter.max=10, nstart=10)
+```
+
+# Size of the k clusters
+```{r}
+clusters$size 
+```
+
+# A matrix indicating the mean values for each feature and cluster combination
+```{r}
+clusters$centers
+```
+
+# Visualize the clustering
+```{r}
+fviz_cluster(clusters, clustering_input2,  geom = "point", show.clust.cent = TRUE, palette = "jco", ggtheme = theme_classic())
+```
+
+# Add cluster to the original a more complete dataframe and add labels
+```{r}
+clustering_input1$cluster <- clusters$cluster
+clustering_input1 <- clustering_input1 %>% mutate(cluster_labels = case_when(
+ cluster==1 ~ 'Cluster 1', 
+ cluster==2 ~ 'Cluster 2',
+ cluster==3 ~ 'Cluster 3',
+ cluster==4 ~ 'Cluster 4'))
+```
+
+
+
+**********DBSCAN**************************************************
+# Run this code before you start
+```{r}
+library(dbscan)
+# read in data
+clustering_input1 <- read_rds("clustering_input1")
+clustering_input2 <- read_rds("clustering_input2")
+```
+
+# Standardize the data using z-score standardization. The features need to be continuous and standardized. Why?
+```{r}
+clustering_input2 <- as.data.frame(scale(clustering_input2))
+```
+
+# Use `dbscan::knndistplot()` to find a suitable epsilon.
+This plots the k-nearest neighbor distances in a matrix of points. It measures the distance to the k nearest neighbors for each plot. K in this case is the minimum points.Then, it sorts those by distance, lowest to highest. This is then the x-axis. On the y-axis, the graph plots the distance to the nearest 7 neighbors for each point.
+```{r}
+dbscan::kNNdistplot(clustering_input2, k = 4)
+abline(h = c(2,3, 4, 5))
+```
+
+# Use the minPts and epsilon from above to run the DBSCAN algorithm
+```{r}
+set.seed(777)
+clusters_db <- dbscan::dbscan(clustering_input2, eps = 3, minPts = 4)
+```
+
+# Use the `table()` function to print the size of the clusters. How many clusters are present? What does the “0” cluster represent, do you think? Generally, we prefer clusters to be relatively equal in size. How equal are the clusters here? 
+```{r}
+table(clusters_db$cluster)
+```
+
+# Visualize the clusters
+```{r}
+fviz_cluster(clusters_db, clustering_input2,  geom = "point", show.clust.cent = FALSE, palette = "jco", ggtheme = theme_classic())
+```

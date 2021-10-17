@@ -1,0 +1,178 @@
+# J073 HW6 Group Assignment - Logistic Regression
+Course: MBA563
+Term: Summer 2021
+Module: 06
+
+Eric Boyle, Quaidzoher Dhilla, Brandon Hyer, Will Kelly, Christian Mukania, and Vinh Tran
+
+1.0 Load and summarize
+
+# Initial loading of data, packages, and functions
+```{r}
+# Run this reusable confusion matrix function (https://en.wikipedia.org/wiki/Confusion_matrix)
+my_confusion_matrix <- function(cf_table) {
+  true_positive <- cf_table[4]
+  true_negative <- cf_table[1]
+  false_positive <- cf_table[2]
+  false_negative <- cf_table[3]
+  accuracy <- (true_positive + true_negative) / (true_positive + true_negative + false_positive + false_negative)
+  sensitivity_recall <- true_positive / (true_positive + false_negative) 
+  specificity_selectivity <- true_negative / (true_negative + false_positive)
+  precision <- true_positive / (true_positive + false_positive) 
+  neg_pred_value <- true_negative/(true_negative + false_negative)
+  print(cf_table)
+  my_list <- list(sprintf("%1.0f = True Positive (TP), Hit", true_positive),
+                  sprintf("%1.0f = True Negative (TN), Rejection", true_negative),
+                  sprintf("%1.0f = False Positive (FP), Type 1 Error", false_positive),
+                  sprintf("%1.0f = False Negative (FN), Type 2 Error", false_negative),
+                  sprintf("%1.4f = Accuracy (TP+TN/(TP+TN+FP+FN))", accuracy), 
+                  sprintf("%1.4f = Sensitivity, Recall, Hit Rate, True Positive Rate (How many positives did the model get right? TP/(TP+FN))", sensitivity_recall),
+                  sprintf("%1.4f = Specificity, Selectivity, True Negative Rate (How many negatives did the model get right? TN/(TN+FP))", specificity_selectivity),
+                  sprintf("%1.4f = Precision, Positive Predictive Value (How good are the model's positive predictions? TP/(TP+FP))", precision),
+                  sprintf("%1.4f = Negative Predictive Value (How good are the model's negative predictions? TN/(TN+FN)", neg_pred_value)
+  )
+  return(my_list)
+}
+```
+
+# Install and load packages (don't install twice)
+```{r}
+#install.packages('tidyverse')
+library(tidyverse)
+
+# Load data
+df <- read_rds("mod6HE_logit.rds")
+
+# Explore the data and discuss in PowerPoint
+summary(df)
+```
+
+2.0 Run the Logistic Algorithm
+
+# Prepare the data
+```{r}
+# Not for the model (for use later)
+logit1 <- df %>% 
+  ungroup() %>% 
+  select(store, week, high_med_rev, high_med_gp, high_med_gpm)
+
+# For use in the model
+logit2 <- df %>% 
+  ungroup() %>% 
+  select(high_med_units, 
+         size, region, promo_units_per, 
+         altbev_units_per, confect_units_per, salty_units_per,
+         velocityA_units_per, velocityB_units_per, velocityC_units_per, velocityD_units_per, velocityNEW_units_per)
+
+# Check that "positive" is last for the `my_confusion_matrix` to work 
+contrasts(factor(logit2$high_med_units))
+```
+
+
+# Partition the data into testing and training datasets
+```{r}
+#install.packages('caret') (don't install twice)
+library(caret)
+set.seed(77) 
+partition <- caret::createDataPartition(y=logit2$high_med_units, p=.75, list=FALSE)
+data_train <- logit2[partition, ]
+data_test <- logit2[-partition, ]
+```
+
+
+# Train the multivariate model - these are the instructions part of machine learning
+```{r}
+model_train <- glm(high_med_units ~ ., family=binomial, data=data_train)
+summary(model_train)
+```
+
+# Predict the response variable (Use the instructions to predict the likelihood of high gross profit)
+```{r}
+predict_test <- predict(model_train, newdata=data_test, type='response')
+```
+
+
+# Form table to look at the accuracy of the model
+```{r}
+table2 <- table(predict_test>.5, data_test$high_med_units) #prediction on left and truth on top
+my_confusion_matrix(table2)
+```
+
+3.0 Use the predictions above to help the business
+
+# Put the data back together for future use
+```{r}
+# Put the prediction back into the test data
+data_test$prediction <- predict_test
+
+# Create a variable that shows if the prediction was correct 
+# (We have to do the classification--in `round(prediction)`--since logistic regression gives us a probability)
+data_test <- data_test %>% mutate(correct_prediction = if_else(round(prediction) == high_med_units, 'correct', 'WRONG!'))
+
+# Add back the original data
+temp1 <- logit1[-partition, ]
+full_test <- bind_cols(temp1, data_test)
+
+# For viewing in class
+full_test <- full_test %>% 
+  select(store, week, high_med_units, prediction, correct_prediction, size, region, promo_units_per, salty_units_per)
+slice_sample(full_test, n=10)
+```
+
+# Questions
+
+# 1.a What feature/variable has the most negative statistically significant coefficient on the trained model summary?
+
+•	Intercept = -31.8
+
+•	“promo_units_per” = -6.742
+
+•	The most negative statistically significant coefficient is promo_units_per at -6.742.
+
+# 1.b Does selling a higher proportion of alternative beverages increase, decrease, or neither increase nor decrease the chance of having above median units sold? How do you know this?
+
+•	“altbev_units_per” = 7.42 w/ p = 0.0000000000000241 (statistically significant)
+
+•	-31.8 + 7.42 = -24.38
+
+•	The coefficient of alternative beverage is 7.42 so selling a higher proportion would increase chance of having above median units sold because it is a positive coefficient. But when adding to intercept it would make it -24.38 which would decrease due to the negative coefficient value. 
+
+# 1.c Does selling a higher proportion of velocity B units increase, decrease, or neither increase nor decrease the chance of having above median units sold? How do you know this?
+
+•	“velocityB_units_per” = 4.95 w/ p = 0.135 (Not significantly significant > 0.05)
+
+•	-31.8 + 4.95 = -26.85
+
+•	The coefficient for velocity B is 4.95 which is a positive coefficient meaning that selling a higher proportion of velocity B units would increase chance of having above median units sold but the coefficient is not significantly correlated due to the p value being greater than 0.05. Also, when adding to intercept the overall coefficient results in -26.85 which would overall decrease the chance due to negative coefficient.
+
+# 1.d Examine the accuracy of the predictions on the test data by answering whether there are more true positives or more true negatives?
+
+•	There are 975 TP and 904 TN, so we can see that there are more True Positives as compared to True Negatives which shows an accuracy of 75% making the model fairly accurate.
+
+# 1.e If stores are sorted by the `store` feature in an ascending manner (lowest number first), which is the first store in the `full_test` dataset that has a “WRONG!” prediction?
+
+•	The first store with the WRONG! prediction is store 186, size 966, region Ontario
+
+# 2. In the model training step, which data—training or testing—do we use and why (that is, explain why we split the data into training and testing subsets)?
+
+•	We use the training data in the model training step but also use the test data for checking the accuracy of the model. Thus, the point of splitting the data is to check whether the model that is created works not just on the data that we have, the training data, but also on the new data, the hold out data or the testing data as well. This avoids the situation in which our model fits the data perfectly but does not generalize to the other data. This is important in terms of machine learning because the goal of ML solutions is to speak not only to the data we have but also to predict future outcomes and future relationships b/t variables. 
+
+# 3. The feature `region` has changed in the summary of the trained model. Further, only three regions show up in the summary of the model. The reasoning for this is that the `glm()` function automatically recognizes that `region` is a categorical variable (specifically a factor in R). This is discussed in our Coursera content. Thus, the `glm()` function has created “dummy variables” for the levels of `region`. Which level of the variable is not present here but rather accounted for in the intercept term?
+
+•	The variable that is shown as the intercept term is Ontario with an intercept value of -31.8 and p value of 2e-16 
+
+# 4. Interpret the confusion matrix using the test / holdout data. Specifically, which of the four measures, Sensitivity, Specificity, Precision, or Negative Predictive Value has the highest value? Write a sentence that translates this value into words. That is, say something that starts like this: “this means this model is good at predicting...”.
+
+•	The measure of Sensitivity has the highest value at 76.5%
+
+•	This means that the model is good at predicting how many positives it got right, or in other words the Hit Rate/True Positive Rate.
+
+# 5. Interpret the confusion matrix. Specifically, which of the four measures, Sensitivity, Specificity, Precision, or Negative Predictive Value has the lowest value? Write a sentence that translates this value into words. That is say something that starts like this: “this means this model is not as good at predicting…”.
+
+•	The measure of Specificity has the lowest value at 72.7%
+
+•	This means that the model did not do as well at predicting how many negatives it got right as compared to the other values within the confusion matrix.
+
+# 6. Interpret the confusion matrix. In NANSE’s business setting, which of these measures does NANSE care about the most, sensitivity, specificity, precision, negative predictive value, or something else? Defend your answer in two or three sentences. There is no correct answer here, but you must successfully defend your answer to get credit.
+
+•	In NANSE's business setting, the company cares the most about the Sensitivity due to the fact that the company would want to know how many times the model was able to predict the correct positive results. This would show how accurate the model is at predicting higher traffic in its stores and when a store will have an above median value of units sold. But also it would be useful to know the Accuracy through (TP+TN/(TP+TN+FP+FN)) which would show how accurate the model is overall at predicting traffic of store sales.

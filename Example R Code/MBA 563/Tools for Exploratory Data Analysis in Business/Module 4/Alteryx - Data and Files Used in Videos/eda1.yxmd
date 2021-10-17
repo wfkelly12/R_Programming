@@ -1,0 +1,269 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2021.1">
+  <Nodes>
+    <Node ToolID="1">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+        <Position x="54" y="54" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Passwords />
+          <File RecordLimit="" SearchSubDirs="False" FileFormat="0" OutputFileName="">C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv</File>
+          <FormatSpecificOptions>
+            <HeaderRow>True</HeaderRow>
+            <IgnoreErrors>False</IgnoreErrors>
+            <AllowShareWrite>False</AllowShareWrite>
+            <ImportLine>1</ImportLine>
+            <FieldLen>254</FieldLen>
+            <SingleThreadRead>False</SingleThreadRead>
+            <IgnoreQuotes>DoubleQuotes</IgnoreQuotes>
+            <Delimeter>,</Delimeter>
+            <QuoteRecordBreak>False</QuoteRecordBreak>
+            <CodePage>28591</CodePage>
+          </FormatSpecificOptions>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>dataForEDA.csv</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <Dependencies>
+          <Implicit />
+        </Dependencies>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="unique_id" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="transaction_id" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="date" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="year" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="month" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="day" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="dow" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="quarter" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="customer_id" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="product_id" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="product_name" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="category_id" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="category_name" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="parent_id" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="parent_name" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="product_count" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="site_id" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="site_name" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="address" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="city" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="zip" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="latitude" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="longitude" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="site_status" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="revenue" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="gross_profit" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="gp_margin" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="costs" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="units" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="state_province_code" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+    </Node>
+    <Node ToolID="2">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.BrowseV2.BrowseV2">
+        <Position x="438" y="54" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <TempFile>C:\Users\racnr\AppData\Local\Temp\Engine_4640_f0f4e65ead4e4ac3b398b5860e025354_\Engine_912_81c33dd3408b485c9f348cba756d7af5_.yxdb</TempFile>
+          <TempFileDataProfiling />
+          <Layout>
+            <ViewMode>Single</ViewMode>
+            <ViewSize value="100" />
+            <View1>
+              <DefaultTab>Report</DefaultTab>
+              <Hints>
+                <Table />
+              </Hints>
+            </View1>
+            <View2 />
+          </Layout>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxBrowseV2" />
+    </Node>
+    <Node ToolID="3">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="150" y="54" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="date" selected="True" type="Date" size="10" />
+            <SelectField field="year" selected="True" type="Int16" size="2" />
+            <SelectField field="month" selected="True" type="Int16" size="2" />
+            <SelectField field="day" selected="True" type="Int16" size="2" />
+            <SelectField field="quarter" selected="True" type="Int16" size="2" />
+            <SelectField field="latitude" selected="True" type="Float" size="4" />
+            <SelectField field="longitude" selected="True" type="Float" size="4" />
+            <SelectField field="revenue" selected="True" type="Float" size="4" />
+            <SelectField field="gross_profit" selected="True" type="Float" size="4" />
+            <SelectField field="gp_margin" selected="True" type="Float" size="4" />
+            <SelectField field="costs" selected="True" type="Float" size="4" />
+            <SelectField field="units" selected="True" type="Float" size="4" />
+            <SelectField field="*Unknown" selected="True" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="4">
+      <GuiSettings>
+        <Position x="270" y="54" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Value name="Select Fields">unique_id=False,transaction_id=False,date=True,year=False,month=False,day=False,dow=False,quarter=False,customer_id=False,product_id=False,product_name=False,category_id=False,category_name=True,parent_id=False,parent_name=False,product_count=False,site_id=False,site_name=False,address=False,city=False,zip=False,latitude=False,longitude=False,site_status=False,revenue=True,gross_profit=True,gp_margin=True,costs=True,units=True,state_province_code=True</Value>
+          <Value name="Sample Data">False</Value>
+          <Value name="Number">True</Value>
+          <Value name="NNumber">5000</Value>
+          <Value name="Percent">False</Value>
+          <Value name="NPercent">10</Value>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <Dependencies>
+          <Implicit />
+        </Dependencies>
+      </Properties>
+      <EngineSettings Macro="Predictive Tools\Field_Summary_Report.yxmc" />
+    </Node>
+    <Node ToolID="5">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.BrowseV2.BrowseV2">
+        <Position x="366" y="6" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <TempFile>C:\Users\racnr\AppData\Local\Temp\Engine_4640_f0f4e65ead4e4ac3b398b5860e025354_\Engine_912_2effd86707634a2eae531bd9499d1cef_.yxdb</TempFile>
+          <TempFileDataProfiling />
+          <Layout>
+            <ViewMode>Single</ViewMode>
+            <ViewSize value="100" />
+            <View1>
+              <DefaultTab>Report</DefaultTab>
+              <Hints />
+            </View1>
+            <View2 />
+          </Layout>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxBrowseV2" />
+    </Node>
+    <Node ToolID="6">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.BrowseV2.BrowseV2">
+        <Position x="366" y="138" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <TempFile>C:\Users\racnr\AppData\Local\Temp\Engine_4640_f0f4e65ead4e4ac3b398b5860e025354_\Engine_912_c29e5b7dda444f49a8357e033fd869f4_.yxdb</TempFile>
+          <TempFileDataProfiling />
+          <Layout>
+            <ViewMode>Single</ViewMode>
+            <ViewSize value="100" />
+            <View1>
+              <DefaultTab>Report</DefaultTab>
+              <Hints>
+                <Table />
+              </Hints>
+            </View1>
+            <View2 />
+          </Layout>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxBrowseV2" />
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="1" Connection="Output" />
+      <Destination ToolID="3" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="3" Connection="Output" />
+      <Destination ToolID="4" Connection="Field Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="4" Connection="Reports" />
+      <Destination ToolID="2" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="4" Connection="Output" />
+      <Destination ToolID="5" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="4" Connection="Interactive" />
+      <Destination ToolID="6" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>eda1</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+  </Properties>
+</AlteryxDocument>

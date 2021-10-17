@@ -1,0 +1,322 @@
+---
+title: "Divvy"
+author: "Ryne Burgess"
+date: "5/25/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r include=FALSE}
+#Load the dplyr, magrittr, lubridate and tidyr packages.
+library(dplyr)
+library(magrittr)
+library(lubridate)
+library(tidyr)
+library(tidyverse)
+library(ggplot2)
+```
+
+Ignore these chunks, they use quarterly data which was not use for visuals
+# ```{r}
+# #Generate dataframes for quarterly Trip data 
+# Q1_19 <- read.csv('Divvy_Trips_2019_Q1', stringsAsFactors = T)
+# Q2_19 <- read.csv('Divvy_Trips_2019_Q2', stringsAsFactors = T)
+# Q3_19 <- read.csv('Divvy_Trips_2019_Q3.csv', stringsAsFactors = T)
+# Q4_19 <- read.csv('Divvy_Trips_2019_Q4.csv', stringsAsFactors = T)
+# Q1_20 <- read.csv('Divvy_Trips_2020_Q1.csv', stringsAsFactors = T)
+# ```
+# 
+# ```{r}
+# #Rename DF - 2019 Q2
+# names(Q1_19) [1] <- 'Ride ID'
+# names(Q1_19) [2] <- 'Start Time'
+# names(Q1_19) [3] <- 'End Time'
+# names(Q1_19) [4] <- 'Bike ID'
+# names(Q1_19) [5] <- 'Duration (sec)'
+# names(Q1_19) [6] <- 'Start Station ID'
+# names(Q1_19) [7] <- 'Start Station Name'
+# names(Q1_19) [8] <- 'End Station ID'
+# names(Q1_19) [9] <- 'End Station Name'
+# names(Q1_19) [10] <- 'User Type'
+# names(Q1_19) [11] <- 'Gender'
+# names(Q1_19) [12] <- 'Birthyear'
+# 
+# #Rename DF - 2019 Q2
+# names(Q2_19) [1] <- 'Ride ID'
+# names(Q2_19) [2] <- 'Start Time'
+# names(Q2_19) [3] <- 'End Time'
+# names(Q2_19) [4] <- 'Bike ID'
+# names(Q2_19) [5] <- 'Duration (sec)'
+# names(Q2_19) [6] <- 'Start Station ID'
+# names(Q2_19) [7] <- 'Start Station Name'
+# names(Q2_19) [8] <- 'End Station ID'
+# names(Q2_19) [9] <- 'End Station Name'
+# names(Q2_19) [10] <- 'User Type'
+# names(Q2_19) [11] <- 'Gender'
+# names(Q2_19) [12] <- 'Birthyear'
+# 
+# #Rename DF - 2019 Q3
+# names(Q3_19) [1] <- 'Ride ID'
+# names(Q3_19) [2] <- 'Start Time'
+# names(Q3_19) [3] <- 'End Time'
+# names(Q3_19) [4] <- 'Bike ID'
+# names(Q3_19) [5] <- 'Duration (sec)'
+# names(Q3_19) [6] <- 'Start Station ID'
+# names(Q3_19) [7] <- 'Start Station Name'
+# names(Q3_19) [8] <- 'End Station ID'
+# names(Q3_19) [9] <- 'End Station Name'
+# names(Q3_19) [10] <- 'User Type'
+# names(Q3_19) [11] <- 'Gender'
+# names(Q3_19) [12] <- 'Birthyear'
+# 
+# #Rename DF - 2019 Q4
+# names(Q4_19) [1] <- 'Ride ID'
+# names(Q4_19) [2] <- 'Start Time'
+# names(Q4_19) [3] <- 'End Time'
+# names(Q4_19) [4] <- 'Bike ID'
+# names(Q4_19) [5] <- 'Duration (sec)'
+# names(Q4_19) [6] <- 'Start Station ID'
+# names(Q4_19) [7] <- 'Start Station Name'
+# names(Q4_19) [8] <- 'End Station ID'
+# names(Q4_19) [9] <- 'End Station Name'
+# names(Q4_19) [10] <- 'User Type'
+# names(Q4_19) [11] <- 'Gender'
+# names(Q4_19) [12] <- 'Birthyear'
+# ```
+# 
+# ```{r}
+# #Generate DF for 2019 Quarterly Trip Data
+# 
+# df_2019 <- rbind(Q1_19, Q2_19, Q3_19, Q4_19)
+# ```
+# 
+# ```{r}
+# summary(df_2019)
+# ```
+
+
+```{r}
+#Generate DF for monthly trip data
+df_2020_11 <- read.csv('202011-divvy-tripdata.csv', stringsAsFactors = T)
+df_2020_12 <- read.csv('202012-divvy-tripdata.csv', stringsAsFactors = T)
+df_2021_01 <- read.csv('202101-divvy-tripdata.csv', stringsAsFactors = T)
+df_2021_02 <- read.csv('202102-divvy-tripdata.csv', stringsAsFactors = T)
+df_2021_03 <- read.csv('202103-divvy-tripdata.csv', stringsAsFactors = T)
+df_2021_04 <- read.csv('202104-divvy-tripdata.csv', stringsAsFactors = T)
+
+df_tripdata <- rbind(df_2020_11, df_2020_12, df_2021_01, df_2021_02, df_2021_03, df_2021_04)
+
+#Rename DF columns
+names(df_tripdata) [1] <- 'Ride_ID'
+names(df_tripdata) [2] <- 'Rideable_Type'
+names(df_tripdata) [3] <- 'Start_Time'
+names(df_tripdata) [4] <- 'End_Time'
+names(df_tripdata) [5] <- 'Start_Name'
+names(df_tripdata) [6] <- 'Start_ID'
+names(df_tripdata) [7] <- 'End_Name'
+names(df_tripdata) [8] <- 'End_ID'
+names(df_tripdata) [9] <- 'Start_Lat'
+names(df_tripdata) [10] <- 'Start_Lng'
+names(df_tripdata) [11] <- 'End_Lat'
+names(df_tripdata) [12] <- 'End_Lng'
+names(df_tripdata) [13] <- 'User_Type'
+
+df_tripdata %<>%
+  mutate(
+    Start_Time = as.character(Start_Time)) %>%
+  mutate(
+    End_Time = as.character(End_Time)
+  )
+
+```
+
+# ```{r}
+# summary(df_tripdata)
+# ```
+```{r}
+df_td <- df_tripdata %>%
+  mutate(
+    Start_Time = ymd_hms(Start_Time)) %>%
+  mutate(
+    End_Time = ymd_hms(End_Time)) %>%
+  mutate(
+    Duration = difftime(End_Time, Start_Time, units = 'mins')) %>%
+  mutate(
+    Day = weekdays(Start_Time)
+  ) %>%
+  mutate(
+    Day = factor(Day, levels = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"))) %>%
+  mutate(
+    Start_Hour = hour(Start_Time)) %>%
+  mutate(
+    Start_Hour = factor(Start_Hour)
+  )
+```
+
+```{r}
+#Generate a tidy version of df_td with relevant data
+
+df_td_short <- df_td %>%
+  select(,-c(Ride_ID, Start_ID, End_ID, Start_Lat, Start_Lng, End_Lat, End_Lng)) %>%
+  relocate(User_Type, .before = Rideable_Type) %>%
+  relocate(Duration, .after = User_Type) %>%
+  relocate(Day, .after = Duration) %>%
+  relocate(Start_Hour, .after = Start_Time) %>%
+  filter(Duration > 0)
+#summary(df_td_short)
+```
+
+Most of the visuals below this point are based on the following tutorial: http://lab.rady.ucsd.edu/sawtooth/business_analytics_in_r/Viz1.html
+
+```{r}
+#Compare Casual vs. Member Rides per Weekday 
+
+df_td_short %>%
+  filter(User_Type %in% c('casual', 'member')) %>%
+  ggplot(aes(x=Day,fill=User_Type)) +
+    geom_bar(position = 'dodge') +
+    #ylab("Number of Rides") +
+    #xlab("Weekday") +
+    #ggtitle("Casual vs. Member Rides Per Weekday") +
+    scale_fill_brewer(palette="Paired") +
+    theme_bw() +
+    theme(panel.background = element_blank(),
+          panel.border = element_blank(),
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(),
+          axis.line = element_line(colour = "black"),
+          legend.position="none",
+          axis.title.x = element_blank(),
+          axis.title.y = element_blank()
+          )
+```
+
+
+```{r}
+#Compare Casual vs. Member Ride Start Times
+
+df_td_short %>%
+  filter(User_Type %in% c('casual', 'member')) %>%
+  ggplot(aes(x=Start_Hour,fill=User_Type)) +
+    geom_bar(position = 'dodge') +
+    #ylab("Number of Rides") +
+    #xlab("Trip Start Hour") +
+    #ggtitle("Casual vs. Member Ride Start Time") +
+    scale_fill_brewer(palette="Paired") +
+    theme_bw() +
+    theme(panel.background = element_blank(),
+          panel.border = element_blank(),
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(),
+          axis.line = element_line(colour = "black"),
+          legend.position="none",
+          axis.title.x = element_blank(),
+          axis.title.y = element_blank()
+          ) +
+    scale_x_continuous(breaks = c(0,6,12,18),
+                       label = c("0:00","6:00","12:00","18:00"))
+```
+
+```{r}
+df_td_short %>%
+  filter(User_Type %in% c('casual','member')) %>%
+  ggplot(aes(x=Start_Hour)) + geom_bar() +
+    xlab("Trip Start Hour") +
+    ylab("Number of Rides") +
+    theme(axis.text.x = element_text(size=8)) +
+    facet_wrap(~User_Type)
+```
+
+```{r}
+df_td_short %>%
+  filter(User_Type %in% c('casual','member')) %>%
+  group_by(Day,User_Type,Start_Hour) %>%
+  ggplot(aes(x=Start_Hour,fill=Day)) + 
+  geom_bar() + 
+  labs(x = 'Trip Start Hour',
+       y = 'Number of Rides',
+       title = 'Number of Rides By Start Hour and Weekday')+
+  facet_grid(Day~User_Type) + 
+  theme(axis.text.x  = element_text(size=8),
+        legend.position="none")
+```
+
+
+```{r}
+df_td_short %>%
+  filter(User_Type %in% c('casual', 'member')) %>%
+  count(User_Type, Day) %>%
+  ggplot(aes(x=Day, y=n, color=User_Type, group=User_Type)) + 
+    geom_point() +
+    geom_line(linetpe = 'dotted') +
+    ylab("Number of Rides") +
+    xlab("Trip Weekday") +
+    ggtitle("Casual vs. Member Rides Per Weekday")
+```
+
+```{r}
+#Determine outlier ride durations, i.e., percent of rides over 3 hours
+# df_td_short %>%
+#   arrange(desc(Duration)) %>%
+#   select(Duration) %>%
+#   slice(1:5)
+#   
+# sum(df_td_short$Duration > 180)/nrow(df_td_short)
+```
+
+```{r}
+#Ride Distribution For Rides under 60 Mins
+
+df_td_short %>%
+  ggplot(aes(x=Duration)) + geom_histogram() + xlim(0,60)
+```
+```{r}
+df_td_short %>%
+filter(User_Type %in% c('casual', 'member')) %>%
+  ggplot(aes(x=Duration,fill=User_Type)) +
+    geom_histogram(position = 'dodge') +
+    xlim(0,60) +
+    ylab("Number of Rides") +
+    xlab("Trip Duration") +
+    ggtitle("Casual vs. Member Ride Duration (All Rides Under 60 Min)")
+```
+
+```{r}
+df_td_short %>%
+  group_by(Day,Start_Hour) %>%
+  summarize(med.duration=median(Duration)) %>%
+  ggplot(aes(x=Start_Hour,y=med.duration,group=Day,color=Day)) + 
+  geom_point(size=1) + 
+  geom_line(size=0.5) + 
+  facet_wrap(~Day,nrow=1) + 
+  theme(legend.position="none")
+```
+
+```{r}
+df_td_short %>%
+  filter(User_Type %in% c('casual','member')) %>%
+  group_by(Day,Start_Hour,User_Type) %>%
+  summarize(med.duration=median(Duration)) %>%
+  ggplot(aes(x=Start_Hour,y=med.duration,group=Day,color=Day)) + 
+  geom_point(size=1) + 
+  geom_line(size=0.5) + 
+  facet_grid(Day~User_Type) + 
+  theme(legend.position="none")
+```
+```{r}
+df_td_short %>%
+  filter(User_Type %in% c('casual','member')) %>%
+  group_by(Day,Start_Hour,User_Type) %>%
+  summarize(med.duration=median(Duration)) %>%
+  ggplot(aes(x=Start_Hour,y=med.duration,group=User_Type,
+             color=User_Type,linetype=User_Type,shape=User_Type)) + 
+  geom_point(size=1) + 
+  geom_line(size=0.5) + 
+  facet_wrap(~Day,nrow=1) + 
+  labs(x='Time of Day',
+       y='Median Trip Duration')
+```
+

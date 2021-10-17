@@ -1,0 +1,133 @@
+---
+title: "Multiple Regression"
+output:
+  html_document:
+    df_print: paged
+---
+Recall that our broad business question is, "How are quarterly sales affected by quarter of the year, region, and by product category (parent name)?" Up to this point we have analyzed the ability of predictor variables (aka explanatory variables) to create forecasts of quarterly revenue independently of each other. In other words, we have used one predictor variable in a regression model. This is known as simple regression. In this lesson we will investigate the benefits of using multiple variables in the same linear model to create those forecasts. When we do that it’s known as multiple regression.   
+
+## Preliminaries
+If you haven't already done so, then install the [tidyverse][1] collection of packages, and the [jtools][2] package. Functions from the jtools package depend on at least two other packages, ggstance, and huxtable, so you will also need to install those packages. You should also install the corrplot package if you have not already done so.
+
+You only need to install these packages once on the machine that you're using. If you have not already done so, then you can do so by uncommenting the code chunk below and running it. If you *have* already done so, then you should *not* run the next code chunk.
+```{r}
+# install.packages('tidyverse')
+ # install.packages('jtools')
+ # install.packages('ggstance')
+ # install.packages('huxtable')
+# install.packages('corrplot')
+```
+
+Load the tidyverse collection of packages.
+```{r}
+library(tidyverse) 
+library(jtools) # For tabulating and visualizing results from multiple regression models
+library(corrplot)
+```
+
+Make sure that you have also downloaded the tecaRegressionData.rds file into the same folder in which this file is saved. Use the next code chunk to read in the data and load it as a dataframe object.
+```{r}
+trd <- readRDS('tecaRegressionData.rds')
+```
+
+## Simple Regressions  
+Creating a linear model using more than one explanatory variable is easy to do in R, but we also want to illustrate that it's not simply a combination of coefficients from many simple regressions that include only one predictor variable. (By the way, a simple regression is a regression in which there is only one predictor variable.) 
+
+As a benchmark, let's first calculate simple regression models of totalRevenue on Fuel_py1 and Juicetonics_py1 and store the coefficients and then aggregate R-squared values in dataframes for comparison purposes.
+
+```{r}
+lm1 <- lm(totalRevenue ~ Fuel_py1, data = trd)
+lm2 <- lm(totalRevenue ~ Juicetonics_py1, data = trd)
+export_summs(lm1, lm2) # Create a nice looking table for comparing the regression results
+```
+
+The table indicates the key takeaways from both linear models:  
+* Coefficient estimates  
+  * For model 1, the coefficient estimate is -11,509.68 for the intercept and is 35,096.84 for Fuel_py1.  
+  * For model 2, the coefficient estimate is 14,295.79 for the intercept and is -150,275.47 for Juicetonics_py1.
+  * The standard errors are in parentheses below these coefficient estimates.  
+* N stands for number of observations, and they are both based on 564 observations.  
+* R2 is the R-squared, which is much larger for model 1, 40%, than for model 2, 3%. This means that model 1 explains more variation in totalRevenue than model 2, and is better for making predictions.  
+
+Let's use the jtools package to plot the coefficients and standard errors to help visualize the results.
+
+```{r}
+plot_summs(lm1, lm2)
+```
+
+I think this visualization is excellent. It clearly shows that the coefficient on Fuel_py1 from model 1 is positive, and has a much smaller standard error relative to the negative coefficient on Juicetonics_py1 from model 2. As you may have guessed, the long orange whiskers and the short, barely visible blue whiskers represent the standard error, or the range in which the actual value could be.
+
+## Multiple Regression of totalRevenue on Fuel_py1 and Juicetonics_py1  
+Now, let's run a multiple regression that contains both predictor variables in the same model, and evaluate the models. It's called a multiple regression because it has multiple predictor variables.
+```{r}
+lm3 <- lm(totalRevenue ~ Fuel_py1 + Juicetonics_py1, data = trd)
+export_summs(lm1, lm2, lm3)
+```
+First, notice how the R-squared for model 3 is .42, which is higher than the R-squared of .40 in model 1 and .03 in model 2. This means that we can have a little more confidence in the accuracy of these predictions than in the predictions from model 1, and a lot more confidence in the predictions compared to model 2.
+
+Also, the R-squared is not simply a sum of the R-squared from models 1 and 2. This is because Fuel_py1 and Juicetonics_py1 are correlated to each other. Let's review the corrleation matrix. It looks like they have a fairly strong correlation of -.46 with each other. This also has implications for helping us understand the relationships among these variables.
+
+```{r}
+ctrd <- cor(trd %>% select(where(is.numeric)))
+corrplot(ctrd
+         , method = 'color' # I also like pie and ellipse
+         , order = 'hclust' # Orders the variables so that ones that behave similarly are placed next to each other
+         , addCoef.col = 'black'
+         , number.cex = .6 # Lower values decrease the size of the numbers in the cells
+         )
+```
+Notice that the coefficient estimates in model 3 are different than in the other two models, and are all statistically significant. 
+
+The coefficient estimates for the intercept and Fuel_py1 are similar, but more extreme than those in model 1. However, the coefficient estimate for Juicetonics_py1 is drastically different. It changed from about a value of -150,000 to a positive value of 150,000. Once again, this is because Fuel_py1 and Juicetonics_py1 are correlated with each other, and the coefficient estimates represent the unique effect of each predictor variable after considering the effect(s) of the other predictor variables.
+
+This change is effectively communicated by visualizing the coefficients from all three models.
+```{r}
+plot_summs(lm1, lm2, lm3)
+```
+
+
+Conceptually, this change in the Juicetonics_py1 coefficient makes sense, as well. Specifically, the negative correlation between Fuel_py1 and Juicetonics_py1 means that stores that have higher percentage of fuel sales have a smaller percentage of juice and tonic sales. People spend a lot more on fuel than on juice and tonics, so stores that depend more on sales of juice an tonics are likely to not generate as much total revenue.
+
+So, the really great thing for explanatory purposes is that we can evaluate the effect of an increase of percentage sales from juice and tonics after controlling for the amount of sales from fuel. In other words, stores that have the same amount of fuel sales can expect to have higher total revenue if they increase their sales from juice and tonics. 
+
+In the absence of being able to run an experiment, this is the next best thing. In some ways it's better because running an experiment would be really hard.
+
+## Predictions  
+Making predictions using a multiple regression model is a fairly straightforward extension of making predictions from a simple regression model. In our case, if we want to estimate the total revenue for a store in which during the previous year 70% of sales came from fuel and 3% came from juice and tonics, then we would take the intercept of -16,856, then add .7 times 39,333, and finally add .03 times 149,876 which would give us $15,173.86=-16,856 + (.7*39,333)+(.03*149,876)$. Of course, we can simply use the `predict()` function to calculate those predictions.
+
+## Adjusted R-square  
+You may have noticed the adjusted R-squared in the output, and that it's always lower than the R-squared. The purpose of the adjusted R-squared is to penalize regression models for adding in predictor variables that do not add much explanatory power, or that are insignificant. 
+
+Let's create a larger multiple regression model by adding in ColdDispensedBeverage_py1, Lottery_py1, and quarterNoYear and look at the summary.
+```{r}
+lm4 = lm(totalRevenue ~ Fuel_py1 + Juicetonics_py1 + ColdDispensedBeverage_py1 + Lottery_py1, data = trd)
+summary(lm4)
+```
+Notice that the Lottery_py1 variable in this model has a statistically insignificant coefficient, which means that we're not very confident that this coefficient could be zero or negative. This is contributing to the adjusted R-squared value being less than the R-squared value.
+
+## Parsimony  
+We don't want to make things more difficult than they need to be, so to keep things simple, the final model that is often used typically includes only the variables that are statistically significant, and the adjusted R-squared should remain about the same as when it was left in the model. Let's try it out.
+
+```{r}
+lm5 = lm(totalRevenue ~ Fuel_py1 + Juicetonics_py1 + ColdDispensedBeverage_py1, data = trd)
+summary(lm5)
+```
+In this case, the adjusted R-squared even increased slightly.
+
+```{r}
+plot_summs(lm1, lm2, lm3, lm4, lm5)
+```
+
+## Concluding Comments  
+In conclusion, multiple regression is a very powerful tool for both predictive and explanatory purposes. It improves the predictive power by using the effect of multiple variables. It improves the explanatory power by reporting the unique effect of each predictor variable.
+
+The adjusted R-squared should be the main version of R-squared that you focus on when using multiple regressions because it is a more conservative estimate of the expected explanatory power of a model.
+
+
+
+
+
+
+
+[1]: https://www.tidyverse.org/packages/
+[2]: https://jtools.jacob-long.com/

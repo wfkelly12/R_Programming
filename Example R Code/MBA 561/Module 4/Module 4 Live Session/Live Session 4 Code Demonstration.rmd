@@ -1,0 +1,215 @@
+---
+title: "Live Session 4 Code Demonstration"
+author: "Ron Guymon"
+date: "5/5/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Overview
+
+Let's assume that we're a product manager who is trying to evaluate the health of our products. We think that weather may influence sales. Let's aggregate the data at the weather level and see how the UnitsSold varies. 
+
+
+## Load Libraries and Read in Data
+
+```{r}
+library(tidyr)
+library(magrittr) # For piping data into functions
+library(lubridate) # For dealing with dates
+library(stringr) # String functions
+library(forcats) #fct infreq functions
+
+# R data structure files preserve the data format and are more compact
+ba <- readRDS('bakedAppleSampleData.rds') # Notice that the data formats are not all character.
+w <- readRDS('bakedAppleWeatherData.rds')
+```
+
+#### Look at the structure and summary of the dataframes
+
+```{r}
+str(ba)
+summary(ba)
+```
+* The unit of observation is a line item at a specific warehouse on a specific day. 
+* The UnitsSold column has 346 missing values.
+* The SplitVendors column has 9,480 missing values, but we're not as concerned about that column.
+
+```{r}
+str(w)
+summary(w)
+```
+
+* The unit of observation in the weather data is for a date at a specific warehouse.
+* The Weather column has 23 levels, and 1,032 missing values.
+
+###### Quick Way to See the Number of Missing Values
+```{r}
+colSums(is.na(ba))
+colSums(is.na(w))
+```
+
+It's easier to see the number of missing values for each column.
+
+## Deal with Missing Values
+You can simply remove the rows with missing values.
+
+```{r}
+w %<>% filter(!is.na(Weather))
+```
+
+Or you can fill them in by using the median/mean/modal values. In the case, of weather we would use the modal value since you can't take the mean of a non-numeric variable. We won't demonstrate that here, though.
+
+Let's demonstrate how to fill in the missing values for UnitsSold with the median value for each warehouse, rather than the overall median. This is where group_by is helpful along with the mutate function.
+
+```{r}
+ba %<>%
+  group_by(Whs) %>%
+  mutate(
+    missingUnitsSold = ifelse(is.na(UnitsSold), 1, 0), #Added during live session to check
+    UnitsSold = ifelse(is.na(UnitsSold)
+                       , median(UnitsSold, na.rm = T)
+                       , UnitsSold)
+  ) %>%
+  ungroup()
+colSums(is.na(ba))
+
+# Q11 Which warehouse sold most units overall - Whs-158
+ba_Whs_most <- ba %>%
+  group_by(Whs) %>%
+  summarise(UnitsSold = sum(UnitsSold, na.rm = T)) %>%
+  ungroup() %>%
+  arrange(desc(UnitsSold))
+ba_Whs_most
+
+# Q12 On what day were the most number of units sold at warehouse 1? [Jan 11, 2020]
+ba_Time_most <- ba %>%
+  group_by(Whs, EventDate) %>%
+  summarise(UnitsSold = sum(UnitsSold, na.rm = T)) %>%
+  ungroup() %>%
+  arrange(desc(UnitsSold))
+ba_Time_most
+
+# Q12 Version 2
+ba_Time_most_2 <- ba %>%
+  filter(Whs == 'Whs-1') %>%
+  group_by(EventDate) %>%
+  summarise(UnitsSold = sum(UnitsSold, na.rm = T)) %>%
+  ungroup() %>%
+  arrange(desc(UnitsSold))
+ba_Time_most_2
+  
+```
+
+The UnitsSold column no longer has missing values in it, which verifies that we replaced them.
+
+## Application of case_when
+Let's look at the different values for Weather in the **w** dataframe:
+
+```{r}
+summary(w$Weather)
+```
+
+There are several weather labels that seem to be variations of the same type of weather. Here are the main culprits: 
+
+* Rainy and Rain, 
+* Snow and Snowing, 
+* Overcast and overcast, and 
+* several variations of Cloudy. 
+
+We could fix these by using nested ifelse statements, but nesting things is hard to read.
+
+```{r}
+cloudyTerms <- c('Overcast', 'Mostly Cloudy', 'Cloudy', 'overcast', 'Partly Cloudy')
+w2 <- w %>%
+  mutate(
+    Weather = str_to_title(Weather) # First convert to character string and title case
+    , Weather = ifelse(Weather == 'Rainy', 'Rain'
+                     , ifelse(Weather == 'Snowing', 'Snow'
+                              , ifelse(Weather %in% cloudyTerms, 'Cloudy', Weather)
+                     )
+    )
+    , Weather = fct_infreq(Weather) # Convert back to factor
+  )
+summary(w2$Weather)
+```
+
+
+Alternatively we can use the case_when function.
+
+```{r}
+w3 <- w %>% 
+  mutate(
+  Weather = str_to_title(Weather) # First convert to character string and title case
+  , Weather = case_when(
+    Weather == 'Rainy' ~ 'Rain'
+    , Weather == 'Snowing' ~ 'Snow'
+    , Weather %in% cloudyTerms ~ 'Cloudy'
+    , T ~ Weather
+  )
+  , Weather = fct_infreq(Weather) # Convert back to factor
+)
+summary(w3$Weather)
+```
+
+Another alternative is to use a vlookup approach, as with Excel. You do this by creating a dataframe with two columns: one is the original value, and the other is the updated value. Then you can do a left join. We won't demonstrate that here, though.
+
+## Join the Sample and Weather Data Together
+
+Make sure to join the dataframes using both the Whs and EventDate columns or else you will duplicate many rows of sample data. When we're done, the joined dataframe should not have more rows than the original sample dataframe.
+
+```{r}
+baw <- left_join(ba, w3, by = c('Whs', 'EventDate'))
+#baw <- left_join(ba, w3, by = c('Whs'))
+```
+
+You could try rerunning the above code chunk after removing 'Whs' to verify that the number of observations increases.
+
+## Summarize the UnitsSold and UnitsPurchased for the Various Weather Types
+
+Let's use the mean function since we know that if we sum them up it will show that Sunny has the most since there are more observations with Sunny.
+
+```{r}
+weatherSum <- baw %>%
+  group_by(Weather) %>%
+  summarise(UnitsSold = mean(UnitsSold, na.rm = T)
+            , UnitsPurchased = mean(UnitsPurchased, na.rm = T)
+            , Whs = mean(DoorCount, na.rm = T)
+            , DoorCount = mean(DoorCount, na.rm = T)) %>%
+  ungroup() %>%
+  arrange(desc(UnitsSold))
+weatherSum
+```
+
+```{r}
+weatherSum %<>% relocate(Weather, .after = DoorCount)
+plot(weatherSum$Weather, weatherSum$UnitsSold)
+```
+
+This is not the most helpful plot, but it does make it easier to see the variation in mean values. Notice that they are not ordered the way we would like them to be--in descending order. To do that, we need to convert the Weather to a factor in the order that it appears in the data.
+
+```{r}
+weatherSum %<>% mutate(Weather = fct_inorder(Weather))
+plot(weatherSum$Weather, weatherSum$UnitsSold)
+```
+
+That's better because it's easy to see the rank order.
+
+#### Look at Distributions of These Values
+
+The means are helpful, but they ignore a lot of the other data, so let's look at the distributions using boxplots. We don't have to aggregate the data for this, but let's order them based on the way that they appear in the weatherSum dataframe.
+
+```{r}
+baw %<>% mutate(Weather = factor(Weather
+                                 , levels = as.character(weatherSum$Weather))
+                )
+boxplot(UnitsSold ~ Weather, data = baw)
+```
+
+## Conclusion
+The tidyverse functions make it very easy to preprocess data.
+
+

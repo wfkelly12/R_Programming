@@ -1,0 +1,141 @@
+---
+title: "HE Assignment 5 – Regression"
+author: "Boyle, Eric; Kelly, Will; Dhilla, Quaidzoher; Hyer, Brandon; Mukania, Christian; and Tran, Vinh"
+date: "7/11/2021"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+# Module 5 Group Project
+
+## 1.	(1 point) Create a code chunk to complete the following tasks: Load the following packages: tidyverse, magrittr, lubridate, and corrplot. (You may need to install those packages if you have not already done so.), Read in the hmdaInterestRate.rds file, and Report the structure of the dataframe. (No need to comment on the structure.)
+
+We have additional packages that may be used during the assignment. 
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = T, message = F, warning = F)
+```
+
+```{r}
+
+#install.packages("tidyverse")
+#install.packages("magrittr")
+#install.packages("lubridate")
+#install.packages("corrplot")
+#install.packages("forcats")
+#install.packages("ggcorrplot")
+#install.packages("dplyr")
+#install.packages("tidyr")
+#install.packages("huxtable")
+#install.packages("jtools")
+
+## Loading Libraries
+
+library(tidyverse)
+library(magrittr)  
+library(lubridate) 
+library(corrplot)
+library(forcats)
+library(ggcorrplot)
+library(dplyr)     
+library(tidyr)
+library(huxtable)
+library(jtools)
+
+```
+
+## 1.b: Read in the hmdaInterestRate.rds file.
+```{r}
+# Read in data
+df5 <- readRDS('hmdaInterestRate.rds')
+```
+
+## 1.c: Structure of the dataframe 
+```{r}
+str(df5)
+```
+
+## 2.	(1 point) Data preparation: Replace the values in the following columns with the same value divided by 1,000: loan_amount, property_value, and income. (This will make it easier to see the impact on the interest rate.), Create a new column, ltp, that is equal to the values in the loan_amount column divided by the values in the property_value column, Filter the data to keep observations for which income is less than 300 (i.e., $300,000, and Report a new summary of all columns.
+
+```{r}
+
+df5$loan_amount <- df5$loan_amount/1000           # Divides loan_amount by 1000
+df5$property_value <- df5$property_value/1000     # Divides property_value by 1000
+df5$income <- df5$income/1000                     # Divides income by 1000
+
+df5$ltp <- df5$loan_amount/df5$property_value     # Creates new column, ltp, by dividing loan_amount by property_value
+
+df5a <- filter(df5, income < 300)                 # Creates df5a which keeps observations for which income is less than 300
+
+summary(df5a)
+
+```
+
+## 3.	(2 points) Create a correlation plot of the following columns: interest_rate, ltp, income, applicant_age, property_value, and loan_amount, Below the plot, identify what variable has the strongest negative correlation with interest_rate, Comment on what might explain why that correlation is negative
+
+```{r}
+
+df5a_corr <- cor(df5a %>% select(interest_rate, ltp, income, applicant_age, property_value, loan_amount))   # Creates an object to analyze correlation between variables
+
+corrplot(df5a_corr
+         , method = 'color'      # Visualization method for the correlation matrix
+         , order = 'hclust'      # Orders the variables so that ones that behave similarly are placed next to each other
+         , addCoef.col = 'black' # Color of coefficients on the graph
+         , number.cex = .6       # Lower values decrease the size of the numbers in the cells
+         )
+
+```
+
+
+The Variable with the strongest negative correlation is “loan_amount v interest_rate” (-0.33)
+
+The correlation between loan amount and interest rates are probably negative for a few reasons: The individuals who qualify for larger loans may have a stronger income or other characteristics that would qualify them for lower interest rates and higher loan amounts simultaneously. A higher the loan may mean higher down payment, and lower interest rate as lenders may see them less risky. The other scenario may be that a borrower might be taking a lower mortgage based on what they could afford on a monthly basis. If the interest rate is higher they may need to take a lower loan in order to stay under the total monthly payment number.
+
+
+## 4.	(2 points) Regress interest rate on ltp. Interpret the coefficient estimate on ltp.
+
+```{r}
+
+lm <- lm(interest_rate ~ ltp , data = df5a)
+summary(lm)
+
+```
+
+
+The coefficient estimate on ltp implies a negative correlation between interest rate and ltp.
+
+Based on the estimate, for every one unit increase in ltp, interest rate would decrease by -1.05188.  The p-Val is <= 0.05 so we are confident the coefficient estimates are not due to chance, however the R squared value is only 0.1017 which shows that only 10.2% of the variation is explained by ltp and better to use than only the mean.
+
+
+## 5.	(2 points) Regress interest rate on ltp and loan_amount. Comment on the change in the adjusted R-squared, as well as the change in the coefficient on ltp
+
+```{r}
+
+lm1 <- lm(interest_rate ~ loan_amount , data = df5a)
+lm2 <- lm(interest_rate ~ ltp + loan_amount , data = df5a)
+
+export_summs(lm, lm1, lm2)
+```
+
+
+The second regression is interesting as we have a .10 with just ltp and a .11 with just loan_amount, but a .15 when we combine them. This means we can have more confidence in the accuracy of these predictions from both model 1 and model 2.
+
+We also know from our correlation matrix above that ltp and loan_amount have a 0.39 correlation so that is a pretty strong positive correlation between the two variables.  The coefficient estimates are similar for the intercept, but some change seen in ltp.  All with p-val < .001 so that is significant.
+
+
+## 6.	(2 points) Regress interest rate on ltp, loan_amount, and aus_1. Interpret the new coefficients.
+
+```{r}
+lm3 <- lm(interest_rate ~ aus_1 , data = df5a)
+lm4 <- lm(interest_rate ~ ltp + loan_amount + aus_1 , data = df5a)
+
+export_summs(lm, lm1, lm2, lm3, lm4)
+```
+
+
+The R squared value has now risen to a 0.27 with 3 variables instead of 2. This makes sense as we have added aus_1 which has an individual R2 of 0.25 with interest_rate.  
+
+Again, p-vals < 0.001 so we are confident the coefficient estimates are not due to chance and can keep all of these significant variables.  However the R squared value is still only 0.27 which means 27% of the variation is explained, better to use than the mean, but still a pretty big spread around the regression line.
+
+

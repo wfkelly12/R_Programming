@@ -1,0 +1,63 @@
+---
+title: "Module_1_Sales_Analysis"
+author: "William Kelly"
+date: "5/14/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyr) # For lots of data wrangling tasks
+library(magrittr) # For piping data into functions
+library(lubridate) # For dealing with dates
+library(stringr) # String functions
+library(forcats) #fct infreq functions 
+library(dplyr) # Data manipulation
+library(ggplot2) # Creating elegant and complex plots Grammar of Graphics
+```
+
+# Read in Sales Data
+```{r}
+df_sales <- read.csv("100 Sales Records.csv") # Read csv into df data frame
+
+df_sales %<>% 
+  mutate(
+    Date = mdy(df_sales$Order.Date)
+  ) %>%
+  arrange(Date)
+
+summary(df_sales)
+```
+# Bar Plot
+```{r}
+barplot(height = df_sales$Total.Profit, names = df_sales$Date, 
+        main = "100 Transaction Sales Profit vs Date (Bar Plot)"
+        ,xlab = "Sales Date"
+        ,ylab = "Total Profit"
+        ,col = "blue")
+```
+
+# Line Plot
+```{r}
+ggplot(df_sales, aes(x = Date
+                     , y = Total.Profit)) +
+  geom_line(color = "blue",
+            size = 1) +
+  geom_smooth(color = "red") +
+  labs(title = "100 Transaction Sales Profit vs Date (Line Plot)"
+       ,x = "Sales Date"
+       ,y = "Total Profit")
+```
+
+# Pie Chart
+```{r}
+ggplot(df_sales, aes(x = "", y = Total.Profit, fill = Date)) +
+  geom_bar(width = 1, stat = "identity", color = "white") +
+  coord_polar("y", start = 0) +
+  labs(x = NULL, y = NULL, title = "100 Transaction Sales Profit vs Date (Pie Chart)")
+```
+
+

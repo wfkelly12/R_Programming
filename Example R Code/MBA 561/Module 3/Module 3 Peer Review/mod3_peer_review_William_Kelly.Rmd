@@ -1,0 +1,71 @@
+MBA 561 Introduction to Business Analytics with R
+---
+title: "mod3_peer_review_William_Kelly"
+author: "William Kelly"
+date: "4/29/2021"
+output: html_document
+---
+
+# Note: Function sys date presents today date and reformatted into m,d,y format
+```{r}
+# 3)
+# Use a code chunk to create a datetime object d that stores today’s date. 
+# Only use base R (don’t use lubridate package functions). 
+# The date must be in the “mm/dd/yyyy” format.
+
+d <- format(Sys.Date(), format="%m/%d/%Y")
+
+```
+# Note: Checks data type and prints today's date
+```{r}
+# 4)
+# Use a new code chunk to check the data type of the d object by printing it.
+
+class(d)
+print(d)
+```
+# Note: Loads lubridate package
+```{r}
+# 5)
+# Use a new code chunk to install and load the package “lubridate.”
+#install.packages("lubridate") #(Commented out, already installed package)
+
+library("lubridate")
+```
+# Note: Code chunk extracts year, month, week, day and assigns to respective variables
+```{r}
+#6)
+# In a new code chunk, use the appropriate functions from the lubridate package to extract the year, month, week and day from the object d created above and save them as d_year, d_month, d_week, and d_day respectively.
+
+d <- mdy(d) # Reformat date into UTC format
+year(d) # Print Year
+d_year <- year(d)
+month(d, label = T) # Print Month
+d_month <- month(d, label = T)
+week(d) # Print number of week
+d_week <- week(d)
+wday(d, label = T) # Print day of week 
+d_day <- wday(d, label = T)
+```
+# Note: Calculates 25 days from today's date
+```{r}
+#7)
+# Use a new code chunk to create another datetime object, d_25, using the object d, 
+# where d_25 is the date 25 days from now.
+
+d_25 <- d + days(25) 
+
+```
+# Note: Uses difftime function to calculate number of days between d and d_25 
+```{r}
+#8)
+# Finally, use a new code chunk to calculate the difference between d and d_25 
+# using the difftime function and check whether the difference is 25 days.
+
+difftime(d_25, d, units = 'days') 
+
+```
+
+
+
+

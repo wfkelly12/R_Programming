@@ -1,0 +1,228 @@
+---
+title: "HE Assignment 8 - K-Means & DBSCAN"
+author: "Eric Boyle, Quaidzoher Dhilla, Brandon Hyer, Will Kelly, Christian Mukania, and Vinh Tran"
+date: "8/1/2021"
+output: html_document
+---
+
+## K-MEANS
+## 1.0 - Load and prep the data
+
+## Load packages and read in data
+```{r}
+library(tidyverse)
+library(factoextra)
+
+# Read in data
+clustering_input1 <- read_rds("city.rds")
+```
+
+## Remove city, region, and province
+```{r}
+clustering_input2 <- clustering_input1 %>% 
+        select(-city, -region, -province)
+
+str(clustering_input2)
+summary(clustering_input2)
+```
+
+## Z-score standardization
+```{r}
+clustering_input2 <- as.data.frame(scale(clustering_input2))
+```
+
+## 2.0 - picking k
+## Find a suitable k using two different methods
+```{r}
+# Within-cluster sum of square method
+set.seed(77)
+factoextra::fviz_nbclust(clustering_input2, kmeans, method = "wss")
+```
+
+```{r}
+# Silhouette approach
+set.seed(77)
+factoextra::fviz_nbclust(clustering_input2, kmeans, method = "silhouette")
+```
+
+## 3.0 - Run and evaluate k-means
+## Run the model
+```{r}
+set.seed(77)
+clusters <- kmeans(clustering_input2, centers=6, iter.max=10, nstart=10)
+```
+
+
+## Check the size of the k clusters
+```{r}
+clusters$size 
+```
+
+## A matrix indicating the mean values for each feature and cluster combination
+```{r}
+clusters$centers
+# write.csv(clusters$centers, "clusters.csv") # Writes .csv file for further analysis of clusters
+```
+
+## Visualize the clustering
+(Uses principal components to collapse the dimensions of the data down to two dimensions)
+```{r}
+fviz_cluster(clusters, clustering_input2,  geom = "point", show.clust.cent = TRUE, palette = "jco", ggtheme = theme_classic())
+```
+
+## 4.0 - put clusters back into the dataset and investigate
+## Add clusters to the original, un-standardized dataset and add labels
+```{r}
+clustering_input1$cluster <- clusters$cluster
+
+clustering_input1 <- clustering_input1 %>% 
+        mutate(cluster_labels = case_when(
+                cluster==1 ~ 'Large and Profitable', 
+                cluster==2 ~ 'Small and Not Profitable',
+                cluster==3 ~ 'High Gum and Water Sales',
+                cluster==4 ~ 'Average Size and Profitability',
+                cluster==5 ~ 'Energy Drinks and Potatoes', 
+                cluster==6 ~ 'High Promo Units',))
+
+slice_sample(clustering_input1, n=10)
+```
+
+```{r}
+# Analyze only Parry Sound and Trenton cities.
+clustering_input1 %>% slice(156, 225)
+```
+
+
+
+## DBSCAN
+## 5.0
+## Run this code before you start
+```{r}
+#install.packages('dbscan') #only install once
+library(dbscan)
+
+# read in data (change to your path)
+clustering_input1 <- read_rds("city.rds")
+
+# remove store from the data for use later
+clustering_input2 <- clustering_input1 %>% 
+        select(-city, -region, -province)
+```
+
+## Standardize the data using z-score standardization. 
+
+```{r}
+clustering_input2 <- as.data.frame(scale(clustering_input2))
+```
+
+## The analyst has to pick minPts and epsilon
+## Use `dbscan::knndistplot()` to find a suitable epsilon.
+This plots the k-nearest neighbor distances in a matrix of points. It measures the distance to the k nearest neighbors for each plot. K in this case is the minimum points (minPts) and is selected by the analyst. Then, it sorts those by distance, lowest to highest. This is then the x-axis. On the y-axis, the graph plots the distance to the nearest neighbors for each point.
+```{r}
+dbscan::kNNdistplot(clustering_input2, k = 4)
+
+# Draw some lines to find the "elbow"
+abline(h = c(2, 3, 4, 5))
+```
+
+## Use the minPts and epsilon from above to run the DBSCAN algorithm
+```{r}
+set.seed(77)
+clusters_db <- dbscan::dbscan(clustering_input2, eps = 5, minPts = 4)
+```
+
+## Use the `table()` function to print the size of the clusters.
+```{r}
+table(clusters_db$cluster)
+```
+
+## 6.0 - Visualize the clusters
+## Visualize the clusters
+```{r}
+fviz_cluster(clusters_db, clustering_input2,  geom = "point", show.clust.cent = FALSE, palette = "jco", ggtheme = theme_classic())
+```
+
+
+## Questions 
+
+### 1. (2 points) How many clusters do you want to use for the K-means algorithm for this data? Play around a bit to make your decision. Justify your answer with evidence from your analysis. Specifically, discuss the following:
+
+### 1.a. results from the “wss” and the “silhouette” methods of finding the optimal number of clusters,
+
+Within the "wss" method, k should be picked at the "elbow" where the next highest k does not decrease wss as much as previously. Following this method, k could be selected between 5 and 8. 
+
+Using the "silhouette" method, k should be selected at a high value of silhouette width. Following this method, k could be selected at 6. 
+
+### 1.b. the size of clusters, and the two-dimensional cluster plot. There is no right answer here, but clearly defend your responses. 
+
+Based on the above conclusions, a cluster size of 6 was selected. At a cluster size of 5, the size of each cluster is 41, 80, 48, 50, and 38. At a cluster size of 6, the size of each cluster is 38, 16, 41, 74, 48, and 40. While these cluster sizes vary more than at k = 5, the two-dimensional plot shows that at k = 6 each cluster appears to have more even deistance around each centroid, compared to 5 or other values.
+
+### 2. (3 points) Regardless of your answer above, use the following code for the `kmeans()` function to answer the rest of the questions about K-means: `kmeans(clustering_input2, centers=6, iter.max=10, nstart=10)`.
+
+### 2.a. Using K-means, print the cluster centers using `clusters$centers` and name each of your clusters and explain how you came up with each name. As you do this, remember that the amounts you see are centered and standardized, so, focus on their sign and size without going into more detail. For example, a title might say something like, “Large; profitable; diverse products; chips and water”. Next, place those cluster names into the `clustering_input1` dataset using the code provided in class.
+
+Clusters are named as follows:
+
+* Cluster 1 - 'Large and Profitable' - This cluster is characterized by large values for size (0.9731) and high_med_gp (0.9417).
+* Cluster 2 - 'Small and Not Profitable' - This cluster is characterized by low values for size (-2.0769) and high_med_gp (-1.13028).
+* Cluster 3 - 'High Gum and Water Sales' - This cluster is characterized by high values for gum_units_per and flatWater_units_per. 
+* Cluster 4 - 'Average Size and Profitability' - This cluster does not have high values for any one variable and is instead characterized by average size and profitability.
+* Cluster 5 - 'Energy Drinks and Potatoes' - This cluster has the highest values for energy_units_per and takeHomePotato_units_per. 
+* Cluster 6 - 'High Promo Units' - This cluster appears to have the highest value for promo_units_per. 
+
+![](Clusters.png)
+
+
+### 2.b. Which number of cluster groups together the cities that are the largest and most profitable?
+
+Cluster 1 groups together cities that are largest and most profitable as the high_med_gp value is largest in this cluster (0.9417).
+
+### 2.c. Provide one recommendation to NANSE based upon this analysis.
+
+Based upon this analysis, NANSE should seek to learn from the 'Large and Profitable' cluster in order to determine what drives high profitability and how less profitable stores can model sales characteristics from this group. Additionally, NANSE should consider learning from the 'Small and Not Profitable' cluster as it may have something to learn from its high velocity A category in addition to why it remains unprofitable. 
+
+### 3. (2 points) After adding your cluster names to `clustering_input1` above in 1a, look at the dataset and describe what you learn about the cities of Trenton and Parry Sound. We did not standardize the data in `clustering_input1`, so this data is easier to interpret following the data description sheet.
+
+Parry Sound is part of the 'Large and Profitable' cluster while Trenton is part of the 'Small and Not Profitable' cluster. These cluster assignments make sense as Parry Sound appears to have a higher-than-median gross profit (1) and high size at (955) while Trenton does not have a higher-than-median gross profit (0) and lower size (351). While Trenton beats out Parry Sound in velocity category A, Parry Sound beats out Trenton in velocity categories B, C, and D. This may be an area NANSE can look further into as a root cause for Parry Sound's higher profitability.
+
+
+### 4. (1 points) Run the DBSCAN algorithm using epsilon = 5 and minPts=4. Print the size of the clusters that this creates. How many clusters are there and how many cities are in each cluster?
+
+There is one cluster with 253 cities. The other 4 cities are outliers.
+
+### 5. (2 points) How does your solution using K-means compare to that using DBSCAN? Specifically, answer the following:
+
+### 5.a. Which is more helpful and why? Which method would you suggest that the management of NANSE use and why?
+
+K-means is more helpful as meaningful clusters are derived through this method. With DBSCAN, only one cluster is produced which does not produce insights NANSE will require to determine how cities are grouped together based on sales history of the stores in those cities. With K-means, it was easy to determine what types of cities are characterized by size, profitability, and other variables. Management of NANSE should utilize the K-means method as this method better solves their business problem and identifies overall differences, reasons for profitability, and other similarities. 
+
+### 5.b. How do the methods deal with outliers differently?
+
+DBSCAN can deal with outliers more effectively as it removes outliers from its clusters. K-means still includes outliers in each cluster.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,114 @@
+---
+title: "Baked Apple"
+author: "Ron Guymon"
+date: "4/22/2021"
+output: html_document
+runtime: shiny
+---
+
+```{r}{r, echo = FALSE} 
+numericInput("n","How many cars?", 5)
+renderTable({ head(cars, input$n)}) 
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Summary  
+This document illustrates how formatted text can be combined with and output of the code. This document is intended to be used with the `bakedAppleSampleData.csv` file, which contains information about how many units of various products are sold at stores where the product is given to customers as a sample. Let's start by reading in the data and returning the first six rows of data.
+
+# 1)
+```{r}
+# Read in data
+ba <- read.csv('bakedAppleSampleData.csv')
+# Print the first six rows
+head(ba)
+```
+# 2)
+#Value in Row 19 Column 11
+```{r}
+ba[19,11]
+```
+
+# 3)
+#Calculate Largest to Smallest "DoorCount" Column
+```{r}
+ba[order(ba$DoorCount,decreasing = TRUE),9]
+ba[tail(ba$DoorCount),9]
+```
+# 4) IQR fo Labor Charge
+```{r}
+IQR(ba$LaborCharge)
+```
+# 5) Unique Values in EventDate Column
+```{r}
+length(unique(ba$EventDate))
+```
+# 6) Column with Mean Value of 7.448
+```{r}
+summary(ba)
+mean(ba$SupplyCharge)
+```
+
+ This data can be helped to better understand the health of Baked Apples products by evaluating how many units are selling. The most important columns are:
+
+* UnitsSold - The number of units purchased by customers.  
+* UnitsPurchased - The number of units purchased by the store to give to customers as a sample.  
+* DoorCount - The number of customers that come into the store based on a count at the door.  
+
+## Print a Summary of Each Column  
+Let's use the `summary()` function to return summary statistics about all of the columns. Please note that the summary information for character string columns is not very informative.
+
+```{r}
+summary(ba)
+```
+
+### Evaluate the UnitsSold Column  
+This column indicates how many units of the product were sold at the store. This is a pretty important column. We can see from the summary statistics that the values range from -3 to 590. Let's use a histogram to get more nuance about how UnitsSold is distributed. 
+
+# 7) Histogram of Units Sold
+```{r}
+hist(ba$UnitsSold)
+```
+
+This histogram shows that about 8,000 of the 11,533 observations sell between 0 and 50 units. 
+
+### Box and Whisker Plot  
+Let's look at the distribution of UnitsSold using a Box and Whisker Plot, which is an alternative plot for evaluating the distribution of a column of data.  
+```{r}
+boxplot(ba$UnitsSold)
+```
+
+The outliers make it hard to see the range of the majority of the data. You could filter the data to remove the outliers, but that will be discussed in another lesson. 
+
+One other thing that is often done to help remove the effect of outliers is to decrease the scale by using a logarithmic transformation. If we use a base 10 logarithm, then we will convert values of 10 to 1, values of 100 to 2, values of 1000 to 3, and so on.  
+
+```{r}
+boxplot(log10(ba$UnitsSold))
+```
+
+Notice that this makes it easier to see the values of the box. To transform these values to their original values, then you can raise 10 to the power of the value indicated in the plot.
+
+
+#### Box and Whisker Plot for Different Values of a Column  
+Let's take a look at the distribution of UnitsSold for each of the Divisions.
+8)
+```{r}
+boxplot(Total ~ Div, data = ba)
+```
+
+This plot helps provide insight about the distribution of units sold for each division.
+
+### Pairplot  
+Let's explore the relationship between units sold, and three other variables. 
+11)
+```{r}
+plot(ba[,c('UnitsSold', 'UnitsPurchased', 'DoorCount', 'Whs','SplitVendors')], cex = .1)
+```
+
+Some questions to consider:
+
+1. Which variable - UnitsPurchased, DoorCount, Whs - appears to have the biggest influence on the number of units sold?
+2. How can you separate out the impact of UnitsPurchased, DoorCount, and Whs on UnitsSold?
+3. How can you find out what the cex argument does?

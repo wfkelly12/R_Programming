@@ -1,0 +1,146 @@
+---
+title: "Module 2 Debrief"
+author: "Ron Guymon"
+date: "4/28/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Follow Up on Questions from Module 2  
+There were a lot of questions about:  
+* Pairplots and weakest relationship in the Baked Apple data, and 
+* The unit of observation, primary key, and duplicate values in the ities dataset.
+
+---
+#### Pairplots  
+
+Let's start by looking at the pairplots from the baked apple data. In terms of a relationship, we mean a pattern. As one changes, does the other change in the same direction? Is it a constant linear relationship? Is it a curvilinear relationship?
+
+Before looking at the plot, how do you expect units sold to behave as more samples are given (UnitsPurchased)? How about DoorCount? How about warehouse?
+
+Now let's look at the plots to see if they can provide some insight.
+
+```{r}
+
+ba <- read.csv('bakedAppleSampleData_M3.csv', stringsAsFactors = F)
+plot(ba[,c('UnitsSold', 'UnitsPurchased', 'DoorCount', 'Whs')], cex = .1)
+
+# Scavenger Hunt 1
+#1. How many levels of invoices are there?
+#2. Which warehouse in the Whs column occurs most frequently?
+#3. Create a bar plot that shows the number of times each item in the
+#   ItemorServiceDescription column appears in the data. Show only the top three most frequently occurring        items, #lump the rest together, and sort the bars in descending order.
+#1.
+invoices <- ba$Invoice
+class(ba$Invoice)
+length(unique(ba$Invoice))
+
+#2.
+whs <- ba$Whs
+summary(whs)
+
+#3.
+library(forcats)
+ba$ItemorServiceDescription2 <-  fct_infreq(fct_lump(ba$ItemorServiceDescription, n=3))
+summary(ba$ItemorServiceDescription2)
+plot(ba$ItemorServiceDescription2)
+
+
+# Scavenger Hunt 2
+# 1. What is the median date in the EventDate column?
+# 2. Create a histogram of the number of days that have passed from when the observations
+# were gathered. Hint: Use Sys.Date() to find the current date.
+# 3. Create a bar chart of the number of observations that occur on each day of the week.
+# Use labels, not numbers, for the day of the week.
+
+#1.
+median(ba$EventDate)
+
+#2.
+library(lubridate) 
+dates <- as.Date(ba$EventDate)
+?Sys.Date()
+hist(as.numeric(difftime(Sys.Date(),dates), units = "days"))
+
+
+#3. 
+daysOfTheWeek <- wday(ba$EventDate, label = T)
+summary(daysOfTheWeek)
+barplot(summary(daysOfTheWeek))
+
+```
+
+
+* There is an upward trend in UnitsSold in relation to UnitsPurchased and DoorCount, but it is less pronounced for DoorCount. 
+* There is not really a trend when looking at Warehouse as evidenced by the up and down pattern. 
+
+Admittedly, it's hard to see these relationships clearly. This is where statistics and machine learning can help, but we will save those topics for later.  
+
+---
+
+#### Unit of Observation  in the Ities Dataset
+
+A unit of observation in the ities dataset is a line item of a transaction. You can infer that by browsing some of the transactions in the data.
+
+One calculation you can perform to support that is to compare the number of unique transactions to the number of rows in the dataset.
+
+```{r}
+df <- read.csv('ities.csv')
+
+length(unique(df$TransactionNumber))
+
+```
+
+The number of unique transaction numbers is 161,058, which is much less than the number of rows, 438,151, suggesting that there at least one transaction number is repeated multiple times.
+
+For your interest, here's a more accurate approach for inferring the primary key, as well as identifying and removing duplicate observations.
+
+```{r}
+# Create a new column that is a combination of TransactionNumber and LineItem
+df$primaryKey <- paste(df$TransactionNumber, df$LineItem, sep = '_')
+nrow(df) - length(unique(df$primaryKey)) # There are 41,001 fewer unique values than rows
+
+# Filter only to rows that have duplicated values in the primary key column
+dupes <- df[duplicated(df$primaryKey),] # This is the right number of rows
+
+# A visual inspection indicates that some observations have different prices, so let's add price to the primaryKey column
+
+# Repeat the process by adding in Price to the primary key column
+df$primaryKey <- paste(df$TransactionNumber, df$LineItem, df$Price, sep = '_')
+nrow(df) - length(unique(df$primaryKey)) # There are 22,073 duplicates
+
+# Filter only to rows that have duplicated values in the primary key column
+dupes <- df[duplicated(df$primaryKey),] # This is the right number of rows
+
+# A visual inspection indicates that there may be some observations that are completely the same.
+
+completeDupes <- df[duplicated(df),] # There are 20,380 observations that are completely duplicated
+df2 <- df[!duplicated(df),] # Remove the rows that are completely duplicated
+nrow(df) - nrow(df2) # The difference in rows is 20,380, thus we have support that we eliminated duplicate rows
+dupes <- df2[duplicated(df2$primaryKey),] # Let's look at duplicates. It's not immediately obvious because this only keeps one of the observations that have a duplicated primary key.
+dupes2 <- df2[df2$primaryKey %in% dupes$primaryKey,] # This will keep all observations with the same primary key. It looks like Quantity varies.
+
+# Repeat the process by adding in Quantity to the primary key column
+df2$primaryKey <- paste(df2$TransactionNumber, df2$LineItem, df2$Price, df2$Quantity, sep = '_')
+nrow(df2) - length(unique(df2$primaryKey)) # There are 20 duplicates
+
+dupes <- df2[duplicated(df2$primaryKey),]
+dupes2 <- df2[df2$primaryKey %in% dupes$primaryKey,]
+
+# A visual inspection indicates that StoreNumber is different, so repeat the process after adding in store number
+
+df2$primaryKey <- paste(df2$TransactionNumber, df2$LineItem, df2$Price, df2$Quantity, df2$StoreNumber, sep = '_')
+nrow(df2) - length(unique(df2$primaryKey)) # Finally, 0 duplicates!!!
+rm(completeDupes, df, df2, dupes, dupes2)
+```
+
+So, the primary key is based on TransactionNumber, LineItem, Price, Quantity, and StoreNumber.
+
+Two important points:  
+
+1. The data architect will be able to tell you the primary key.
+2. In my experience, this is not uncommon. Organizations often don't realize that they have messy data until you show it to them. This alone can help improve business.
+3. This data has been obfuscated for use in this class, so that is also a likely source of the duplicated rows.   

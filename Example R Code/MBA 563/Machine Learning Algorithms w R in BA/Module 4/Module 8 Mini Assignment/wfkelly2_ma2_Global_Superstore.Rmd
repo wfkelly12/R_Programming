@@ -1,0 +1,81 @@
+---
+title: "Module 8 Mini Assignment"
+author: "William Kelly"
+date: "7/19/2021"
+---
+
+Data sourced from Kaggle.com
+Global Super Store Sales Data
+Link: https://www.kaggle.com/apoorvaappz/global-super-store-dataset
+
+# Load Libraries
+```{r}
+library(lubridate)
+library(tidyverse)
+library(jtools)
+```
+
+
+# Read in the KC Housing Data
+```{r}
+df <- read.csv("Global_Superstore2.csv")
+```
+
+# Structure and Summary of Data
+```{r}
+str(df)
+summary(df)
+```
+
+# Update Date Type Column
+```{r}
+df$Order.Date<- dmy(df$Order.Date)
+df$Ship.Date<- dmy(df$Ship.Date)
+```
+
+# Linear Models
+```{r}
+lm1 <- lm(Profit ~ Sales+Shipping.Cost+Discount+Quantity, data=df)
+lm1
+lm2 <- lm(Profit ~ Quantity+Discount+Segment, data=df)
+lm2
+
+
+plot_summs(lm1, lm2)
+export_summs(lm1, lm2)
+```
+# Correlation b/t Sales, Profit, Shipping.Cost, Discount and Quantity
+```{r}
+df_corr <- cor(df %>% select(Sales, Profit, Shipping.Cost, Discount, Quantity))
+
+corrplot(df_corr
+         , method = 'color'      # Visualization method for the correlation matrix
+         , order = 'hclust'      # Orders the variables so that ones that behave similarly are placed next to each other
+         , addCoef.col = 'black' # Color of coefficients on the graph
+         , number.cex = .6       # Lower values decrease the size of the numbers in the cells
+         )
+```
+
+# Scatter Plots
+```{r}
+ggplot(df, aes(x = Sales, y = Profit)) +
+  geom_point() +
+  expand_limits(x = c(0,1)) +
+  stat_smooth(method = 'lm', fullrange = T)
+
+ggplot(df, aes(x = Shipping.Cost, y = Profit)) +
+  geom_point() +
+  expand_limits(x = c(0,1)) +
+  stat_smooth(method = 'lm', fullrange = T)
+
+ggplot(df, aes(x = Discount, y = Profit)) +
+  geom_point() +
+  expand_limits(x = c(0,1)) +
+  stat_smooth(method = 'lm', fullrange = T)
+```
+
+
+
+
+
+

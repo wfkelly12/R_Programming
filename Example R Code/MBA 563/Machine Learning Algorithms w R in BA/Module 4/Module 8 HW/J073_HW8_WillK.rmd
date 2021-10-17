@@ -1,0 +1,188 @@
+************************************************************************
+# Homework 8 K-Means & DBSCAN
+Course: MBA563
+Term: Summer 2021
+Module: 08
+Kelly, William; Boyle, Eric; Dhilla, Quaidzoher; Hyer, Brandon; Tran, Vinh, and Mukania, Christian
+************************************************************************
+
+**********K-MEANS ******************************************************
+__1.0 - Load and prep the data__
+# Install packages and read in data
+```{r}
+#install.packages('tidyverse') #only install once
+library(tidyverse)
+#install.packages('factoextra') #only install once
+library(factoextra)
+
+# read in data (change to your path)
+clustering_input1 <- read_rds("city.rds")
+```
+
+# remove City, Region, Province from the data for use later
+```{r}
+clustering_input2 <- clustering_input1 %>% 
+        select(-city,-region,-province)
+
+str(clustering_input2)
+summary(clustering_input2)
+```
+
+# Z-score standardization
+```{r}
+clustering_input2 <- as.data.frame(scale(clustering_input2))
+```
+
+__2.0 - picking k__
+# Find a suitable k using two different methods
+```{r}
+# Within-cluster sum of square method
+set.seed(77)
+factoextra::fviz_nbclust(clustering_input2, kmeans, method = "wss")
+```
+
+```{r}
+# Silhouette approach
+set.seed(77)
+factoextra::fviz_nbclust(clustering_input2, kmeans, method = "silhouette")
+```
+
+__3.0 - Run and evaluate k-means__
+# Run the model
+```{r}
+set.seed(77)
+# clusters <- kmeans(clustering_input2, centers=2, iter.max=10, nstart=10)
+clusters <- kmeans(clustering_input2, centers=6, iter.max=10, nstart=10)
+```
+Arguments:
+* `centers`: number of centroids (k random (distinct) rows are chosen as the initial centers)
+* `iter.max`: the maximum number of iterations allowed
+* `nstart`: how many random start configurations are chosen (for example, nstart=10 will generate 10 initial random centroids and choose the best one for the algorithm)
+
+# Check the size of the k clusters
+(Ideally, clusters are of similar size)
+```{r}
+clusters$size 
+```
+
+# A matrix indicating the mean values for each feature and cluster combination
+```{r}
+clusters$centers
+write.csv(clusters$centers, "clusters.csv")
+```
+
+# Visualize the clustering
+(Uses principal components to collapse the dimensions of the data down to two dimensions)
+```{r}
+fviz_cluster(clusters, clustering_input2,  geom = "point", show.clust.cent = TRUE, palette = "jco", ggtheme = theme_classic())
+```
+
+__4.0 - put clusters back into the dataset and investigate individual stores__
+# Add clusters to the original, un-standardized dataset and add labels
+```{r}
+clustering_input1$cluster <- clusters$cluster
+
+clustering_input1 <- clustering_input1 %>% 
+        mutate(cluster_labels = case_when(
+                cluster==1 ~ 'Large/Profitable', 
+                cluster==2 ~ 'Small/Not Profitable',
+                cluster==3 ~ 'Gum/Flatwater',
+                cluster==4 ~ 'Medium Size/Medium Profitability',
+                cluster==5 ~ 'Energy/TakeHomePotato',
+                cluster==6 ~ 'High Promo Units'))
+
+slice_sample(clustering_input1, n=10)
+```
+
+
+
+**********DBSCAN**************************************************
+__5.0__ 
+# Run this code before you start
+```{r}
+#install.packages('dbscan') #only install once
+library(dbscan)
+
+# read in data (change to your path)
+clustering_input1 <- read_rds("city.rds")
+
+# remove store from the data for use later
+clustering_input2 <- clustering_input1 %>% 
+        select(-city,-region,-province)
+```
+
+# Standardize the data using z-score standardization. 
+The features need to be continuous and standardized. Why?
+```{r}
+clustering_input2 <- as.data.frame(scale(clustering_input2))
+```
+
+# The analyst has to pick minPts and epsilon (Ugh!)
+# Use `dbscan::knndistplot()` to find a suitable epsilon.
+This plots the k-nearest neighbor distances in a matrix of points. It measures the distance to the k nearest neighbors for each plot. K in this case is the minimum points (minPts) and is selected by the analyst. Then, it sorts those by distance, lowest to highest. This is then the x-axis. On the y-axis, the graph plots the distance to the nearest neighbors for each point.
+```{r}
+dbscan::kNNdistplot(clustering_input2, k = 4)
+
+# Draw some lines to find the "elbow"
+abline(h = c(2, 3, 4, 5))
+```
+
+# Use the minPts and epsilon from above to run the DBSCAN algorithm
+```{r}
+set.seed(77)
+clusters_db <- dbscan::dbscan(clustering_input2, eps = 5, minPts = 4)
+```
+
+# Use the `table()` function to print the size of the clusters.
+```{r}
+table(clusters_db$cluster)
+```
+
+__6.0 - Visualize the clusters__
+# Visualize the clusters
+```{r}
+fviz_cluster(clusters_db, clustering_input2,  geom = "point", show.clust.cent = FALSE, palette = "jco", ggtheme = theme_classic())
+```
+
+# Questions
+
+# 1) How many clusters do you want to use for the K-means algorithm for this data? Play around a bit to make your decision. Justify your answer with evidence from your analysis. Specifically, discuss the following:
+
+   a. results from the “wss” and the “silhouette” methods of finding the optimal number of clusters,
+   •	From WSS and Silhouette methods. Can see that the minimum change in WSS and Average Silhouette          width occurs at K = 5 to 8. So K = 6 would be the best pick for clusters.
+   
+   b. the size of clusters, and the two-dimensional cluster plot. There is no right answer here, but          clearly defend your responses. 
+   •	Noticed that at K = 5 or 6 shows even distance around centroid.
+   
+# 2) Regardless of your answer above, use the following code for the `kmeans()` function to answer the rest of the questions about K-means: `kmeans(clustering_input2, centers=6, iter.max=10, nstart=10)`.
+
+  a. Using K-means, print the cluster centers using `clusters$centers` and name each of your clusters and explain how you came up with each name. As you do this, remember that the amounts you see are centered and standardized, so, focus on their sign and size without going into more detail. For example, a title might say something like, “Large; profitable; diverse products; chips and water”. Next, place those cluster names into the `clustering_input1` dataset using the code provided in class.
+  •	Cluster 1 => Large/Profitable
+  •	Cluster 2 => Small/Not Profitable
+  •	Cluster 3 => Gum/Flatwater
+  •	Cluster 4 => Medium Size/Medium Profitability
+  •	Cluster 5 => Energy/TakeHomePotato
+  •	Cluster 6 => High Promo Units
+  
+  b. Which number of cluster groups together the cities that are the largest and most profitable?
+  •	Cluster 1 contain the largest size and most profitable.
+    
+  c. Provide one recommendation to NANSE based upon this analysis.
+  •	Focus attention on Cluster 1 due to high profitability and model sales characteristics on other         clusters that are less profitable like Cluster 2.
+    
+# 3) After adding your cluster names to `clustering_input1` above in 1a, look at the dataset and describe what you learn about the cities of Trenton and Parry Sound. We did not standardize the data in `clustering_input1`, so this data is easier to interpret following the data description sheet.
+  •	Trenton falls in Cluster 2 Small Not Profitable
+  •	Perry Sound falls in Cluster 1 Large and Profitable
+
+# 4) Run the DBSCAN algorithm using epsilon = 5 and minPts=4. Print the size of the clusters that this creates. How many clusters are there and how many cities are in each cluster?
+  •	There is 1 Cluster with 253 cities and other 4 cities are outliers.
+
+# 5) How does your solution using K-means compare to that using DBSCAN? Specifically, answer the following:
+
+  a. Which is more helpful and why? Which method would you suggest that the management of NANSE use          and why?
+  •	K-Means is better than DBSCAN due to the ability to sort out the different cities based on their        cluster characteristics and learning which clusters are profitable and which need more work. 
+    
+  b. How do the methods deal with outliers differently?
+  •	DBSCAN is able to remove outliers while K-Means includes the outliers within the analysis.
+
+

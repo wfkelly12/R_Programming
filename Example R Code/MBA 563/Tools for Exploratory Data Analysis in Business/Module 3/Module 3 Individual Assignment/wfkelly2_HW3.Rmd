@@ -1,0 +1,136 @@
+---
+title: "wfkelly2_HW3"
+author: "William Kelly"
+date: "6/21/2021"
+output: html_document
+---
+
+# Load Libraries
+```{r}
+library(tidyverse)
+library(corrplot)
+library(Hmisc)
+```
+
+
+# 1) Import store_3HE dataframe as df 
+```{r}
+df <- read.csv("store_3HE.csv")
+```
+
+# 2) Familiarize w/ the features of the data frame
+```{r}
+str(df)
+summary(df)
+head(df)
+tail(df)
+slice_sample(df)
+# unique(df) 
+n_distinct(df)
+```
+From the str function can see that there are 771 rows of data with 20 different columns.
+Noticed from Summary function the revenue column is in character format.
+Also can see that there are 15 NA's in the size column and 1 NA in Revenue col.
+
+# 3) Convert Values in Revenue to numeric data type
+```{r}
+df$revenue <- as.numeric(df$revenue)
+```
+
+# 4) Delete rows that contain missing values in any column
+```{r}
+df <- df %>% filter(size != "NA", revenue != "NA")
+```
+Noticed 15 NAs in size column and 1 in revenue so filtered out rows w/ NA's (755 rows)
+
+# 5) Create two dataframes df_low and df_high
+```{r}
+# Calculate mean of revenue from df
+df_mean_revenue <- mean(df$revenue)
+df_low <- df %>% filter(df$revenue < df_mean_revenue)
+df_high <- df %>% filter(df$revenue >= df_mean_revenue)
+
+# Average Size of each low/high
+size_df_low <- mean(df_low$size)
+size_df_high <- mean(df_high$size)
+
+
+# Line plots for df_low and df_high showing Revenue by Size
+ggplot(df_low,aes(x=revenue,y=size)) +
+  geom_line() + 
+  labs(title='Line Plot-Size by Revenue df_low')
+
+ggplot(df_high,aes(x=revenue,y=size)) +
+  geom_line() + 
+  labs(title='Line Plot-Size by Revenue df_high')
+```
+
+One can see by the Line Plot that for both df_low and df_high the
+Revenue and Size is a positive relationship, 
+as Revenue goes up the size also increases.
+
+# 6) Correlation between Revenue and Size of df
+```{r}
+cor(df$revenue,df$size)
+
+ggplot(df,aes(x=revenue,y=size)) +
+  geom_line() + 
+  labs(title='Line Plot-Size by Revenue df')
+```
+
+As shown in the line plot for df dataframe the relationship between
+Revenue and Size is a positive slope meaning as Revenue increases, Size increases.
+The Correlation calculated for Revenue and Size is 0.6175055.
+
+# 7) Boxplots of Revenue for each region
+```{r}
+ggplot(df, aes(x=region, y=revenue)) + 
+  geom_boxplot() +
+  labs(title = 'Box Plot-Revenue by Region')
+```
+
+As shown in the boxplots for each region, 
+the average revenue is greater in the West & Quebec compared to Atlantic & Ontario.
+Also there are more higher values in the West noted by larger third quartile from mean.
+In addition, Ontario has the lowest mean and spread of revenue.
+
+# 8) Correlation between revenue and promo_units
+```{r}
+cor(df$revenue,df$promo_units)
+
+ggplot(df,aes(x=revenue,y=promo_units)) +
+  geom_line() + 
+  labs(title='Line Plot-Promo_units by Revenue df')
+
+```
+
+Correlation between revenue and promo_units is 0.9659697
+This aligns with expectation in that more promo units result in higher revenue.
+Based on the Line Plot trend I believe that selling more units on promotion 
+will increase revenue due to the positive slope/correlation b/t the two variables.
+
+# 9) Bar Chart showing total gross_profit for each province
+```{r}
+ggplot(df, aes(x=province, y=gross_profit)) + 
+  geom_col() + 
+  labs(title = 'Bar Plot-Gross Profit by Province')
+```
+
+From the Bar Plot we can see that the provinces ON, AB and QC have the highest gross profit.
+While the provinces NB, PE, and Unknown are the lowest in gross profit.
+
+# 10) Correlation Matrix b/t Average Store Sales for all Product Categories
+```{r}
+Product_Categories <- df[,c(10,11,12,13,14,15,16,17,18,19,20)]
+head(Product_Categories)
+	
+Prod_Cat.cor = cor(Product_Categories, method = c("spearman"))
+corrplot(as.matrix(Prod_Cat.cor))
+
+palette = colorRampPalette(c("green", "white", "red")) (20)
+heatmap(x = Prod_Cat.cor, col = palette, symm = TRUE)
+```
+
+From the Correlation Matrix the product categories 
+that sell the least together are psd591MI_units & gum_units.
+While product categories bagpegCandy_units and takeHomePotato sell the most together.

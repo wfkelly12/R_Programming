@@ -1,0 +1,473 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2021.2">
+  <Nodes>
+    <Node ToolID="1">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+        <Position x="198" y="102" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Passwords />
+          <File RecordLimit="" SearchSubDirs="False" FileFormat="0" OutputFileName="">C:\MBA 563\Alteryx Designer\Module 4\loan_application.csv</File>
+          <FormatSpecificOptions>
+            <HeaderRow>True</HeaderRow>
+            <IgnoreErrors>False</IgnoreErrors>
+            <AllowShareWrite>False</AllowShareWrite>
+            <ImportLine>1</ImportLine>
+            <FieldLen>254</FieldLen>
+            <SingleThreadRead>False</SingleThreadRead>
+            <IgnoreQuotes>DoubleQuotes</IgnoreQuotes>
+            <Delimeter>,</Delimeter>
+            <QuoteRecordBreak>False</QuoteRecordBreak>
+            <CodePage>28591</CodePage>
+          </FormatSpecificOptions>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>loan_application.csv</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <Dependencies>
+          <Implicit />
+        </Dependencies>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="SK_ID_CURR" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\loan_application.csv" type="V_String" />
+            <Field name="TARGET" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\loan_application.csv" type="V_String" />
+            <Field name="NAME_CONTRACT_TYPE" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\loan_application.csv" type="V_String" />
+            <Field name="CODE_GENDER" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\loan_application.csv" type="V_String" />
+            <Field name="FLAG_OWN_CAR" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\loan_application.csv" type="V_String" />
+            <Field name="FLAG_OWN_REALTY" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\loan_application.csv" type="V_String" />
+            <Field name="CNT_CHILDREN" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\loan_application.csv" type="V_String" />
+            <Field name="AMT_INCOME_TOTAL" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\loan_application.csv" type="V_String" />
+            <Field name="AMT_CREDIT" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\loan_application.csv" type="V_String" />
+            <Field name="AMT_ANNUITY" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\loan_application.csv" type="V_String" />
+            <Field name="AMT_GOODS_PRICE" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\loan_application.csv" type="V_String" />
+            <Field name="NAME_TYPE_SUITE" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\loan_application.csv" type="V_String" />
+            <Field name="NAME_INCOME_TYPE" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\loan_application.csv" type="V_String" />
+            <Field name="NAME_EDUCATION_TYPE" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\loan_application.csv" type="V_String" />
+            <Field name="NAME_FAMILY_STATUS" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\loan_application.csv" type="V_String" />
+            <Field name="NAME_HOUSING_TYPE" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\loan_application.csv" type="V_String" />
+            <Field name="FLAG_MOBIL" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\loan_application.csv" type="V_String" />
+            <Field name="FLAG_EMAIL" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\loan_application.csv" type="V_String" />
+            <Field name="OCCUPATION_TYPE" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\loan_application.csv" type="V_String" />
+            <Field name="CNT_FAM_MEMBERS" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\loan_application.csv" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+    </Node>
+    <Node ToolID="3">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="318" y="102" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="True" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="AMT_ANNUITY" selected="True" type="Float" size="4" />
+            <SelectField field="AMT_CREDIT" selected="True" type="Float" size="4" />
+            <SelectField field="AMT_GOODS_PRICE" selected="True" type="Float" size="4" />
+            <SelectField field="AMT_INCOME_TOTAL" selected="True" type="Float" size="4" />
+            <SelectField field="CNT_CHILDREN" selected="True" type="Int32" size="4" />
+            <SelectField field="CNT_FAM_MEMBERS" selected="True" type="Int32" size="4" />
+            <SelectField field="CODE_GENDER" selected="True" />
+            <SelectField field="FLAG_EMAIL" selected="True" />
+            <SelectField field="FLAG_MOBIL" selected="True" />
+            <SelectField field="FLAG_OWN_CAR" selected="True" />
+            <SelectField field="FLAG_OWN_REALTY" selected="True" />
+            <SelectField field="NAME_CONTRACT_TYPE" selected="True" />
+            <SelectField field="NAME_EDUCATION_TYPE" selected="True" />
+            <SelectField field="NAME_FAMILY_STATUS" selected="True" />
+            <SelectField field="NAME_HOUSING_TYPE" selected="True" />
+            <SelectField field="NAME_INCOME_TYPE" selected="True" />
+            <SelectField field="NAME_TYPE_SUITE" selected="True" />
+            <SelectField field="OCCUPATION_TYPE" selected="True" />
+            <SelectField field="SK_ID_CURR" selected="True" />
+            <SelectField field="TARGET" selected="True" />
+            <SelectField field="*Unknown" selected="True" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>Convert Data Types</AnnotationText>
+          <DefaultAnnotationText>Convert Data Types</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="5">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="450" y="102" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Expression>!IsNull([AMT_INCOME_TOTAL])</Expression>
+          <Mode>Custom</Mode>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>Remove Null in Amount Income Total Column</AnnotationText>
+          <DefaultAnnotationText>!IsNull([AMT_INCOME_TOTAL])</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+    </Node>
+    <Node ToolID="6">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="570" y="102" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Expression>[AMT_CREDIT] &gt;= 300000</Expression>
+          <Mode>Custom</Mode>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>[AMT_CREDIT] &gt;= 300000</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+    </Node>
+    <Node ToolID="7">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+        <Position x="666" y="162" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Passwords />
+          <File RecordLimit="" SearchSubDirs="False" FileFormat="0" OutputFileName="">C:\MBA 563\Alteryx Designer\Module 4\credit_bureau.csv</File>
+          <FormatSpecificOptions>
+            <HeaderRow>True</HeaderRow>
+            <IgnoreErrors>False</IgnoreErrors>
+            <AllowShareWrite>False</AllowShareWrite>
+            <ImportLine>1</ImportLine>
+            <FieldLen>254</FieldLen>
+            <SingleThreadRead>False</SingleThreadRead>
+            <IgnoreQuotes>DoubleQuotes</IgnoreQuotes>
+            <Delimeter>,</Delimeter>
+            <QuoteRecordBreak>False</QuoteRecordBreak>
+            <CodePage>28591</CodePage>
+          </FormatSpecificOptions>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>credit_bureau.csv</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <Dependencies>
+          <Implicit />
+        </Dependencies>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Field_1" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\credit_bureau.csv" type="V_String" />
+            <Field name="SK_ID_CURR" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\credit_bureau.csv" type="V_String" />
+            <Field name="SK_ID_BUREAU" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\credit_bureau.csv" type="V_String" />
+            <Field name="CREDIT_ACTIVE" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\credit_bureau.csv" type="V_String" />
+            <Field name="DAYS_CREDIT" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\credit_bureau.csv" type="V_String" />
+            <Field name="CREDIT_DAY_OVERDUE" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\credit_bureau.csv" type="V_String" />
+            <Field name="DAYS_CREDIT_ENDDATE" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\credit_bureau.csv" type="V_String" />
+            <Field name="DAYS_ENDDATE_FACT" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\credit_bureau.csv" type="V_String" />
+            <Field name="AMT_CREDIT_MAX_OVERDUE" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\credit_bureau.csv" type="V_String" />
+            <Field name="CNT_CREDIT_PROLONG" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\credit_bureau.csv" type="V_String" />
+            <Field name="AMT_CREDIT_SUM" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\credit_bureau.csv" type="V_String" />
+            <Field name="AMT_CREDIT_SUM_DEBT" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\credit_bureau.csv" type="V_String" />
+            <Field name="AMT_CREDIT_SUM_LIMIT" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\credit_bureau.csv" type="V_String" />
+            <Field name="AMT_CREDIT_SUM_OVERDUE" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\credit_bureau.csv" type="V_String" />
+            <Field name="CREDIT_TYPE" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\credit_bureau.csv" type="V_String" />
+            <Field name="DAYS_CREDIT_UPDATE" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\credit_bureau.csv" type="V_String" />
+            <Field name="AMT_ANNUITY" size="254" source="File: C:\MBA 563\Alteryx Designer\Module 4\credit_bureau.csv" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+    </Node>
+    <Node ToolID="9">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Join.Join">
+        <Position x="726" y="102" />
+      </GuiSettings>
+      <Properties>
+        <Configuration joinByRecordPos="False">
+          <JoinInfo connection="Left">
+            <Field field="SK_ID_CURR" />
+          </JoinInfo>
+          <JoinInfo connection="Right">
+            <Field field="SK_ID_CURR" />
+          </JoinInfo>
+          <SelectConfiguration>
+            <Configuration outputConnection="Join">
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Right_SK_ID_CURR" selected="True" rename="Right_SK_ID_CURR" input="Right_" />
+                <SelectField field="Right_AMT_ANNUITY" selected="True" rename="Right_AMT_ANNUITY" input="Right_" />
+                <SelectField field="*Unknown" selected="True" />
+              </SelectFields>
+            </Configuration>
+          </SelectConfiguration>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJoin" />
+    </Node>
+    <Node ToolID="11">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.BrowseV2.BrowseV2">
+        <Position x="1134" y="90" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <TempFile>C:\Users\Willkel\AppData\Local\Temp\Engine_23292_cd9190ef45a649b4bb50914ea3eaf9ef_\Engine_13528_56122349e29045e0b0b6dbcd30f0b115_.yxdb</TempFile>
+          <TempFileDataProfiling />
+          <Layout>
+            <ViewMode>Single</ViewMode>
+            <ViewSize value="100" />
+            <View1>
+              <DefaultTab>Profile</DefaultTab>
+              <Hints>
+                <Table />
+              </Hints>
+            </View1>
+            <View2 />
+          </Layout>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxBrowseV2" />
+    </Node>
+    <Node ToolID="13">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.BrowseV2.BrowseV2">
+        <Position x="750" y="210" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <TempFile>C:\Users\Willkel\AppData\Local\Temp\Engine_23292_cd9190ef45a649b4bb50914ea3eaf9ef_\Engine_13528_3352f4e929274b60b0e4541278c6c6e6_.yxdb</TempFile>
+          <TempFileDataProfiling />
+          <Layout>
+            <ViewMode>Single</ViewMode>
+            <ViewSize value="100" />
+            <View1>
+              <DefaultTab>Profile</DefaultTab>
+              <Hints>
+                <Table />
+              </Hints>
+            </View1>
+            <View2 />
+          </Layout>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxBrowseV2" />
+    </Node>
+    <Node ToolID="14">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="858" y="102" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="True" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="AMT_ANNUITY" selected="False" />
+            <SelectField field="AMT_CREDIT" selected="False" />
+            <SelectField field="AMT_GOODS_PRICE" selected="False" />
+            <SelectField field="SK_ID_CURR" selected="True" />
+            <SelectField field="TARGET" selected="True" type="Int32" size="4" />
+            <SelectField field="AMT_INCOME_TOTAL" selected="True" />
+            <SelectField field="AMT_CREDIT_SUM" selected="True" type="Float" size="4" />
+            <SelectField field="CNT_CHILDREN" selected="False" />
+            <SelectField field="CNT_FAM_MEMBERS" selected="False" />
+            <SelectField field="CODE_GENDER" selected="False" />
+            <SelectField field="FLAG_EMAIL" selected="False" />
+            <SelectField field="FLAG_MOBIL" selected="False" />
+            <SelectField field="FLAG_OWN_CAR" selected="False" />
+            <SelectField field="FLAG_OWN_REALTY" selected="False" />
+            <SelectField field="NAME_CONTRACT_TYPE" selected="False" />
+            <SelectField field="NAME_EDUCATION_TYPE" selected="False" />
+            <SelectField field="NAME_FAMILY_STATUS" selected="False" />
+            <SelectField field="NAME_HOUSING_TYPE" selected="False" />
+            <SelectField field="NAME_INCOME_TYPE" selected="False" />
+            <SelectField field="NAME_TYPE_SUITE" selected="False" />
+            <SelectField field="OCCUPATION_TYPE" selected="False" />
+            <SelectField field="Field_1" selected="False" />
+            <SelectField field="Right_SK_ID_CURR" selected="False" />
+            <SelectField field="SK_ID_BUREAU" selected="False" />
+            <SelectField field="CREDIT_ACTIVE" selected="False" />
+            <SelectField field="DAYS_CREDIT" selected="False" />
+            <SelectField field="CREDIT_DAY_OVERDUE" selected="False" />
+            <SelectField field="DAYS_CREDIT_ENDDATE" selected="False" />
+            <SelectField field="DAYS_ENDDATE_FACT" selected="False" />
+            <SelectField field="AMT_CREDIT_MAX_OVERDUE" selected="False" />
+            <SelectField field="CNT_CREDIT_PROLONG" selected="False" />
+            <SelectField field="AMT_CREDIT_SUM_DEBT" selected="False" />
+            <SelectField field="AMT_CREDIT_SUM_LIMIT" selected="False" />
+            <SelectField field="AMT_CREDIT_SUM_OVERDUE" selected="False" />
+            <SelectField field="CREDIT_TYPE" selected="False" />
+            <SelectField field="DAYS_CREDIT_UPDATE" selected="False" />
+            <SelectField field="Right_AMT_ANNUITY" selected="False" />
+            <SelectField field="*Unknown" selected="False" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>Specify Cols and Data Type</AnnotationText>
+          <DefaultAnnotationText>Specify Col/Type</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="15">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Unique.Unique">
+        <Position x="990" y="102" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UniqueFields>
+            <Field field="AMT_INCOME_TOTAL" />
+            <Field field="SK_ID_CURR" />
+            <Field field="TARGET" />
+            <Field field="AMT_CREDIT_SUM" />
+          </UniqueFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>Unique</AnnotationText>
+          <DefaultAnnotationText>Unique</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxUnique" />
+    </Node>
+    <Node ToolID="16">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileOutput.DbFileOutput">
+        <Position x="1134" y="150" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <File MaxRecords="" FileFormat="0">C:\MBA 563\Alteryx Designer\Module 4\wfkelly2_HW4_data.csv</File>
+          <Passwords />
+          <FormatSpecificOptions>
+            <LineEndStyle>CRLF</LineEndStyle>
+            <Delimeter>,</Delimeter>
+            <ForceQuotes>False</ForceQuotes>
+            <HeaderRow>True</HeaderRow>
+            <CodePage>28591</CodePage>
+            <WriteBOM>True</WriteBOM>
+          </FormatSpecificOptions>
+          <MultiFile value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>wfkelly2_HW4_data.csv</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <Dependencies>
+          <Implicit />
+        </Dependencies>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileOutput" />
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="1" Connection="Output" />
+      <Destination ToolID="3" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="3" Connection="Output" />
+      <Destination ToolID="5" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="5" Connection="True" />
+      <Destination ToolID="6" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="6" Connection="True" />
+      <Destination ToolID="9" Connection="Left" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="7" Connection="Output" />
+      <Destination ToolID="9" Connection="Right" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="7" Connection="Output" />
+      <Destination ToolID="13" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="9" Connection="Join" />
+      <Destination ToolID="14" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="14" Connection="Output" />
+      <Destination ToolID="15" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="15" Connection="Unique" />
+      <Destination ToolID="11" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="15" Connection="Unique" />
+      <Destination ToolID="16" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <PredictiveToolsCodePage value="1252" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="False" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>wfkelly2_HW4</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+      <WorkflowId value="a39b67db-34a6-4f03-aaa4-5dbbb1e88170" />
+      <Telemetry>
+        <PreviousWorkflowId value="ce9e5253-a91b-45e7-a107-1f128a92b459" />
+        <OriginWorkflowId value="a39b67db-34a6-4f03-aaa4-5dbbb1e88170" />
+      </Telemetry>
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+  </Properties>
+</AlteryxDocument>

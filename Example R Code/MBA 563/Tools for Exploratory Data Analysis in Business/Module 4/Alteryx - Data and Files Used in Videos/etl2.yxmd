@@ -1,0 +1,271 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2021.1">
+  <Nodes>
+    <Node ToolID="5">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+        <Position x="54" y="54" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Passwords />
+          <File RecordLimit="" SearchSubDirs="False" FileFormat="0" OutputFileName="">Z:\tecaPosSmall.csv</File>
+          <FormatSpecificOptions>
+            <HeaderRow>True</HeaderRow>
+            <IgnoreErrors>False</IgnoreErrors>
+            <AllowShareWrite>False</AllowShareWrite>
+            <ImportLine>1</ImportLine>
+            <FieldLen>254</FieldLen>
+            <SingleThreadRead>False</SingleThreadRead>
+            <IgnoreQuotes>DoubleQuotes</IgnoreQuotes>
+            <Delimeter>,</Delimeter>
+            <QuoteRecordBreak>False</QuoteRecordBreak>
+            <CodePage>28591</CodePage>
+          </FormatSpecificOptions>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name>Input Data</Name>
+          <AnnotationText>tecaPosSmall.csv
+This is the first step.</AnnotationText>
+          <DefaultAnnotationText>Input Data</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="unique_id" size="254" source="File: Z:\tecaPosSmall.csv" type="V_String" />
+            <Field name="transaction_id" size="254" source="File: Z:\tecaPosSmall.csv" type="V_String" />
+            <Field name="unformatted_date" size="254" source="File: Z:\tecaPosSmall.csv" type="V_String" />
+            <Field name="customer_id" size="254" source="File: Z:\tecaPosSmall.csv" type="V_String" />
+            <Field name="product_id" size="254" source="File: Z:\tecaPosSmall.csv" type="V_String" />
+            <Field name="product_name" size="254" source="File: Z:\tecaPosSmall.csv" type="V_String" />
+            <Field name="category_id" size="254" source="File: Z:\tecaPosSmall.csv" type="V_String" />
+            <Field name="category_name" size="254" source="File: Z:\tecaPosSmall.csv" type="V_String" />
+            <Field name="parent_id" size="254" source="File: Z:\tecaPosSmall.csv" type="V_String" />
+            <Field name="parent_name" size="254" source="File: Z:\tecaPosSmall.csv" type="V_String" />
+            <Field name="product_count" size="254" source="File: Z:\tecaPosSmall.csv" type="V_String" />
+            <Field name="site_id" size="254" source="File: Z:\tecaPosSmall.csv" type="V_String" />
+            <Field name="site_name" size="254" source="File: Z:\tecaPosSmall.csv" type="V_String" />
+            <Field name="address" size="254" source="File: Z:\tecaPosSmall.csv" type="V_String" />
+            <Field name="city" size="254" source="File: Z:\tecaPosSmall.csv" type="V_String" />
+            <Field name="zip" size="254" source="File: Z:\tecaPosSmall.csv" type="V_String" />
+            <Field name="latitude" size="254" source="File: Z:\tecaPosSmall.csv" type="V_String" />
+            <Field name="longitude" size="254" source="File: Z:\tecaPosSmall.csv" type="V_String" />
+            <Field name="site_status" size="254" source="File: Z:\tecaPosSmall.csv" type="V_String" />
+            <Field name="revenue" size="254" source="File: Z:\tecaPosSmall.csv" type="V_String" />
+            <Field name="gross_profit" size="254" source="File: Z:\tecaPosSmall.csv" type="V_String" />
+            <Field name="costs" size="254" source="File: Z:\tecaPosSmall.csv" type="V_String" />
+            <Field name="units" size="254" source="File: Z:\tecaPosSmall.csv" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+    </Node>
+    <Node ToolID="6">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.BrowseV2.BrowseV2">
+        <Position x="738" y="54" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <TempFile>C:\Users\racnr\AppData\Local\Temp\Engine_3264_1421c1ff269b4cf6bb03f6f3740ad415_\Engine_7244_0cc50477468a48399b4168ace5441472_.yxdb</TempFile>
+          <TempFileDataProfiling />
+          <Layout>
+            <ViewMode>Single</ViewMode>
+            <ViewSize value="100" />
+            <View1>
+              <DefaultTab>Profile</DefaultTab>
+              <Hints>
+                <Table />
+              </Hints>
+            </View1>
+            <View2 />
+          </Layout>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxBrowseV2" />
+    </Node>
+    <Node ToolID="7">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="198" y="54" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="revenue" selected="True" type="Float" size="4" />
+            <SelectField field="gross_profit" selected="True" type="Float" size="4" />
+            <SelectField field="costs" selected="True" type="Float" size="4" />
+            <SelectField field="units" selected="True" type="Float" size="4" />
+            <SelectField field="*Unknown" selected="True" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="8">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DateTime.DateTime">
+        <Position x="318" y="54" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <IsFrom value="False" />
+          <InputFieldName>unformatted_date</InputFieldName>
+          <Language>English</Language>
+          <Format>MM/dd/yy</Format>
+          <OutputFieldName>date</OutputFieldName>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Convert unformatted_date From:
+MM/dd/yy</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDateTime" />
+    </Node>
+    <Node ToolID="9">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="462" y="54" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="DateTimeYear([date])" field="year" size="2" type="Int16" />
+            <FormulaField expression="DateTimeMonth([date])" field="month" size="2" type="Int16" />
+            <FormulaField expression="DateTimeDay([date])" field="day" size="2" type="Int16" />
+            <FormulaField expression="DateTimeFormat([date],&quot;%A&quot;)" field="dow" size="1073741823" type="V_WString" />
+            <FormulaField expression="IF [month] &lt;= 3 THEN 1 ELSEIF [month] &gt; 3 AND [month] &lt;= 6 THEN 2 ELSEIF [month] &gt; 6 and [month] &lt;=9 THEN 3 ELSE 4 ENDIF" field="quarter" size="2" type="Int16" />
+            <FormulaField expression="[gross_profit]/[revenue]" field="gp_margin" size="4" type="Float" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>year = DateTimeYear([date])
+month = DateTimeMonth([date])
+day = DateTimeDay([dat...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="10">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="606" y="54" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="True" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="unique_id" selected="True" />
+            <SelectField field="transaction_id" selected="True" />
+            <SelectField field="unformatted_date" selected="False" />
+            <SelectField field="date" selected="True" />
+            <SelectField field="year" selected="True" />
+            <SelectField field="month" selected="True" />
+            <SelectField field="day" selected="True" />
+            <SelectField field="dow" selected="True" />
+            <SelectField field="quarter" selected="True" />
+            <SelectField field="customer_id" selected="True" />
+            <SelectField field="product_id" selected="True" />
+            <SelectField field="product_name" selected="True" />
+            <SelectField field="category_id" selected="True" />
+            <SelectField field="category_name" selected="True" />
+            <SelectField field="parent_id" selected="True" />
+            <SelectField field="parent_name" selected="True" />
+            <SelectField field="product_count" selected="True" />
+            <SelectField field="site_id" selected="True" />
+            <SelectField field="site_name" selected="True" />
+            <SelectField field="address" selected="True" />
+            <SelectField field="city" selected="True" />
+            <SelectField field="zip" selected="True" />
+            <SelectField field="latitude" selected="True" />
+            <SelectField field="longitude" selected="True" />
+            <SelectField field="site_status" selected="True" />
+            <SelectField field="revenue" selected="True" />
+            <SelectField field="gross_profit" selected="True" />
+            <SelectField field="gp_margin" selected="True" />
+            <SelectField field="costs" selected="True" />
+            <SelectField field="units" selected="True" />
+            <SelectField field="*Unknown" selected="True" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="5" Connection="Output" />
+      <Destination ToolID="7" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="7" Connection="Output" />
+      <Destination ToolID="8" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="8" Connection="Output" />
+      <Destination ToolID="9" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="9" Connection="Output" />
+      <Destination ToolID="10" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="10" Connection="Output" />
+      <Destination ToolID="6" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="True" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="False" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>etl2</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+  </Properties>
+</AlteryxDocument>

@@ -1,0 +1,103 @@
+MBA 561 HW 3 Assignment
+---
+title: "wfkelly2_HW3"
+author: "William Kelly"
+date: "4/29/2021"
+output: html_document
+---
+
+# Read in Data File 'ities.csv' and assign to data frame 'df'
+```{r}
+#1)
+# Read the datafile as dataframe, df and create a new RMD file to answer the following questions.
+
+df <- read.csv("ities.csv") # Read csv into df data frame
+```
+
+# Display number of Rows and Columns in dataset 'df'
+```{r}
+#2) 
+# Display the number of rows and columns in the dataset using an appropriate R function. 
+# Below the output, identify which numbers from the output correspond to the number of rows and columns.
+
+nrow(df) # Number of rows
+ncol(df) # Number of columns
+
+```
+Number of Rows are 438151 and Number of Columns are 13
+
+# Displays the structure of the Data Frame 'df'
+```{r}
+#3)
+# Display the structure of the dataframe, df. 
+# Below the output, briefly summarize two main points about the dataframe structure.
+
+str(df) # Display structure of df
+
+```
+Dataset contains all characters except price, quantity, and totaldue.
+There are 13 different variables within the dataset.
+
+# Displays the Summary of Dataset 'df'
+```{r}
+#4) Display a summary of the columns in df. 
+# Below the output, comment on columns for which the data type does not seem correct, 
+# the format to which they should be changed, and why that change would be helpful.
+
+summary(df) # Display summary of df
+
+```
+The Price and TotalDue contain 12 NA values
+Remove NA values from dataset using functions na.omit or !row.has.na
+Also the Date is in character format could change to date class 
+to read out Day, Month, Year and make calculations on the date
+
+# Converts 'Department' and 'LineItem' columns to lower case and save to datasets
+```{r}
+#5) Convert the values in Department and LineItem columns to lower cases 
+# and save them as Department_lower and LineItem_lower.
+
+library(stringr)
+Department_lower <- str_to_lower(df$Department)
+LineItem_lower <- str_to_lower(df$LineItem)
+
+```
+
+# Use Plot function on Department_lower and explain why it won't plot
+```{r}
+#6)
+# Use the plot function on Department_lower. You will get an error. 
+# Below the output, describe the reason for the error. 
+# After running the code chunk to see the error, comment out the code chunk so that you can knit the document to a .html file.
+
+# plot(Department_lower) # Commented out code chunk to knit into HTML
+
+```
+The reason why it won't plot is because Department_lower is a character data type
+Need to convert to factors in order to plot Department_lower with different levels
+Levels represent the different unique categories within the column of data
+
+
+# Converts datatype of Department_lower column to factor type
+```{r}
+#7)
+# Convert the datatype of Department_lower to a factor type 
+# (do not create new column, just convert it in place). 
+
+factor(Department_lower) # Factor function used on Department_lower
+
+```
+
+# Plots Department_lower displaying from most frequent on left to least frequent on right
+```{r}
+#8)
+# Use the plot function on the Department_lower column to display a plot of that column from most frequent on the left to least frequent on the right. Below the output, comment on the department that occurs most frequently, as well as the one that occurs least frequently. It may be hard for you to read the names of all of the departments from the plot. You may have to add additional code to adjust the plot or to print out additional summary information so that you can identify the departments that appear most/least frequently. Make sure that your comments are supported by the code that is displayed. (You can get more information about plot function by searching it in help section on the right of the RStudio.)
+
+library(forcats) # Use library to utilize fct_infreq functions
+plot(fct_infreq(Department_lower))
+summary(fct_infreq(Department_lower))
+
+```
+The department that occurs the most frequently is 'entrees'
+The department that occurs the least frequently is 'swag'
+

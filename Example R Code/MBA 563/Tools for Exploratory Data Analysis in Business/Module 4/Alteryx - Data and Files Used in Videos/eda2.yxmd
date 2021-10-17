@@ -1,0 +1,3472 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2021.1">
+  <Nodes>
+    <Node ToolID="1">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+        <Position x="54" y="102" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Passwords />
+          <File RecordLimit="" SearchSubDirs="False" FileFormat="0" OutputFileName="">C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv</File>
+          <FormatSpecificOptions>
+            <HeaderRow>True</HeaderRow>
+            <IgnoreErrors>False</IgnoreErrors>
+            <AllowShareWrite>False</AllowShareWrite>
+            <ImportLine>1</ImportLine>
+            <FieldLen>254</FieldLen>
+            <SingleThreadRead>False</SingleThreadRead>
+            <IgnoreQuotes>DoubleQuotes</IgnoreQuotes>
+            <Delimeter>,</Delimeter>
+            <QuoteRecordBreak>False</QuoteRecordBreak>
+            <CodePage>28591</CodePage>
+          </FormatSpecificOptions>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>dataForEDA.csv</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="unique_id" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="transaction_id" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="date" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="year" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="month" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="day" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="dow" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="quarter" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="customer_id" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="product_id" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="product_name" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="category_id" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="category_name" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="parent_id" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="parent_name" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="product_count" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="site_id" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="site_name" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="address" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="city" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="zip" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="latitude" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="longitude" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="site_status" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="revenue" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="gross_profit" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="gp_margin" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="costs" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="units" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+            <Field name="state_province_code" size="254" source="File: C:\Users\racnr\Desktop\alteryx demos\dataForEDA.csv" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+    </Node>
+    <Node ToolID="2">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.BrowseV2.BrowseV2">
+        <Position x="438" y="102" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <TempFile>C:\Users\racnr\AppData\Local\Temp\Engine_7780_91cad1441b6b4518af614fb1f15231e6_\Engine_6968_561b20c72b6a4d8aa508bafebf217dc4_.yxdb</TempFile>
+          <TempFileDataProfiling />
+          <Layout>
+            <ViewMode>Single</ViewMode>
+            <ViewSize value="100" />
+            <View1>
+              <DefaultTab>Report</DefaultTab>
+              <Hints>
+                <Table />
+              </Hints>
+            </View1>
+            <View2 />
+          </Layout>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxBrowseV2" />
+    </Node>
+    <Node ToolID="3">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="150" y="102" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="date" selected="True" type="Date" size="10" />
+            <SelectField field="year" selected="True" type="Int16" size="2" />
+            <SelectField field="month" selected="True" type="Int16" size="2" />
+            <SelectField field="day" selected="True" type="Int16" size="2" />
+            <SelectField field="quarter" selected="True" type="Int16" size="2" />
+            <SelectField field="latitude" selected="True" type="Float" size="4" />
+            <SelectField field="longitude" selected="True" type="Float" size="4" />
+            <SelectField field="revenue" selected="True" type="Float" size="4" />
+            <SelectField field="gross_profit" selected="True" type="Float" size="4" />
+            <SelectField field="gp_margin" selected="True" type="Float" size="4" />
+            <SelectField field="costs" selected="True" type="Float" size="4" />
+            <SelectField field="units" selected="True" type="Float" size="4" />
+            <SelectField field="*Unknown" selected="True" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="4">
+      <GuiSettings>
+        <Position x="270" y="102" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Value name="Select Fields">unique_id=False,transaction_id=False,date=True,year=False,month=False,day=False,dow=False,quarter=False,customer_id=False,product_id=False,product_name=False,category_id=False,category_name=True,parent_id=False,parent_name=False,product_count=False,site_id=False,site_name=False,address=False,city=False,zip=False,latitude=False,longitude=False,site_status=False,revenue=True,gross_profit=True,gp_margin=True,costs=True,units=True,state_province_code=True</Value>
+          <Value name="Sample Data">False</Value>
+          <Value name="Number">True</Value>
+          <Value name="NNumber">5000</Value>
+          <Value name="Percent">False</Value>
+          <Value name="NPercent">10</Value>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings Macro="Predictive Tools\Field_Summary_Report.yxmc" />
+    </Node>
+    <Node ToolID="5">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.BrowseV2.BrowseV2">
+        <Position x="366" y="54" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <TempFile>C:\Users\racnr\AppData\Local\Temp\Engine_7780_91cad1441b6b4518af614fb1f15231e6_\Engine_6968_c5b53b8c96f24b96b42c4a3afec00bf6_.yxdb</TempFile>
+          <TempFileDataProfiling />
+          <Layout>
+            <ViewMode>Single</ViewMode>
+            <ViewSize value="100" />
+            <View1>
+              <DefaultTab>Report</DefaultTab>
+              <Hints />
+            </View1>
+            <View2 />
+          </Layout>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxBrowseV2" />
+    </Node>
+    <Node ToolID="6">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.BrowseV2.BrowseV2">
+        <Position x="366" y="186" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <TempFile>C:\Users\racnr\AppData\Local\Temp\Engine_7780_91cad1441b6b4518af614fb1f15231e6_\Engine_6968_e992ef94ec7f4a2bb6474a45d607ed22_.yxdb</TempFile>
+          <TempFileDataProfiling />
+          <Layout>
+            <ViewMode>Single</ViewMode>
+            <ViewSize value="100" />
+            <View1>
+              <DefaultTab>Report</DefaultTab>
+              <Hints>
+                <Table />
+              </Hints>
+            </View1>
+            <View2 />
+          </Layout>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxBrowseV2" />
+    </Node>
+    <Node ToolID="7">
+      <GuiSettings Plugin="PlotlyCharting">
+        <Position x="282" y="246" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <ChartingFields>
+            <Traces json:Array="true" xmlns:json="http://james.newtonking.com/projects/json">
+              <type>box</type>
+              <mode>markers</mode>
+              <name>Box and Whisker</name>
+              <boxpoints>false</boxpoints>
+              <ysrc>revenue</ysrc>
+              <xsrc>dow</xsrc>
+            </Traces>
+            <Layout>
+              <title>
+                <text>Distribution of Revenue By Day of Week</text>
+              </title>
+              <font>
+                <family>sans-serif</family>
+              </font>
+              <autosize>false</autosize>
+              <width>700</width>
+              <height>849</height>
+              <showlegend>false</showlegend>
+              <hovermode>closest</hovermode>
+              <xaxis>
+                <range>-0.5</range>
+                <range>6.5</range>
+                <autorange>true</autorange>
+                <title>
+                  <text>Day of Week</text>
+                </title>
+                <type>category</type>
+                <tickfont>
+                  <size>12</size>
+                </tickfont>
+                <nticks>0</nticks>
+              </xaxis>
+              <yaxis>
+                <range>-10.110000186496311</range>
+                <range>92.0900035434299</range>
+                <autorange>true</autorange>
+                <title>
+                  <text>Revenue</text>
+                </title>
+                <type>linear</type>
+              </yaxis>
+              <margin>
+                <pad>0</pad>
+                <t>100</t>
+                <b>80</b>
+                <l>80</l>
+                <r>80</r>
+              </margin>
+              <legend>
+                <font>
+                  <size>12</size>
+                </font>
+                <borderwidth>0</borderwidth>
+              </legend>
+            </Layout>
+          </ChartingFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name>Box and Whisker of Revenue</Name>
+          <DefaultAnnotationText>Box and Whisker of Revenue</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="PortfolioPluginsEngine.dll" EngineDllEntryPoint="ComposerInteractiveCharting" />
+    </Node>
+    <Node ToolID="8">
+      <GuiSettings Plugin="PlotlyCharting">
+        <Position x="270" y="342" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <ChartingFields>
+            <Traces json:Array="true" xmlns:json="http://james.newtonking.com/projects/json">
+              <type>bar</type>
+              <mode>markers</mode>
+              <orientation>v</orientation>
+              <xsrc>parent_name</xsrc>
+              <ysrc>revenue</ysrc>
+              <aggregationField>ysrc</aggregationField>
+              <aggregationFunction>sum</aggregationFunction>
+              <aggregationFieldName>revenue</aggregationFieldName>
+            </Traces>
+            <Layout>
+              <title>
+                <text>Total Revenue by Parent Name</text>
+              </title>
+              <font>
+                <family>sans-serif</family>
+              </font>
+              <autosize>false</autosize>
+              <width>700</width>
+              <height>849</height>
+              <showlegend>false</showlegend>
+              <hovermode>closest</hovermode>
+              <xaxis>
+                <range>-0.5</range>
+                <range>59.5</range>
+                <autorange>true</autorange>
+                <title>
+                  <text>Parent Name</text>
+                </title>
+                <type>category</type>
+                <tickfont>
+                  <size>12</size>
+                </tickfont>
+                <nticks>0</nticks>
+              </xaxis>
+              <yaxis>
+                <range>-773.426666815248</range>
+                <range>14278.506669525472</range>
+                <autorange>true</autorange>
+                <title>
+                  <text>Revenue</text>
+                </title>
+                <type>linear</type>
+              </yaxis>
+              <legend>
+                <font>
+                  <size>12</size>
+                </font>
+                <borderwidth>0</borderwidth>
+              </legend>
+              <margin>
+                <pad>0</pad>
+                <t>100</t>
+                <b>80</b>
+                <l>80</l>
+                <r>80</r>
+              </margin>
+            </Layout>
+          </ChartingFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name>Bar Chart</Name>
+          <DefaultAnnotationText>Bar Chart</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="PortfolioPluginsEngine.dll" EngineDllEntryPoint="ComposerInteractiveCharting" />
+    </Node>
+    <Node ToolID="9">
+      <GuiSettings Plugin="PlotlyCharting">
+        <Position x="258" y="426" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <ChartingFields>
+            <Traces json:Array="true" xmlns:json="http://james.newtonking.com/projects/json">
+              <type>scatter</type>
+              <mode>markers</mode>
+              <xsrc>gp_margin</xsrc>
+              <ysrc>revenue</ysrc>
+              <marker>
+                <size>6</size>
+                <line>
+                  <width>0</width>
+                </line>
+              </marker>
+              <transforms json:Array="true">
+                <type>groupby</type>
+                <groupssrc>parent_name</groupssrc>
+                <groups>Lottery (360)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Pop (587)</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Cold Sandwiches</groups>
+                <groups>Fuel</groups>
+                <groups>Cookies</groups>
+                <groups>Lotto (271)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Fuel</groups>
+                <groups>Hot Sandwiches &amp; Chicken</groups>
+                <groups>Roller Grill</groups>
+                <groups>Cigars</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Fuel</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Beer</groups>
+                <groups>Dairy</groups>
+                <groups>Salad/produce &amp; Misc</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Cigarettes</groups>
+                <groups>Gm/novelty</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Cigarettes</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Beer</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Roller Grill</groups>
+                <groups>Beer</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Hot Sandwiches &amp; Chicken</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Candy</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Beer</groups>
+                <groups>Gum</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Roller Grill</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Roller Grill</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>SKU Coupons (98)</groups>
+                <groups>Fuel</groups>
+                <groups>Candy</groups>
+                <groups>Fuel</groups>
+                <groups>Milk</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Store Services (92)</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Juice/tonics</groups>
+                <groups>SKU Coupons (98)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Health &amp; Beauty</groups>
+                <groups>Beer</groups>
+                <groups>Pizza</groups>
+                <groups>Fuel</groups>
+                <groups>Hot Sandwiches &amp; Chicken</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Candy</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Lotto (271)</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Candy</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Store Services (92)</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Fuel</groups>
+                <groups>Gum</groups>
+                <groups>Pizza</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Dairy</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Juice No Tax (311)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Cold Sandwiches</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Beer</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Pizza</groups>
+                <groups>Cigars</groups>
+                <groups>Beer</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Candy</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Cigars</groups>
+                <groups>Chips</groups>
+                <groups>Candy</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Fuel</groups>
+                <groups>Chips</groups>
+                <groups>Roller Grill</groups>
+                <groups>Pizza</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Fuel</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Roller Grill</groups>
+                <groups>Fuel</groups>
+                <groups>Gm/novelty</groups>
+                <groups>Chips</groups>
+                <groups>Bakery</groups>
+                <groups>Pop (587)</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Fuel</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Cold Sandwiches</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Pop (587)</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Beer Deposits (66)</groups>
+                <groups>Fuel</groups>
+                <groups>Roller Grill</groups>
+                <groups>Pop (587)</groups>
+                <groups>Bakery</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Beer Deposits (66)</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Chips</groups>
+                <groups>Fuel</groups>
+                <groups>Cigarettes</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Candy</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Fuel</groups>
+                <groups>Salad/produce &amp; Misc</groups>
+                <groups>Fuel</groups>
+                <groups>Beer</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Krispy Kreme Retail (166)</groups>
+                <groups>Fuel</groups>
+                <groups>Automotive (35)</groups>
+                <groups>Fuel</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Fuel</groups>
+                <groups>Chips</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Candy</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Candy</groups>
+                <groups>Lotto (271)</groups>
+                <groups>Chips</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Pop (587)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Candy</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Pop (587)</groups>
+                <groups>Fuel</groups>
+                <groups>Candy</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Salad/produce &amp; Misc</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Cigars</groups>
+                <groups>Fuel</groups>
+                <groups>Hot Sandwiches &amp; Chicken</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Hot Sandwiches &amp; Chicken</groups>
+                <groups>Fuel</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Hot Sandwiches &amp; Chicken</groups>
+                <groups>Dairy</groups>
+                <groups>Pop (587)</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Fuel</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>SKU Coupons (98)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Gum</groups>
+                <groups>Hot Sandwiches &amp; Chicken</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Hot Sandwiches &amp; Chicken</groups>
+                <groups>Hot Sandwiches &amp; Chicken</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Hot Sandwiches &amp; Chicken</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Fuel</groups>
+                <groups>Hot Sandwiches &amp; Chicken</groups>
+                <groups>Candy</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Fuel</groups>
+                <groups>Pop (587)</groups>
+                <groups>Roller Grill</groups>
+                <groups>Fuel</groups>
+                <groups>Nuts</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Cigarettes</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Beer</groups>
+                <groups>Pop (587)</groups>
+                <groups>Roller Grill</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Beer</groups>
+                <groups>Juice No Tax (311)</groups>
+                <groups>Store Services (92)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Cigarettes</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Bakery</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Fuel</groups>
+                <groups>Candy</groups>
+                <groups>Beer</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Fuel</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Candy</groups>
+                <groups>Jerky (305)</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Ice Cream</groups>
+                <groups>Fuel</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Pop (587)</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Fuel</groups>
+                <groups>Salad/produce &amp; Misc</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Candy</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Cigars</groups>
+                <groups>Dairy</groups>
+                <groups>Nuts</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Fuel</groups>
+                <groups>Candy</groups>
+                <groups>Fuel</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Dairy</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Fuel</groups>
+                <groups>Chips</groups>
+                <groups>Fuel</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Cigars</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Pop (587)</groups>
+                <groups>Beer</groups>
+                <groups>Pop (587)</groups>
+                <groups>Cigarettes</groups>
+                <groups>Roller Grill</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Gm/novelty</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Fuel</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Beer Deposits (66)</groups>
+                <groups>Candy</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Automotive (35)</groups>
+                <groups>Beer</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Gum</groups>
+                <groups>Nuts</groups>
+                <groups>Pop (587)</groups>
+                <groups>Fuel</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Pop (587)</groups>
+                <groups>Nuts</groups>
+                <groups>Pop (587)</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Roller Grill</groups>
+                <groups>Bakery</groups>
+                <groups>Candy</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Lotto (271)</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Fuel</groups>
+                <groups>Ice (277)</groups>
+                <groups>Bakery</groups>
+                <groups>Fuel</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Cigarettes</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Gum</groups>
+                <groups>Newspapers</groups>
+                <groups>Fuel</groups>
+                <groups>Energy carbonated</groups>
+                <groups>E-Cigarettes</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Pop (587)</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Pop (587)</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Fuel</groups>
+                <groups>Chips</groups>
+                <groups>Candy</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Gum</groups>
+                <groups>Candy</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Fuel</groups>
+                <groups>Beer</groups>
+                <groups>Cigarettes</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>SKU Coupons (98)</groups>
+                <groups>Fuel</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Candy</groups>
+                <groups>Pop (587)</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Packaged Sandwiches</groups>
+                <groups>Roller Grill</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Pop (587)</groups>
+                <groups>Fuel</groups>
+                <groups>Krispy Kreme Retail (166)</groups>
+                <groups>Jerky (305)</groups>
+                <groups>Cigarettes</groups>
+                <groups>Store Services (92)</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Fuel</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Bakery</groups>
+                <groups>Food-</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Liquor</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Gum</groups>
+                <groups>Pop (587)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Juice No Tax (311)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Ice Cream</groups>
+                <groups>Lotto (271)</groups>
+                <groups>Gm/novelty</groups>
+                <groups>Fuel</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Bakery</groups>
+                <groups>Cigars</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Pizza</groups>
+                <groups>Fuel</groups>
+                <groups>Pop (587)</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Ice Cream</groups>
+                <groups>Candy</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Gm/novelty</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Energy non-carb</groups>
+                <groups>E-Cigarettes</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Lotto (271)</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Beer Deposits (66)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Chips</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Cigarettes</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Jerky (305)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Cigarettes</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Candy</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Cigars</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Cigarettes</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Dairy</groups>
+                <groups>Fuel</groups>
+                <groups>Cigarettes</groups>
+                <groups>Fuel</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Newspapers</groups>
+                <groups>Fuel</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Pop (587)</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Fuel</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Fuel</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Beer</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Automotive (35)</groups>
+                <groups>Cigars</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Energy non-carb</groups>
+                <groups>Candy</groups>
+                <groups>Juice No Tax (311)</groups>
+                <groups>Cigars</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Liquor</groups>
+                <groups>Fuel</groups>
+                <groups>Cigars</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Beer</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Lotto (271)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>E-Cigarettes</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Pizza</groups>
+                <groups>Fuel</groups>
+                <groups>Beer Deposits (66)</groups>
+                <groups>Gum</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Hot Sandwiches &amp; Chicken</groups>
+                <groups>Newspapers</groups>
+                <groups>Health Snacks</groups>
+                <groups>Health Snacks</groups>
+                <groups>Pop (587)</groups>
+                <groups>Beer</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Bakery</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Roller Grill</groups>
+                <groups>Hot Sandwiches &amp; Chicken</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Gum</groups>
+                <groups>Packaged Sandwiches</groups>
+                <groups>Fuel</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Fuel</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>SKU Coupons (98)</groups>
+                <groups>Milk</groups>
+                <groups>Fuel</groups>
+                <groups>Candy</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Sandwiches</groups>
+                <groups>Packaged Sandwiches</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Chips</groups>
+                <groups>Sunglasses (915)</groups>
+                <groups>Fuel</groups>
+                <groups>Lotto (271)</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Cough Drops/antacids (85)</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Candy</groups>
+                <groups>Fuel</groups>
+                <groups>Nuts</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Chips</groups>
+                <groups>Pizza</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Pop (587)</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Jerky (305)</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Roller Grill</groups>
+                <groups>Lotto (271)</groups>
+                <groups>Candy</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Fuel</groups>
+                <groups>SKU Coupons (98)</groups>
+                <groups>Fuel</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Dairy</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Pop (587)</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Pop (587)</groups>
+                <groups>Candy</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Candy</groups>
+                <groups>Beer</groups>
+                <groups>SKU Coupons (98)</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Health Snacks</groups>
+                <groups>Fuel</groups>
+                <groups>Pop (587)</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Roller Grill</groups>
+                <groups>Candy</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Lotto (271)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Cigarettes</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Fuel</groups>
+                <groups>Pop (587)</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Ice (277)</groups>
+                <groups>Beer Deposits (66)</groups>
+                <groups>Hot Sandwiches &amp; Chicken</groups>
+                <groups>Beer</groups>
+                <groups>Beer</groups>
+                <groups>Pizza</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Gum</groups>
+                <groups>Pop (587)</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Beer</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Beer Deposits (66)</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Cigarettes</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Candy</groups>
+                <groups>Dairy</groups>
+                <groups>Milk</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Pizza</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Beer Deposits (66)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Hot Sandwiches &amp; Chicken</groups>
+                <groups>Juice No Tax (311)</groups>
+                <groups>Fuel</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Pizza</groups>
+                <groups>Jerky (305)</groups>
+                <groups>Nuts</groups>
+                <groups>Bakery</groups>
+                <groups>Hot Sandwiches &amp; Chicken</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Beer</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Dairy</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Fuel</groups>
+                <groups>Beer</groups>
+                <groups>Fuel</groups>
+                <groups>Bakery</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Fuel</groups>
+                <groups>Candy</groups>
+                <groups>Nuts</groups>
+                <groups>Cigarettes</groups>
+                <groups>Beer</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Health Snacks</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Candy</groups>
+                <groups>Juice No Tax (311)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Beer</groups>
+                <groups>Pop (587)</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Pop (587)</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Fuel</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Lotto (271)</groups>
+                <groups>Pizza</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Candy</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Beer Deposits (66)</groups>
+                <groups>Bakery</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Cigarettes</groups>
+                <groups>Beer</groups>
+                <groups>Hot Sandwiches &amp; Chicken</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Beer Deposits (66)</groups>
+                <groups>Roller Grill</groups>
+                <groups>Pop (587)</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Fuel</groups>
+                <groups>Liquor</groups>
+                <groups>Dairy</groups>
+                <groups>Liquor</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Health Snacks</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Cigarettes</groups>
+                <groups>Beer Deposits (66)</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Liquor</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>E-Cigarettes</groups>
+                <groups>Candy</groups>
+                <groups>Nuts</groups>
+                <groups>Beer Deposits (66)</groups>
+                <groups>Bakery</groups>
+                <groups>Fuel</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Gum</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Beer Deposits (66)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Candy</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Pop (587)</groups>
+                <groups>Liquor</groups>
+                <groups>Jerky (305)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Candy</groups>
+                <groups>Pop (587)</groups>
+                <groups>Cookies</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Candy</groups>
+                <groups>Pop (587)</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Gum</groups>
+                <groups>Cigars</groups>
+                <groups>Fuel</groups>
+                <groups>Pop (587)</groups>
+                <groups>SKU Coupons (98)</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Cigarettes</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Fuel</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Dairy</groups>
+                <groups>Pop (587)</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Beer Deposits (66)</groups>
+                <groups>Lotto (271)</groups>
+                <groups>Candy</groups>
+                <groups>Beer Deposits (66)</groups>
+                <groups>Newspapers</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Eggs/cheese</groups>
+                <groups>Jerky (305)</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Fuel</groups>
+                <groups>Candy</groups>
+                <groups>Store Services (92)</groups>
+                <groups>Fuel</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Pizza</groups>
+                <groups>Ice (277)</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Beer Deposits (66)</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Fuel</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Roller Grill</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Roller Grill</groups>
+                <groups>Beer Deposits (66)</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Pizza</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Beer Deposits (66)</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Gum</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Fuel</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Hot Sandwiches &amp; Chicken</groups>
+                <groups>Cigars</groups>
+                <groups>Fuel</groups>
+                <groups>Beer</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Fuel</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Fuel</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Beer</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Juice No Tax (311)</groups>
+                <groups>Bakery</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Gm/novelty</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Pop (587)</groups>
+                <groups>Beer Deposits (66)</groups>
+                <groups>Roller Grill</groups>
+                <groups>Pop (587)</groups>
+                <groups>Pizza</groups>
+                <groups>Pizza</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Cigarettes</groups>
+                <groups>Fuel</groups>
+                <groups>Beer Deposits (66)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Beer Deposits (66)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Pop (587)</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Roller Grill</groups>
+                <groups>Pop (587)</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>E-Cigarettes</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Fuel</groups>
+                <groups>Candy</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Roller Grill</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Energy non-carb</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Dairy</groups>
+                <groups>Pop (587)</groups>
+                <groups>E-Cigarettes</groups>
+                <groups>Fuel</groups>
+                <groups>Gum</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Juice No Tax (311)</groups>
+                <groups>Roller Grill</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Cigars</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Gm/novelty</groups>
+                <groups>Liquor</groups>
+                <groups>Clothing</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Pop (587)</groups>
+                <groups>Beer</groups>
+                <groups>Store Services (92)</groups>
+                <groups>Wine</groups>
+                <groups>Milk</groups>
+                <groups>Lotto (271)</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Pop (587)</groups>
+                <groups>Beer Deposits (66)</groups>
+                <groups>Gm/novelty</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Fuel</groups>
+                <groups>Packaged Sandwiches</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Fuel</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Bakery</groups>
+                <groups>Salad/produce &amp; Misc</groups>
+                <groups>Beer Deposits (66)</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Chips</groups>
+                <groups>Fuel</groups>
+                <groups>Pop (587)</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Milk</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Beer Deposits (66)</groups>
+                <groups>Fuel</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Candy</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Cigars</groups>
+                <groups>Beer</groups>
+                <groups>Roller Grill</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Fuel</groups>
+                <groups>Juice No Tax (311)</groups>
+                <groups>Pizza</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Beer</groups>
+                <groups>Fuel</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Beer Deposits (66)</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Pizza</groups>
+                <groups>Cigars</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Pizza</groups>
+                <groups>Pizza</groups>
+                <groups>Pop (587)</groups>
+                <groups>Fuel</groups>
+                <groups>Health &amp; Beauty</groups>
+                <groups>Beer Deposits (66)</groups>
+                <groups>Fuel</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Dairy</groups>
+                <groups>Candy</groups>
+                <groups>Fuel</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Gum</groups>
+                <groups>Health Snacks</groups>
+                <groups>Pizza</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Bakery</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Fuel</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Cigarettes</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Health &amp; Beauty</groups>
+                <groups>Candy</groups>
+                <groups>Fuel</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Beer Deposits (66)</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Fuel</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Cigarettes</groups>
+                <groups>Juice No Tax (311)</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Liquor</groups>
+                <groups>Dairy</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Cigars</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Energy non-carb</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Newspapers</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Roller Grill</groups>
+                <groups>Fuel</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Cigarettes</groups>
+                <groups>Beer Deposits (66)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Beer Deposits (66)</groups>
+                <groups>E-Cigarettes</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Fuel</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Pop (587)</groups>
+                <groups>Cigarettes</groups>
+                <groups>Cigarettes</groups>
+                <groups>Fuel</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Liquor</groups>
+                <groups>Lotto (271)</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Roller Grill</groups>
+                <groups>Fuel</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Bakery</groups>
+                <groups>Beer Deposits (66)</groups>
+                <groups>Fuel</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Beer Deposits (66)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Pop (587)</groups>
+                <groups>Roller Grill</groups>
+                <groups>Chips</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Lotto (271)</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Fuel</groups>
+                <groups>Salad/produce &amp; Misc</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Beer</groups>
+                <groups>Liquor</groups>
+                <groups>Fuel</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Beer</groups>
+                <groups>Fuel</groups>
+                <groups>Liquor</groups>
+                <groups>Beer Deposits (66)</groups>
+                <groups>Pop Deposits (588)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Beer</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Gum</groups>
+                <groups>Pop (587)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Cold Sandwiches</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Eggs/cheese</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Cigars</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Beer</groups>
+                <groups>Energy non-carb</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Ice (277)</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Pop (587)</groups>
+                <groups>Fuel</groups>
+                <groups>Frozen Foods</groups>
+                <groups>Pop (587)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Milk</groups>
+                <groups>Pop (587)</groups>
+                <groups>Fuel</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Pizza</groups>
+                <groups>Cold Sandwiches</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Bakery</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Bakery</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Liquor</groups>
+                <groups>Roller Grill</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Fuel</groups>
+                <groups>Cigarettes</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Beer</groups>
+                <groups>Dairy</groups>
+                <groups>Candy</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Roller Grill</groups>
+                <groups>Fuel</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Pop (587)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Pop (587)</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Roller Grill</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Liquor</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Fuel</groups>
+                <groups>Milk</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Packaged Sandwiches</groups>
+                <groups>Candy</groups>
+                <groups>Cigars</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Pop (587)</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Lotto (271)</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Pop (587)</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Nuts</groups>
+                <groups>Fuel</groups>
+                <groups>Bakery</groups>
+                <groups>Fuel</groups>
+                <groups>Pop (587)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Pop (587)</groups>
+                <groups>Fuel</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Health &amp; Beauty</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Pop (587)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Cigarettes</groups>
+                <groups>Liquor</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Food-</groups>
+                <groups>Cigars</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Krispy Kreme Retail (166)</groups>
+                <groups>Health &amp; Beauty</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Fuel</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Fuel</groups>
+                <groups>Liquor</groups>
+                <groups>Lotto (271)</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Roller Grill</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Dairy</groups>
+                <groups>Fuel</groups>
+                <groups>Candy</groups>
+                <groups>Gm/novelty</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Fuel</groups>
+                <groups>Juice No Tax (311)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Pop (587)</groups>
+                <groups>Cigars</groups>
+                <groups>Candy</groups>
+                <groups>Fuel</groups>
+                <groups>Roller Grill</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Food-Grocery</groups>
+                <groups>Beer</groups>
+                <groups>Beer</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Jerky (305)</groups>
+                <groups>Fuel</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Newspapers</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Cigarettes</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Cigarettes</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Fuel</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Fuel</groups>
+                <groups>Ice (277)</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Liquor</groups>
+                <groups>Cigarettes</groups>
+                <groups>Pop (587)</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Pizza</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Pizza</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Candy</groups>
+                <groups>Fuel</groups>
+                <groups>Candy</groups>
+                <groups>Pop (587)</groups>
+                <groups>Cigarettes</groups>
+                <groups>Cigars</groups>
+                <groups>Fuel</groups>
+                <groups>Cigars</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Cigarettes</groups>
+                <groups>Gum</groups>
+                <groups>Cigars</groups>
+                <groups>Cigarettes</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Roller Grill</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Juice/tonics</groups>
+                <groups>SKU Coupons (98)</groups>
+                <groups>Lotto (271)</groups>
+                <groups>Cookies</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Cigars</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Beer</groups>
+                <groups>Cigarettes</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Cigars</groups>
+                <groups>Cigarettes</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Fuel</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Health &amp; Beauty</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Pop (587)</groups>
+                <groups>Cigars</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Cigarettes</groups>
+                <groups>Candy</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Candy</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Cigarettes</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Salad/produce &amp; Misc</groups>
+                <groups>Cigarettes</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Fuel</groups>
+                <groups>Gum</groups>
+                <groups>Postage Stamps (233)</groups>
+                <groups>Cookies</groups>
+                <groups>Liquor</groups>
+                <groups>Milk</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Fuel</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Chips</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Cigarettes</groups>
+                <groups>Dairy</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Cigars</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Milk</groups>
+                <groups>Fuel</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Roller Grill</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Fuel</groups>
+                <groups>E-Cigarettes</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Dairy</groups>
+                <groups>Automotive (35)</groups>
+                <groups>Krispy Kreme Retail (166)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Pop (587)</groups>
+                <groups>Cigarettes</groups>
+                <groups>Cigars</groups>
+                <groups>Store Services (92)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Cigarettes</groups>
+                <groups>Fuel</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Milk</groups>
+                <groups>Lotto (271)</groups>
+                <groups>Beer</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Beer</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Liquor</groups>
+                <groups>Candy</groups>
+                <groups>Fuel</groups>
+                <groups>Cigarettes</groups>
+                <groups>Krispy Kreme Retail (166)</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Milk</groups>
+                <groups>Candy</groups>
+                <groups>Candy</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Fuel</groups>
+                <groups>Liquor</groups>
+                <groups>Health Snacks</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Liquor</groups>
+                <groups>Pop (587)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Pizza</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Liquor</groups>
+                <groups>Liquor</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Hot Sandwiches &amp; Chicken</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Bakery</groups>
+                <groups>Fuel</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Pop (587)</groups>
+                <groups>Health &amp; Beauty</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Beer</groups>
+                <groups>Fuel</groups>
+                <groups>Pop (587)</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Cigars</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Chips</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Liquor</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Packaged Sandwiches</groups>
+                <groups>Newspapers</groups>
+                <groups>Ice (277)</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Pizza</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Beer</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Dairy</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Fuel</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Fuel</groups>
+                <groups>Candy</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Pop (587)</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Candy</groups>
+                <groups>Beer</groups>
+                <groups>Cigarettes</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Pizza</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Fuel</groups>
+                <groups>Pizza</groups>
+                <groups>Jerky (305)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Chips</groups>
+                <groups>Store Services (92)</groups>
+                <groups>Pizza</groups>
+                <groups>Candy</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Candy</groups>
+                <groups>Nuts</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Roller Grill</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Bakery</groups>
+                <groups>Bakery</groups>
+                <groups>Candy</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Gum</groups>
+                <groups>Cigarettes</groups>
+                <groups>Candy</groups>
+                <groups>Jerky (305)</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Cigarettes</groups>
+                <groups>Lotto (271)</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Cigarettes</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Bakery</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Liquor</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Pop (587)</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>E-Cigarettes</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Candy</groups>
+                <groups>Pop (587)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Ice (277)</groups>
+                <groups>Cigarettes</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Bakery</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Bakery</groups>
+                <groups>Bakery</groups>
+                <groups>Cigarettes</groups>
+                <groups>Fuel</groups>
+                <groups>Juice No Tax (311)</groups>
+                <groups>Fuel</groups>
+                <groups>Milk</groups>
+                <groups>Roller Grill</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Pop (587)</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Fuel</groups>
+                <groups>Cigars</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Jerky (305)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Fuel</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Health &amp; Beauty</groups>
+                <groups>Dairy</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Health Snacks</groups>
+                <groups>Fuel</groups>
+                <groups>Bakery</groups>
+                <groups>Pop (587)</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Fuel</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Fuel</groups>
+                <groups>Cookies</groups>
+                <groups>Newspapers</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Pop (587)</groups>
+                <groups>Health &amp; Beauty</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Fuel</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Fuel</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Fuel</groups>
+                <groups>Pizza</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Chips</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Fuel</groups>
+                <groups>Cigarettes</groups>
+                <groups>Lotto (271)</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Beer</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Roller Grill</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Fuel</groups>
+                <groups>Pizza</groups>
+                <groups>Pizza</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Bakery</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Chips</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Cookies</groups>
+                <groups>Dairy</groups>
+                <groups>Candy</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Pop (587)</groups>
+                <groups>Pizza</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Candy</groups>
+                <groups>Cigars</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Candy</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Nuts</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Cigars</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Beer</groups>
+                <groups>Liquor</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Fuel</groups>
+                <groups>Cigars</groups>
+                <groups>Bakery</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Pop (587)</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Cigarettes</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Fuel</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Jerky (305)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Pop (587)</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Liquor</groups>
+                <groups>Hot Sandwiches &amp; Chicken</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Pizza</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Cigarettes</groups>
+                <groups>Fuel</groups>
+                <groups>Beer</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Newspapers</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Pizza</groups>
+                <groups>Pizza</groups>
+                <groups>Pizza</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Fuel</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Fuel</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Cigarettes</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Hot Sandwiches &amp; Chicken</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Pop (587)</groups>
+                <groups>Dairy</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Gift Cards - SKU (938)</groups>
+                <groups>Dips</groups>
+                <groups>Beer</groups>
+                <groups>Candy</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Health Snacks</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Fuel</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Milk</groups>
+                <groups>Fuel</groups>
+                <groups>Candy</groups>
+                <groups>Fuel</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Fuel</groups>
+                <groups>Juice No Tax (311)</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Hot Sandwiches &amp; Chicken</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Pop (587)</groups>
+                <groups>Fuel</groups>
+                <groups>Gum</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Health &amp; Beauty</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Pizza</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Beer</groups>
+                <groups>Fuel</groups>
+                <groups>Bakery</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Fuel</groups>
+                <groups>Bakery</groups>
+                <groups>Fuel</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Pizza</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Pizza</groups>
+                <groups>Cigarettes</groups>
+                <groups>Pizza</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Candy</groups>
+                <groups>Fuel</groups>
+                <groups>Lotto (271)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Hot Sandwiches &amp; Chicken</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Hot Sandwiches &amp; Chicken</groups>
+                <groups>Jerky (305)</groups>
+                <groups>Hot Sandwiches &amp; Chicken</groups>
+                <groups>Pizza</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Gm/novelty</groups>
+                <groups>Candy</groups>
+                <groups>Fuel</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Jerky (305)</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Fuel</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Beer</groups>
+                <groups>Fuel</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Krispy Kreme Retail (166)</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Candy</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Candy</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Food-</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Chips</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Gm/novelty</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Pop (587)</groups>
+                <groups>Packaged Sandwiches</groups>
+                <groups>Cigars</groups>
+                <groups>Fuel</groups>
+                <groups>Pop (587)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Gm/novelty</groups>
+                <groups>Fuel</groups>
+                <groups>Packaged Sandwiches</groups>
+                <groups>Fuel</groups>
+                <groups>Pizza</groups>
+                <groups>Pizza</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Jerky (305)</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Fuel</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Health &amp; Beauty</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Roller Grill</groups>
+                <groups>Cigarettes</groups>
+                <groups>Roller Grill</groups>
+                <groups>Fuel</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Nuts</groups>
+                <groups>Health Snacks</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Chips</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Roller Grill</groups>
+                <groups>Automotive (35)</groups>
+                <groups>Cigarettes</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Cigarettes</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Food-Grocery</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Chips</groups>
+                <groups>Fuel</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Fuel</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Ice (277)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Beer</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Candy</groups>
+                <groups>Fuel</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Lotto (271)</groups>
+                <groups>Cigarettes</groups>
+                <groups>Pizza</groups>
+                <groups>Pizza</groups>
+                <groups>Fuel</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Cigarettes</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Lotto (271)</groups>
+                <groups>Hot Sandwiches &amp; Chicken</groups>
+                <groups>Gm/novelty</groups>
+                <groups>Pop (587)</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Pop (587)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Store Services (92)</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Pop (587)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Pop (587)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Beer</groups>
+                <groups>Fuel</groups>
+                <groups>Chips</groups>
+                <groups>Pop (587)</groups>
+                <groups>Pizza</groups>
+                <groups>Health &amp; Beauty</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Pop (587)</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Beer</groups>
+                <groups>Fuel</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Pop (587)</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Pop (587)</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Energy non-carb</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Jerky (305)</groups>
+                <groups>Hot Sandwiches &amp; Chicken</groups>
+                <groups>Cigarettes</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Fuel</groups>
+                <groups>Pop (587)</groups>
+                <groups>Newspapers</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Juice No Tax (311)</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Pop (587)</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Ice (277)</groups>
+                <groups>Fuel</groups>
+                <groups>Pizza</groups>
+                <groups>Fuel</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Roller Grill</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Health Snacks</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Juice No Tax (311)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Pop (587)</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Beer</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Chips</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Health Snacks</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Roller Grill</groups>
+                <groups>Health &amp; Beauty</groups>
+                <groups>Health Snacks</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Cigarettes</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Fuel</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Cigarettes</groups>
+                <groups>Salad/produce &amp; Misc</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Pop (587)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Fuel</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Cigarettes</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Pizza</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Beer</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Lotto (271)</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Fuel</groups>
+                <groups>Pizza</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Fuel</groups>
+                <groups>Store Services (92)</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Fuel</groups>
+                <groups>Newspapers</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Fuel</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Fuel</groups>
+                <groups>Candy</groups>
+                <groups>Lotto (271)</groups>
+                <groups>Beer</groups>
+                <groups>Fuel</groups>
+                <groups>Packaged Sandwiches</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Chips</groups>
+                <groups>Pop (587)</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Beer</groups>
+                <groups>Chips</groups>
+                <groups>Fuel</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Cigarettes</groups>
+                <groups>Fuel</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Pop (587)</groups>
+                <groups>Roller Grill</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Roller Grill</groups>
+                <groups>Cigars</groups>
+                <groups>Beer</groups>
+                <groups>Nuts</groups>
+                <groups>Cigars</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Ice (277)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Health &amp; Beauty</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Sandwiches</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Fuel</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Beer</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Automotive (35)</groups>
+                <groups>Fuel</groups>
+                <groups>Pop (587)</groups>
+                <groups>Cigarettes</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Cigarettes</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Ice (277)</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Fuel</groups>
+                <groups>Pop (587)</groups>
+                <groups>Chips</groups>
+                <groups>Beer</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Fuel</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Health Snacks</groups>
+                <groups>Energy non-carb</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Gm/novelty</groups>
+                <groups>Fuel</groups>
+                <groups>Candy</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Cough Drops/antacids (85)</groups>
+                <groups>Gm/novelty</groups>
+                <groups>Cold Sandwiches</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Pop (587)</groups>
+                <groups>Candy</groups>
+                <groups>Nuts</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Cold Sandwiches</groups>
+                <groups>Nuts</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Pop (587)</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Candy</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Fuel</groups>
+                <groups>Newspapers</groups>
+                <groups>Ice (277)</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Pop (587)</groups>
+                <groups>Clothing</groups>
+                <groups>Candy</groups>
+                <groups>Roller Grill</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Eggs/cheese</groups>
+                <groups>Bakery</groups>
+                <groups>Bakery</groups>
+                <groups>Ice (277)</groups>
+                <groups>Candy</groups>
+                <groups>Roller Grill</groups>
+                <groups>Food-Grocery</groups>
+                <groups>Cigarettes</groups>
+                <groups>Store Services (92)</groups>
+                <groups>Cigarettes</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Nuts</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Pizza</groups>
+                <groups>Nuts</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Fuel</groups>
+                <groups>Pizza</groups>
+                <groups>Cigarettes</groups>
+                <groups>Fuel</groups>
+                <groups>Pop (587)</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Cigars</groups>
+                <groups>Newspapers</groups>
+                <groups>Candy</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Cigars</groups>
+                <groups>Cigarettes</groups>
+                <groups>Fuel</groups>
+                <groups>Cigarettes</groups>
+                <groups>Ice Cream</groups>
+                <groups>Cigarettes</groups>
+                <groups>Pop (587)</groups>
+                <groups>Roller Grill</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Pizza</groups>
+                <groups>Pizza</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Hot Sandwiches &amp; Chicken</groups>
+                <groups>Fuel</groups>
+                <groups>Cigarettes</groups>
+                <groups>Fuel</groups>
+                <groups>Pop (587)</groups>
+                <groups>Nuts</groups>
+                <groups>Health Snacks</groups>
+                <groups>Fuel</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Fuel</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Fuel</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Dairy</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Fuel</groups>
+                <groups>Chips</groups>
+                <groups>Pop (587)</groups>
+                <groups>Store Services (92)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Pop (587)</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Fuel</groups>
+                <groups>Beer</groups>
+                <groups>Food-Grocery</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Candy</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Candy</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Fuel</groups>
+                <groups>Candy</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Cigarettes</groups>
+                <groups>Fuel</groups>
+                <groups>Pop (587)</groups>
+                <groups>Cigars</groups>
+                <groups>Beer</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Gm/novelty</groups>
+                <groups>Candy</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Lotto (271)</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Cigars</groups>
+                <groups>Fuel</groups>
+                <groups>Lotto (271)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Fuel</groups>
+                <groups>Nuts</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Pop (587)</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Pop (587)</groups>
+                <groups>Milk</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Pop (587)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Chips</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Eggs/cheese</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Nuts</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Pizza</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Fuel</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Food-</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Health Snacks</groups>
+                <groups>Bakery</groups>
+                <groups>Pop (587)</groups>
+                <groups>Candy</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Pop (587)</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Gum</groups>
+                <groups>Juice No Tax (311)</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Health &amp; Beauty</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>SKU Coupons (98)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Lotto (271)</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Candy</groups>
+                <groups>Candy</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Cold Sandwiches</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Cigars</groups>
+                <groups>Pop (587)</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Cigars</groups>
+                <groups>Pop (587)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Gum</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Pop (587)</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Energy non-carb</groups>
+                <groups>Pop (587)</groups>
+                <groups>Milk</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Fuel</groups>
+                <groups>Candy</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Pop (587)</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Candy</groups>
+                <groups>Cigarettes</groups>
+                <groups>Nuts</groups>
+                <groups>Fuel</groups>
+                <groups>Candy</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Hot Sandwiches &amp; Chicken</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Candy</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Energy non-carb</groups>
+                <groups>Nuts</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Pop (587)</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Fuel</groups>
+                <groups>Roller Grill</groups>
+                <groups>Fuel</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Juice No Tax (311)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Health Snacks</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Ice (277)</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Fuel</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Pop (587)</groups>
+                <groups>E-Cigarettes</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Ice (277)</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Pop (587)</groups>
+                <groups>Candy</groups>
+                <groups>Fuel</groups>
+                <groups>Pizza</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Nuts</groups>
+                <groups>Ice (277)</groups>
+                <groups>Chips</groups>
+                <groups>Fuel</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Eggs/cheese</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Pizza</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Cigarettes</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Gum</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Cigarettes</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Energy non-carb</groups>
+                <groups>Pizza</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Gum</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Fuel</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Dairy</groups>
+                <groups>Pizza</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Fuel</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Pop (587)</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Pizza</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Juice No Tax (311)</groups>
+                <groups>Store Services (92)</groups>
+                <groups>Ice Cream</groups>
+                <groups>Pizza</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Salty Snacks</groups>
+                <groups>No Tax Meds (246)</groups>
+                <groups>Gm/novelty</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Pizza</groups>
+                <groups>Juice No Tax (311)</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Pop (587)</groups>
+                <groups>Chips</groups>
+                <groups>Pizza</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Cold Sandwiches</groups>
+                <groups>Milk</groups>
+                <groups>Packaged Sandwiches</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Energy carbonated</groups>
+                <groups>E-Cigarettes</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Pop (587)</groups>
+                <groups>Gum</groups>
+                <groups>Packaged Sandwiches</groups>
+                <groups>Pizza</groups>
+                <groups>Gm/novelty</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Fuel</groups>
+                <groups>Cookies</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Gm/novelty</groups>
+                <groups>Pop (587)</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Nuts</groups>
+                <groups>Pop (587)</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Candy</groups>
+                <groups>Clothing</groups>
+                <groups>Pizza</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Automotive (35)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Fuel</groups>
+                <groups>Bakery</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Dairy</groups>
+                <groups>Beer</groups>
+                <groups>Candy</groups>
+                <groups>Jerky (305)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Pop (587)</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Cigarettes</groups>
+                <groups>Fuel</groups>
+                <groups>Chips</groups>
+                <groups>Candy</groups>
+                <groups>Juice No Tax (311)</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Hot Sandwiches &amp; Chicken</groups>
+                <groups>Food-Grocery</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Hot Sandwiches &amp; Chicken</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Ice (277)</groups>
+                <groups>Fuel</groups>
+                <groups>Gum</groups>
+                <groups>Automotive (35)</groups>
+                <groups>Candy</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Health &amp; Beauty</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Candy</groups>
+                <groups>Fuel</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Candy</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Fuel</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Bakery</groups>
+                <groups>Roller Grill</groups>
+                <groups>Fuel</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Chips</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Roller Grill</groups>
+                <groups>Food-</groups>
+                <groups>Fuel</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Fuel</groups>
+                <groups>Chips</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Cigars</groups>
+                <groups>Lotto (271)</groups>
+                <groups>Candy</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Fuel</groups>
+                <groups>Roller Grill</groups>
+                <groups>Jerky (305)</groups>
+                <groups>Store Services (92)</groups>
+                <groups>Nuts</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Clothing</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Sandwiches</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Candy</groups>
+                <groups>Fuel</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Candy</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Fuel</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Lottery (360)</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Cigarettes</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Fuel</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Fuel</groups>
+                <groups>Cigarettes</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Roller Grill</groups>
+                <groups>Clothing</groups>
+                <groups>Bakery</groups>
+                <groups>Pop (587)</groups>
+                <groups>Fuel</groups>
+                <groups>Dairy</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Dairy</groups>
+                <groups>Nuts</groups>
+                <groups>Pop (587)</groups>
+                <groups>Cold Sandwiches</groups>
+                <groups>Bakery</groups>
+                <groups>Cigars</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Gm/novelty</groups>
+                <groups>Chips</groups>
+                <groups>Candy</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Cigarettes</groups>
+                <groups>Cigars</groups>
+                <groups>SKU Coupons (98)</groups>
+                <groups>Fuel</groups>
+                <groups>Ice (277)</groups>
+                <groups>Cigars</groups>
+                <groups>Pop (587)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Chips</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Pop (587)</groups>
+                <groups>Bread &amp; Cakes</groups>
+                <groups>Breakfast Sandwiches</groups>
+                <groups>Pizza</groups>
+                <groups>Pizza</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Salad/produce &amp; Misc</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Pop (587)</groups>
+                <groups>Milk</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Candy</groups>
+                <groups>Juice No Tax (311)</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Health &amp; Beauty</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Cigarettes</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Fuel</groups>
+                <groups>Fuel</groups>
+                <groups>Smokeless (951)</groups>
+                <groups>Candy</groups>
+                <groups>Salty Snacks</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Roller Grill</groups>
+                <groups>Cigarettes</groups>
+                <groups>Frozen Dispensed Beverage</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Ice (277)</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Roller Grill</groups>
+                <groups>Gm/novelty</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Packaged Sandwiches</groups>
+                <groups>Fuel</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Fuel</groups>
+                <groups>Ice (277)</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Fuel</groups>
+                <groups>Ice Cream</groups>
+                <groups>Health Snacks</groups>
+                <groups>Off Invoice Cigs (104)</groups>
+                <groups>Pop (587)</groups>
+                <groups>Cigarettes</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Sandwiches</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Health Snacks</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Cold Dispensed Beverage</groups>
+                <groups>Gm/novelty</groups>
+                <groups>Fuel</groups>
+                <groups>Cigars</groups>
+                <groups>Pop (587)</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Candy</groups>
+                <groups>Jerky (305)</groups>
+                <groups>Fuel</groups>
+                <groups>Energy carbonated</groups>
+                <groups>Hot Sandwiches &amp; Chicken</groups>
+                <groups>Juice/tonics</groups>
+                <groups>Hot Dispensed Beverage</groups>
+                <groups>Fuel</groups>
+                <groups>Cold Dispensed Beverage</groups>
+              </transforms>
+            </Traces>
+            <Layout>
+              <title>
+                <text>Gross Profit Margin by Revenue</text>
+              </title>
+              <font>
+                <family>sans-serif</family>
+              </font>
+              <autosize>false</autosize>
+              <width>700</width>
+              <height>849</height>
+              <showlegend>true</showlegend>
+              <hovermode>closest</hovermode>
+              <xaxis>
+                <range>0</range>
+                <range>1</range>
+                <autorange>false</autorange>
+                <title>
+                  <text>Gross Profit Margin</text>
+                </title>
+                <tickfont>
+                  <size>12</size>
+                </tickfont>
+                <nticks>0</nticks>
+                <type>linear</type>
+              </xaxis>
+              <yaxis>
+                <range>-10.754551168647712</range>
+                <range>92.7345545255813</range>
+                <autorange>true</autorange>
+                <title>
+                  <text>Revenue</text>
+                </title>
+                <type>linear</type>
+              </yaxis>
+              <margin>
+                <pad>0</pad>
+                <t>100</t>
+                <b>80</b>
+                <l>80</l>
+                <r>80</r>
+              </margin>
+              <legend>
+                <x>0.9777114427860697</x>
+                <y>0.86397608370702539</y>
+              </legend>
+            </Layout>
+          </ChartingFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name>Scatter Plot</Name>
+          <DefaultAnnotationText>Scatter Plot</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="PortfolioPluginsEngine.dll" EngineDllEntryPoint="ComposerInteractiveCharting" />
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="1" Connection="Output" />
+      <Destination ToolID="3" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="3" Connection="Output" />
+      <Destination ToolID="4" Connection="Field Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="3" Connection="Output" />
+      <Destination ToolID="7" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="3" Connection="Output" />
+      <Destination ToolID="8" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="3" Connection="Output" />
+      <Destination ToolID="9" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="4" Connection="Reports" />
+      <Destination ToolID="2" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="4" Connection="Output" />
+      <Destination ToolID="5" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="4" Connection="Interactive" />
+      <Destination ToolID="6" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>eda2</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+  </Properties>
+</AlteryxDocument>

@@ -1,0 +1,259 @@
+************************************************************************
+# Title: Module 3HE ETL and EDA
+Course: MBA563
+Term: Summer 2021
+Mooc or HE?: HE
+Module: 03
+Author: Jessen Hobson
+************************************************************************
+
+*********ETL & EDA********************************************
+In class notebook
+*********ETL & EDA********************************************
+
+# Install and load packages (don't install twice)
+```{r}
+#install.packages('tidyverse')
+library(tidyverse)
+```
+
+# 1.1 - Bring in the data and visualize
+# *****Data unavailable*****
+```{r}
+df1 <- read_rds("Mod3HE_HMPV_eda.rds")
+```
+
+```{r}
+summary(df1)
+```
+
+```{r}
+str(df1)
+```
+
+```{r}
+head(df1, n=5) #Multiple observations per participant. Lots of features.
+```
+
+```{r}
+n_distinct(df1$jobtitle)
+```
+
+```{r}
+unique(df1$jobtitle)
+```
+
+
+# 1.2 - Clean the data with the goal in mind
+
+
+
+# QUESTION: What features do we care about?
+
+
+
+# Subset the data (order here also determines the order of the variables)
+```{r}
+df2 <- df1 %>%
+  select(subject, company, decep_firm, decep_judg, aud_exp, cdmanipulation, 
+         overall_time, jobtitle, auditor_fraud, confidence, flagchars)
+```
+
+```{r}
+# Examine and describe each feature
+slice_sample(df2, n=10)
+```
+
+```{r}
+df2 <- read_rds("Mod3HE_HMPV_eda.rds")
+summary(df2)
+```
+
+
+
+# QUESTION: What do we do about NAs in `auditor_fraud`
+
+
+# Rename a variable
+```{r}
+df2 <- df2 %>% 
+  rename(prompt = cdmanipulation,
+         judgment = decep_judg,
+         fraud = decep_firm)
+```
+
+
+# Create variables using `mutate()`, `if_else()`, and `case_when()`
+```{r}
+df2 <- df2 %>% 
+  mutate(accurate = if_else(fraud==judgment, 1, 0))
+
+head(df2, n=3)
+```
+
+
+
+```{r}
+df2 <- df2 %>% mutate(fraud = if_else(fraud==1, 'fraud firm', "clean firm"))
+
+df2 <- df2 %>% mutate(judgment = if_else(judgment==1, 'say fraud', "say clean"))
+
+df2 <- df2 %>% mutate(prompt = if_else(prompt==1, 'prompted', "unprompted"))
+
+head(df2, n=3)
+```
+
+
+
+# Create professional dummy variable
+
+# QUESTION: How do we know whether someone is an auditor or not? What variables should we look at? See PowerPoint.
+
+
+
+```{r}
+ggplot(df2, aes(x=aud_exp)) + 
+  geom_histogram(binwidth = 1) +
+  theme_minimal() +
+  labs(title = 'Histogram of Audit Experience')
+```
+
+
+
+```{r}
+df2 %>% dplyr::filter(aud_exp==1) %>% 
+  select(aud_exp, jobtitle)
+```
+
+
+```{r}
+df2 <- df2 %>% 
+  mutate(professional = 
+           case_when(aud_exp < 1 ~ 'student',
+                     aud_exp > 1 ~ 'pro', 
+                     aud_exp==1 & jobtitle == 'student' ~ 'student',
+                     aud_exp==1 & jobtitle != 'student' ~ 'pro'))
+
+df2 %>% filter(aud_exp==1) %>% 
+  select(aud_exp, jobtitle, professional)
+```
+
+
+# 2.1 - Outliers
+
+
+# QUESTION: Look at the summary. Do any features have potential outliers?
+```{r}
+summary(df2)
+```
+
+
+
+```{r}
+ggplot(df2, aes(y=overall_time)) + 
+  geom_boxplot() +
+  theme_minimal()
+```
+
+```{r}
+ggplot(df2, aes(y=overall_time)) + 
+  geom_boxplot() + 
+  coord_cartesian(ylim=c(0, 10000)) + 
+  theme_minimal()
+```
+
+```{r}
+df2 %>% 
+  select(subject, overall_time, professional) %>%
+  filter(overall_time > 3*sd(df2$overall_time) | overall_time < -3*sd(df2$overall_time)) %>% 
+  mutate(minutes = overall_time/60, hours = overall_time/(60*60), days = overall_time/(60*60*24)) %>% 
+  distinct()
+
+```
+
+```{r}
+df2 <- df2 %>% filter(!subject %in% c(81, 196, 209))
+summary(df2$overall_time)
+```
+
+
+
+# QUESTION: In groups, do a simple visualization of the data. Pick one or two variables to look at and create a plot with `ggplot()`. 
+
+# Use data “Mod3HE_HMPV_eda.rds”
+```{r}
+df2 <- read_rds('Mod3HE_HMPV_eda.rds')
+summary(df2)
+```
+
+
+
+# 2.2a Correlations
+```{r}
+cor(df2$confidence, df2$aud_exp)
+```
+
+```{r}
+df2 %>% 
+  select(confidence, flagchars, overall_time, aud_exp) %>% 
+  cor()
+```
+
+
+
+# 2.2b Main Effects
+
+# `group_by` and `summarize()`
+```{r}
+main_effects <- df2 %>% 
+  group_by(professional) %>%
+  summarize(accuracy = mean(accurate))
+
+print(main_effects)
+```
+
+# Plot
+```{r}
+main_effects %>% 
+  ggplot(aes(x=professional, y=accuracy, fill=professional)) +
+  geom_col()
+```
+
+```{r}
+main_effects %>% 
+  ggplot(aes(x=professional, y=accuracy, fill=professional)) +
+  geom_text(aes(label=round(accuracy, digits = 2)), vjust = -0.2) +
+  geom_col()
+```
+
+
+
+# By type of firm and professional
+```{r}
+main_effects2 <- df2 %>% 
+  group_by(professional, fraud) %>%
+  summarize(accuracy = mean(accurate))
+
+print(main_effects2)
+```
+
+```{r}
+main_effects2 %>% 
+  ggplot(aes(x=fraud, y=accuracy, fill=professional)) +
+  geom_col(position='dodge2') + 
+  geom_text(aes(label=round(accuracy, digits = 2)), vjust = -0.2, position = position_dodge(.9)) +
+  theme_minimal()
+```
+
+
+
+# 2.3 - Interaction
+```{r}
+df2 %>% group_by(professional, fraud, prompt) %>% 
+  summarize(accuracy = mean(accurate)) %>% 
+  ggplot(aes(x=fraud, y=accuracy, fill=prompt)) +
+  geom_col(position='dodge2') + 
+  facet_grid(rows = professional~.) +
+  geom_text(aes(label=round(accuracy, digits = 2)), vjust = 1.2, position = position_dodge(.9)) +
+  theme_classic()
+```

@@ -1,0 +1,110 @@
+---
+title: "HE Assignment 5 – Regression"
+author: "W Kelly, Eric Boyle, Quaidzoher Dhilla, Brandon Hyer, Christian Mukania, Vinh Tran"
+date: "7/9/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Load Libraries
+```{r}
+library(tidyverse)
+library(magrittr)
+library(lubridate)
+library(corrplot)
+```
+
+# Read in hmdaInterestRate.rds file
+```{r}
+df <- read_rds("hmdaInterestRate.rds")
+```
+
+# Report Structure of dataframe
+```{r}
+str(df)
+```
+
+
+# Divide by 1,000 for columns loan_amount, property_value, and income
+```{r}
+df$loan_amount <- df$loan_amount / 1000
+df$property_value <- df$property_value / 1000
+df$income <- df$income / 1000
+```
+
+
+# Create new column "Itp" dividing loan_amount by property_value
+```{r}
+df$Itp <- df$loan_amount / df$property_value
+```
+
+
+# Filter Data to keep observations which income is less than 300 (i.e. $300,000)
+```{r}
+df <- df %>% filter(income < 300)
+```
+
+
+# Report Summary of all Columns
+```{r}
+summary(df)
+```
+
+
+# Corr plot for interest_rate, Itp, income, applicant_age, property_value, and loan_amount
+```{r}
+df_corr <- cor(df[,c('interest_rate', 'Itp', 'income','applicant_age','property_value','loan_amount')])
+df_corr
+
+corrplot(df_corr
+         , method = 'color' # I also like pie and ellipse
+         , order = 'hclust' # Orders the variables so that ones that behave similarly are placed next to each other
+         , addCoef.col = 'black'
+         , number.cex = .6 # Lower values decrease the size of the numbers in the cells
+         )
+```
+
+***Below the plot, identify what variable has the strongest negative correlation with interest_rate. Comment on what might explain why that correlation is negative.
+
+The Variable with the strongest negative correlation is "loan_amount" (-0.33)
+
+The correlation b/t loan amount and interest rates are negative b/c the higher the loan amount the lower the interest rate due to the larger down payment because lenders see a lower level of risk when you have more at stake in the property compared to smaller loan amounts.
+
+
+# Regress interest rate on Itp
+```{r}
+lm1 <- lm(interest_rate ~ Itp, data = df)
+summary(lm1)
+```
+***Interpret the coefficient estimate on ltp.
+
+Conclude from lm1 that the coefficient for Itp is -1.05188 which shows a negative coefficient and intercept of 5.31852. 
+Also the R squared value is 0.1017 which shows that it is not significantly correlated.   
+
+# Regress interest rate on Itp and loan_amount
+```{r}
+lm2 <- lm(interest_rate ~ Itp + loan_amount, data = df)
+summary(lm2)
+```
+***Comment on the change in the adjusted R-squared, as well as the change in the coefficient on ltp.
+
+The R Squared value in lm2 improved which is now 0.1522 but not significantly.
+The coefficient for Itp is now -0.737 which shows lm2 has an increased correlation.
+The coefficient for loan_amount is -0.002 which is a small correlation.
+
+
+# Regress interest rate on Itp, loan_amount, and aus_1
+```{r}
+lm3 <- lm(interest_rate ~ Itp + loan_amount + aus_1, data = df)
+summary(lm3)
+```
+***Interpret the new coefficients.
+
+From lm3 we can see that the R squared value increased with stronger correlation (0.2675)
+Also in aus_1 the value Desktop Underwriter (DU) is set as the reference.
+For coefficients Itp is 0.025007, loan_amount is -0.001714 which is an increase in correlation from the previous models.
+In addition from aus_1 there is a strong positive correlation for Not Applicable and Other.
+

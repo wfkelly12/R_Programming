@@ -1,0 +1,290 @@
+---
+title: "Getting to Know You Survey Results"
+author: "Ron Guymon"
+date: "4/22/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F, warning = F, message = F)
+```
+# Introduction  
+Hi, I'm the students in the 2021 offering of MBA 561. Here's a little bit about me.
+
+![](https://media.giphy.com/media/icUEIrjnUuFCWDxFpU/giphy.gif)
+
+```{r}
+library(tidyverse)
+library(magrittr)
+library(lubridate)
+library(wordcloud2)
+library(tidytext)
+library(jpeg) # For reading in jpeg files
+library(grid) # For adding pics to plots
+
+# Most of the data
+most <- read_csv('Live Session 1 Quiz.downloadlong2.csv') %>%
+  mutate(
+    Answer = gsub('</span>', '', Answer) %>% gsub('.*>', '', .) %>% gsub('&quot;', '', .)
+  )
+names(most) <- gsub('[^A-Za-z]', '', names(most))
+
+# Data about the picture preference
+pic <- read_csv('Live Session 1 Quiz.downloadPicPref.csv')
+pic1 <- pic[,c(1:3,42)]
+names(pic1) <- c('Username', 'LastName', 'FirstName', 'Answer')
+pic1 %<>%
+  mutate(
+    QuestionID = 'Question ID 7'
+    , Question = 'Which of the four pictures best represents your current attitude about learning R?'
+  )
+
+# Stack data together
+df <- most %>%
+  filter(QuestionID != 'Question ID 7') %>%
+  bind_rows(pic1) %>%
+  arrange(Username, QuestionID)
+
+rm(pic, pic1, most)
+# Create shorter names for questions
+qid <- df %>% select(QuestionID) %>% unique()
+qid$qShort <- c('favSmell', 'lfc', 'boring', 'pizza', 'library', 'sm', 'pic', 'picExp')
+df %<>% left_join(qid, by = 'QuestionID')
+rm(qid)
+
+# Sentiment of coronavirus responses
+sent <- df %>% filter(qShort == 'lfc') %>%
+  unnest_tokens(word, Answer) %>%
+  anti_join(stop_words, by = 'word') %>%
+  inner_join(get_sentiments('afinn'), by = 'word') %>%
+  group_by(Username) %>%
+  dplyr::summarise(coronaSentiment = sum(value, na.rm = T)) %>%
+  ungroup()
+df %<>% left_join(sent, by = c('Username')) %>%
+  dplyr::mutate(
+    coronaSentiment = ifelse(is.na(coronaSentiment), 0, coronaSentiment)
+  )
+```
+
+## Wordcloud of Favorite Smells
+The wordcloud below shows the words that describe the smells I love the most.
+
+
+```{r}
+df %>% filter(qShort == 'favSmell') %>%
+  unnest_tokens(word, Answer) %>%
+  dplyr::select(word) %>%
+  anti_join(stop_words, by = 'word') %>%
+  filter(!word %in% c('favorite')) %>%
+  count(word, sort = T) %>%
+  wordcloud2(size = 1.6, fontFamily = 'Courier'
+             # , color=rep_len(themeColors$colorHex, nrow(pd))
+             , backgroundColor = 'white')
+```
+
+I really like smells that are fresh. That makes sense since stale things usually don't smell good. I also really like the smell of coffee. Check out some of the other things that I like to smell.
+
+## What is one thing you've learned from the impact of the coronavirus?  
+Sentiment is an estimate of how positive or negative a phrase is. 
+
+```{r, echo=F, message=F}
+
+ggplot(df, aes(x = coronaSentiment)) + 
+  geom_density() +
+  labs(x = 'Sentiment', y = 'Density') +
+  theme_minimal()
+```
+
+Overall, it looks like I have learned a lot of neutral lessons from the pandemic. I have also chosen to focus more on the positive lessons, rather than the negative ones. 
+
+## Exciting vs Not Boring by Amusement Park vs Library
+The width of the bars correspond to the number of people who would prefer to be locked up in an amusement park or a library.  
+
+```{r, echo=F, message=F}
+
+pd <- df %>%
+  select(Username, qShort, Answer) %>%
+  filter(qShort %in% c('boring', 'library')) %>%
+  pivot_wider(names_from = qShort, values_from = Answer) %>%
+  dplyr::filter(boring != '<Unanswered>' & library != '<Unanswered>' & library != '')
+boringLibrary <- table(pd$boring) %>% as.data.frame() %>%
+  dplyr::mutate(Freq = Freq/max(Freq)*.9) %>%
+  dplyr::arrange(Var1)
+pd %>%
+  group_by(boring, library) %>%
+  count() %>%
+  as.data.frame() %>%
+  ggplot(aes(fill = boring, y = n, x = library)) +
+  geom_bar(position = 'fill', stat = 'identity', width = boringLibrary$Freq) +
+  labs(y = 'Percentage of Respondents', x = 'Remove Boring or Participate in Exciting') +
+  guides(fill = guide_legend('Interesting vs Not Boring')) +
+  theme_minimal()
+```
+
+As shown by the width of the bars, I much prefer to be locked up in an amusement park rather than a library. Regardless of where I prefer to be locked up, I have a strong preference to be invited to participate in an exciting project rather than have a boring one removed from my to-do list. Although, when I do feel like being locked up in a library, I have a slightly stronger preference to have boring tasks removed from my to-do list.
+
+### Emotion About this Course  
+The bar chart below indicates the frequency with which each picture was selected.
+
+```{r}
+annotation_custom <- function (grob, xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf, data){ 
+  layer(data = data, stat = StatIdentity, position = PositionIdentity, 
+        geom = ggplot2:::GeomCustomAnn,
+        inherit.aes = TRUE, params = list(grob = grob, 
+                                          xmin = xmin, xmax = xmax, 
+                                          ymin = ymin, ymax = ymax))
+}
+
+# Data
+pd <- df %>% filter(qShort == 'pic' & Answer != '<Unanswered>') %>%
+  group_by(Answer) %>%
+  tally() %>%
+  arrange(desc(n)) %>%
+  mutate(Answer = fct_inorder(Answer))
+# Plot
+p <- ggplot(pd, aes(x = Answer, y = n)) +
+  geom_bar(stat = 'identity', fill = 'steelblue') +
+  theme(legend.position = 'none') +
+  labs(title = 'Number of People Who Selected Each Picture'
+       , y = 'Count'
+       , x = 'Emotion')
+
+# Pictures
+curiosity <- readJPEG('curiosity.jpg')
+focus <-readJPEG('joy.jpg')
+joy <- readJPEG('difficulty.jpg')
+difficulty <- readJPEG('focus.jpg')
+
+cur <- annotation_custom(rasterGrob(curiosity)
+                         , xmin = .5, xmax = 1.5
+                         , ymin = pd$n[1]*.75, ymax = pd$n[1]*.95
+                         , data = pd %>% filter(Answer == 'Curiosity'))
+foc <- annotation_custom(rasterGrob(focus)
+                         , xmin = 2.5, xmax = 3.5
+                         , ymin = 100, ymax = 200
+                         , data = pd %>% filter(Answer == 'Focus'))
+jy <- annotation_custom(rasterGrob(joy)
+                         , xmin = 3.5, xmax = 4.5
+                         , ymin = 85, ymax = 185
+                         , data = pd %>% filter(Answer == 'Joy'))
+dif <- annotation_custom(rasterGrob(difficulty)
+                         , xmin = 1.5, xmax = 2.5
+                         , ymin = 160, ymax = 260
+                         , data = pd %>% filter(Answer == 'Difficulty'))
+p + cur + foc + jy + dif
+```
+
+I am very curious about this course. I recognize that it will take a lot of focus to make it through. My feelings of joy about this course slightly outweigh the anxiety of how difficult it will be.
+
+### Interpretation of Pictures  
+The tables below show the top ten words that that were used to describe the pictures. The words that appeared most frequently are at the top. Some words were removed because they were obvious.
+
+```{r, echo=F, message=F}
+library(kableExtra)
+options(tibble.width = Inf) # displays all columns.
+options(tibble.print_max = Inf) # to show all the rows.
+all <- data.frame(deleteMe = rep(NA, 10))
+emotions <- c('Curiosity', 'Focus', 'Joy', 'Difficulty')
+for(i in emotions){
+  unames <- df %>%
+    dplyr::filter(Answer == i)
+  wrds <- df %>% 
+    filter(Username %in% unames$Username) %>%
+    filter(qShort == 'picExp') %>%
+    unnest_tokens(word, Answer) %>%
+    dplyr::select(word) %>%
+    anti_join(stop_words, by = 'word') %>%
+    filter(!word %in% c('data', 'curious', 'focus', 'focused', 'difficulty', 'difficult')) %>%
+    mutate(
+      word = case_when(
+        word == 'learning' ~ 'learn'
+        , word == 'programming' ~ 'program'
+        , T ~ word
+      )
+    ) %>%
+    filter(word != 'learn') %>%
+    count(word, sort = T) %>%
+    .[1:10,]
+  names(wrds) <- c(i, 'n')
+  wrds %<>% select(-n)
+  all %<>% bind_cols(wrds)
+}
+all %<>% dplyr::select(-deleteMe) %>% as.data.frame()
+kableExtra::kable(all)
+```
+
+Here's more about why I feel the way I feel. I really want to learn about analytics and how R compares to Excel. I know it will take a lot of time, and even though I don't have a lot of experience, I am excited to see what I can learn about how R can help me in my business tasks because I love to learn.
+
+### Social Media Platform and Emotion About This Course
+The proportion of social media platforms used by those who chose each picture is indicated by the heights of the bars. 
+
+```{r, echo=F, message=F}
+pd <- df %>%
+  filter(qShort %in% c('sm', 'pic')) %>%
+  select(Username, qShort, Answer) %>%
+  pivot_wider(names_from = qShort, values_from = Answer) %>%
+  mutate(sm = abbreviate(sm)) %>%
+  filter(!pic %in% c('<Unanswered>', '')) %>%
+  group_by(sm, pic) %>%
+  tally() %>%
+  ungroup() %>%
+  group_by(pic) %>%
+  mutate(p = n/sum(n))
+
+ggplot(pd, aes(x = sm, y = p, fill = sm)) +
+  geom_col(postion = 'fill') +
+  theme(legend.position = 'none') +
+  facet_wrap(~pic) +
+  labs(y = 'Percentage of Responses'
+       , x = 'Emotion')
+           
+```
+
+* Regardless of how I feel about this course, I most often use Instagram and LinkedIn. In second place is Facebook and Whatsapp.
+* Interestingly, I am more prone to use Instagram when I feel that this course is difficult, and when I feel curious about this course.
+* Also, I'm more likely to use LinkedIn and Whatsapp when I feel joy about this course.
+
+I sure am a complicated entity!
+
+## Pieces of Pizza by Amusement Park vs Library  
+Density plots are smoother versions of histograms. The density plots below indicate how many pieces of pizza people eat.
+
+```{r, echo=F, message=F}
+pd <- df %>%
+  filter(qShort %in% c('library', 'pizza')) %>%
+  select(Username, qShort, Answer) %>%
+  pivot_wider(names_from= qShort, values_from = Answer) %>%
+  mutate(pizza = as.numeric(pizza)) %>%
+  filter(!is.na(pizza) & !library %in% c('<Unanswered>', ''))
+p <- ggplot(pd, aes(pizza, group = library, fill = library)) +
+  geom_density(alpha = .4) +
+  guides(fill = guide_legend('Boring or Exciting')) +
+  labs(x = 'Number of pizza slices that people are capable of eating in one sitting'
+       , y = 'Density') +
+  theme_minimal() +
+  guides(fill = guide_legend(title = 'AP or Library'))
+p
+```
+
+I usually eat around three to four pieces of pizza; however, when I would rather be locked up in an amusement park, I am slightly more likely to have a bigger appetite :)  
+
+---
+
+Let's look at this using box and whisker plots. The boxes represent the size of the interquartile range, or where the middle 50% of the data falls. Notice how the standard deviations, printed below the box and whisker plots, m correspond to the size of the boxes.
+
+```{r}
+ggplot(pd, aes(x = library, y = pizza, fill = library)) +
+  geom_boxplot() +
+  theme(legend.position = 'none') +
+  labs(x = 'Amusement Park or Library'
+       , y = ''
+       , title = 'Number of Slices of Pizza by Amusement Park or Library')
+ap <- pd %>% filter(library == 'Amusement park') %>% pull(pizza)
+l <- pd %>% filter(library == 'Library') %>% pull(pizza)
+summary(ap)
+summary(l)
+print(paste0('The standard deviation for Amusement Park is ', round(sd(ap), 1)))
+print(paste0('The standard deviation for Library is ', round(sd(l), 1)))
+```
+
+This larger box for Amusement park supports what is also shown by the histograms: when I prefer to be locked up in an amusement park I have a larger appetite.

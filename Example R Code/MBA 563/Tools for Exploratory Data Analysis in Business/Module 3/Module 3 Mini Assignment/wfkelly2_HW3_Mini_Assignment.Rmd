@@ -1,0 +1,131 @@
+---
+title: "wfkelly2_HW3_Mini_Assignment"
+author: "William Kelly"
+date: "6/21/2021"
+output: html_document
+---
+
+#Read in Library Packages
+```{r}
+library(tidyverse)
+library(lubridate)
+```
+
+# Read in Airbnb Data from 2010 - 2020
+Resource: https://www.kaggle.com/kritikseth/us-airbnb-open-data
+```{r}
+df <- read.csv("Airbnb_US_Data.csv")
+```
+
+```{r}
+str(df) # Rows: 226,030, Cols: 16
+summary(df)
+head(df)
+tail(df)
+```
+
+# Update Column last_review to Date Format w/ Year Month Column
+```{r}
+df$last_review <- dmy(df$last_review)
+df$year <- year(df$last_review)
+df$month <- month(df$last_review, label=TRUE)
+```
+
+# Update Data Types and Remove Columns/Rows
+```{r}
+df$neighbourhood <- as.numeric(df$neighbourhood) #Update to Numeric
+df <- df %>% select(-neighbourhood_group) #Remove neighbourhood_group col
+df <- df %>% filter(reviews_per_month != "NA") #Removed NAs 48,602 [Now 177,428 rows]
+df$neighbourhood[is.na(df$neighbourhood)] <- 0 #Replaced NAs with 0
+
+```
+
+# Histogram Plot showing Airbnb Price Distibution
+```{r}
+ggplot(df, aes(x=price)) + 
+  geom_histogram(binwidth = 100,color="black", fill="blue") +
+  coord_cartesian(xlim = c(0, 400), ylim = c(0, 100000)) +
+  labs(title = 'Histogram of Airbnb Prices')
+```
+
+# Scatter Plot Number of Reviews by Price
+```{r}
+ggplot(df, aes(x=`price`, y=`number_of_reviews`)) + 
+  geom_point() + 
+  coord_cartesian(xlim=c(0, 300), ylim=c(0,750)) + 
+  labs(title='Scatter Plot of Number of Reviews by Price')
+
+cor(df$price,df$number_of_reviews)
+max(df$price)
+max(df$number_of_reviews)
+```
+
+# Plot Average Price of Airbnbs by Month
+```{r}
+Avg_Per_Month <- aggregate(df[, 9], list(df$month), mean)
+names(Avg_Per_Month)[1] <- "Month"
+names(Avg_Per_Month)[2] <- "Average Price"
+
+ggplot(Avg_Per_Month, aes(x=`Month`, y=`Average Price`)) + 
+  geom_col(aes(fill=`Month`)) + 
+  labs(title = 'Bar Plot-price of Airbnbs by month') +
+  geom_text(
+    label=as.integer(Avg_Per_Month$`Average Price`),
+    vjust = -0.5, size = 3)
+
+```
+
+# Plot Average Price of Airbnbs by Year
+```{r}
+Avg_Per_Year <- aggregate(df[, 9], list(df$year), mean)
+names(Avg_Per_Year)[1] <- "Year"
+names(Avg_Per_Year)[2] <- "Average Price"
+Avg_Per_Year$Year <- as.integer(Avg_Per_Year$Year)
+
+ggplot(Avg_Per_Year, aes(x=`Year`, y=`Average Price`)) + 
+  geom_col(aes(fill=`Year`)) + 
+  labs(title = 'Bar Plot-Average price of Airbnbs by year') +
+  scale_x_continuous(name = " ", breaks = c(2010:2020)) +
+  scale_fill_continuous(breaks=c(2010:2020)) +
+  geom_text(
+    label=as.integer(Avg_Per_Year$`Average Price`),
+    vjust = -0.5, size = 3)
+
+```
+
+# Plot Average Price of Airbnb by Room Type
+```{r}
+Avg_Room_Type <- aggregate(df[, 9], list(df$room_type), mean)
+names(Avg_Room_Type)[1] <- "Room Type"
+names(Avg_Room_Type)[2] <- "Average Price"
+
+ggplot(Avg_Room_Type, aes(x=`Room Type`, y=`Average Price`)) + 
+  geom_col(aes(fill=`Room Type`)) + 
+  labs(title = 'Bar Plot-Average price of Airbnbs by Room Type') +
+  geom_text(
+    label=as.integer(Avg_Room_Type$`Average Price`),
+    vjust = -0.5, size = 3)
+
+```
+
+Summary of Insights found from Visualizations
+
+From the Histogram Plot of the Price Distribution, one can denote that the main price points are centered around $100 to $200 this gives us an idea of the average price people are renting out their airbnbs for and what customers should expect in that price range.
+
+From the Scatter Plot of the Number of Reviews compared to Price one can conclude that as the price increases for the Airbnbs, the Number of Reviews decreases which shows a negative trend between the two variables. This conclusion shows that the mean price range for the most amount of reviews is centered around $100 to $200 which gives an idea of what consumers are willing to spend on Airbnbs.
+
+From the Bar Plot of the Average Price per month, we can see that the price of Airbnbs in the months of February and July are when the prices increase which gives us an idea of what time of the year the Aribnbs cost more or less.
+
+From the Bar Plot of Average Prices per year, we can see that 2012, 2014, 2018 contained the higher prices for Airbnbs on average. This helps us understand the trend for the prices from 2010-2020.
+
+From the Bar Plot showing Average Price per Room Type, we can conclude that the highest average price is when staying at a Hotel Room versus a Shared Room. This gives us an idea of how much to expect to pay based on the different living situations.
+
+
+
+
+
+
+
+
+
+

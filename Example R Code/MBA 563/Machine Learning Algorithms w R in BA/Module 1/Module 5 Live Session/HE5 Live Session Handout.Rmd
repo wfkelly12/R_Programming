@@ -1,0 +1,224 @@
+---
+title: "HE5 Live Session Handout"
+author: "Ron Guymon"
+date: "7/8/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = T, message = F, warning = F)
+```
+
+## Load the libraries and read in the data
+```{r}
+library(tidyverse) # For lots of tidyverse packages and functions
+library(magrittr) # For pipe symbol
+library(jtools) # For summarizing regression model results. Also install huxtable and jtools.
+library(GGally) # For nice looking pairplots
+library(plotly) # For interactive plots like in Alteryxx
+
+# Read in data
+df <- readRDS('adSpend.rds') # Fictitious data for illustrating regression concepts
+str(df)
+```
+
+The adspend data is fictitious data that we will use to illustrate regression concepts. It consists of 710 observations and 5 variables. Here is a brief description about each column:
+
+1. __sales__: The dollar value of sales for the duration of the associated ad campaigns.
+2. __adSpend1__: The dollar value spent on advertising on Facebook.
+3. __adSpend2__: The dollar value spend on advertising on Instagram.
+4. __campaign__: The name of the advertising campaign.
+5. __store__: The nominal name of the store.
+
+## Univariate and bivariate exploration of the data
+Run the code cell below. It will create a bunch of plots for EDA on the first four columns of data which are explained in more detail below.
+
+```{r}
+# The ggpairs function is from the GGally package. It creates a rich pairplot
+ggpairs(df
+        , columns = 1:4 # Only include the first four columns,and leave out the last column, store.
+        , aes(color = campaign # Let's see if we can identify any difference among campaign. 
+              , alpha = .4 # Makes the colors partially transparent
+              )
+        )
+```
+
+What are some takeaways from the pairplot?
+
+## Sa campaign
+Let's first create a scatter plot between adspend and sales for the sa campaign.
+```{r}
+sa <- df %>% filter(campaign == 'sa')
+# Reshape the data from wide to long and then plot it
+sa %>%
+  pivot_longer(cols = c(adSpendFacebook, adSpendInstagram)
+               , names_to = 'ad', values_to = 'spend') %>%
+  ggplot(aes(x = spend, y = sales, color = ad)) +
+  geom_point() +
+  stat_smooth(method = 'lm', se = F)
+```
+
+What do these results tell us?
+
+Let's run a regression to quantify that relationship. Typically we include all variables that are of interest, and then remove variables that are insignificant. However, let's ignore store for now.
+
+```{r}
+lmsa <- lm('sales ~ adSpendFacebook + adSpendInstagram + store', data = sa)
+summary(lmsa)
+```
+
+What do these results tell us?
+
+
+Let's simplify the regression model to make it more parsimonious.
+
+```{r}
+lmsa1 <- lm('sales ~ adSpendFacebook', data = sa)
+summary(lmsa1)
+```
+
+What do these results tell us?
+
+
+## Sb campaign
+Let's create a scatter plot between adspend and sales for the sb campaign.
+```{r}
+sb <- df %>% filter(campaign == 'sb') 
+sb %>%
+  pivot_longer(cols = c(adSpendFacebook, adSpendInstagram), names_to = 'ad', values_to = 'spend') %>%
+  ggplot(aes(x = spend, y = sales, color = ad)) +
+  geom_point() +
+  stat_smooth(method = 'lm', se = F)
+```
+
+What does the plot tell us?
+
+
+Let's run a multiple regression model of sales on the amount spent on Facebook and Instagram for the sb campaign. Again, we usually start with multiple regression models and remove variables for which coefficients are insignificant.
+
+```{r}
+lmsb <- lm('sales ~ adSpendFacebook + adSpendInstagram + store', data = sb)
+summary(lmsb)
+```
+
+What do these results tell us?
+
+Let's create a simple regression model:
+
+```{r}
+lmsb1 <- lm('sales ~ adSpendInstagram', data = sb)
+summary(lmsb1)
+```
+* For every dollar spent on advertising on Instagram for campaign sb, sales increase by $17.02.
+
+## Sc campagin
+Repeat the process for the sc campaign that we used for the sa and sb campaign. Answer the following questions:
+1. What model is best for explaining relationships?
+2. What model is best for prediction?
+3. What social media platform gives the highest return on advertising dollars?
+
+```{r}
+sc <- df %>% filter(campaign == 'sc') 
+sc %>%
+  pivot_longer(cols = c(adSpendFacebook, adSpendInstagram), names_to = 'ad', values_to = 'spend') %>%
+  ggplot(aes(x = spend, y = sales, color = ad)) +
+  geom_point() +
+  stat_smooth(method = 'lm', se = F)
+  
+lmsc <- lm('sales ~ adSpendFacebook + adSpendInstagram + store', data = sc)
+summary(lmsc)
+
+lmsc1 <- lm('sales ~ adSpendFacebook', data = sc)
+summary(lmsc1)
+
+lmsc2 <-lm('sales ~ adSpendInstagram', data = sc)
+summary(lmsc2)
+
+lmsc3 <- lm('sales ~ adSpendFacebook + adSpendInstagram', data = sc)
+summary(lmsc3)
+
+```
+
+
+
+# Qualitative Variables
+## Sd campaign
+Let's visually investigate the sd campaign.
+
+```{r}
+sd <- df %>% filter(campaign == 'sd')
+sd %>%
+  pivot_longer(cols = c(adSpendFacebook, adSpendInstagram), names_to = 'ad', values_to = 'spend') %>%
+  ggplot(aes(x = spend, y = sales, color = ad)) +
+  geom_point() +
+  stat_smooth(method = 'lm', se = F)
+```
+
+What does this plot tell us?
+
+Let's plot the data again, but remove the amount spent on Instagram and color the points by store.
+```{r}
+ggplot(sd, aes(x = adSpendFacebook, y = sales, color = store)) +
+  geom_point()
+```
+
+What does this plot communicate? This scatter plot makes it clear that there is a consistent increasing relationship between Facebook ads and sales, but a different intercept. The
+
+Let's see what happens when we regress sales on adSpendFacebook as a benchmark before we also include store as a variable.
+```{r}
+lmsd <- lm('sales ~ adSpendFacebook', data = sd)
+summary(lmsd)
+```
+
+What do these results tell us?
+
+
+Now let's include store as an independent variable.
+
+```{r}
+lmsd1 <- lm('sales ~ adSpendFacebook + store', data = sd)
+summary(lmsd1)
+```
+
+What do these results tell us?
+
+
+
+## Se campaign
+Let's visually investigate the se campaign.
+
+```{r}
+se <- df %>% filter(campaign == 'se')
+se %>%
+  pivot_longer(cols = c(adSpendFacebook, adSpendInstagram), names_to = 'ad', values_to = 'spend') %>%
+  ggplot(aes(x = spend, y = sales, color = ad)) +
+  geom_point() +
+  stat_smooth(method = 'lm', se = F)
+```
+
+What does this plot communicate?
+
+
+Let's evaluate the relationships with a multiple regression model.
+```{r}
+lmse <- lm('sales ~ adSpendFacebook + adSpendInstagram + store', data = se)
+summary(lmse)
+```
+
+What do these results tell us?
+
+## Business application
+
+#### How can these models be used for predicting future performance?
+Let's predict the sales for two different scenarios:
+1. When adSpendFacebook is $65, adSpendInstagram is \$70, and store is C.
+2. When adSpendFacebook is $80, adSpendInstagram is \$55, and store is A.
+
+
+#### How should future ad dollars be spent?
+
+
+
+
+
+

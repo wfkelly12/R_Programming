@@ -1,0 +1,118 @@
+---
+title: "Residuals and Predictions"
+output:
+  html_document:
+    df_print: paged
+---
+Recall that our broad business question is, "How are quarterly sales affected by quarter of the year, region, and by product category (parent name)?" Creating a model to help answer this question can certainly be helpful for predicting future performance. Another way in which the model can be used for business purposes is to evaluate past performance.
+
+In this video we will explain residuals and then discuss how they can be used for evaluating business performance. We will also show how you can use R to make predictions from a model, rather than calculating them by hand.
+
+## Preliminaries
+If you haven't already done so, then install the [tidyverse][1] collection of packages.
+
+You only need to install these packages once on the machine that you're using. If you have not already done so, then you can do so by uncommenting the code chunk below and running it. If you *have* already done so, then you should *not* run the next code chunk.
+```{r}
+# install.packages('tidyverse')
+```
+
+Load the tidyverse collection of packages.
+```{r}
+library(tidyverse)
+```
+
+Make sure that you have also downloaded the tecaRegressionData.rds file into the same folder in which this file is saved. Use the next code chunk to read in the data and load it as a dataframe object.
+```{r}
+trd <- readRDS('tecaRegressionData.rds')
+```
+
+## Residuals  
+Let's create a linear model to predict totalRevenue by regressing totalRevenue on Fuel_py1 from the trd dataframe, and then look at a summary of the model.
+```{r}
+lm1 <- lm(totalRevenue ~ Fuel_py1, data = trd)
+summary(lm1)
+```
+
+Notice that the second section of this output is Residuals. Residuals are simply the difference between the actual observations of totalRevenue that were used to create the model and the values of totalRevenue that are fitted from the model. 
+
+Let's look at some specific observations by first creating a dataframe that has the actual values of Fuel_py1, the totalRevenue, and two new columns that we will create. One new column, fittedRevenue we will create by using the coefficient estimates from the linear model. The second column we will create, residuals, by subtracting the values from the fittedRevenue column from the totalRevenue.
+
+```{r}
+resids <- trd %>%
+  select(Fuel_py1, totalRevenue) %>%
+  mutate(fittedRevenue = -11510 + 35097*Fuel_py1
+         , residuals = totalRevenue - fittedRevenue)
+head(resids)
+```
+
+The first row indicates that when the value of Fuel_py1 is equal to .559, the fitted value of totalRevenue is 8112.84. However, the actual totalRevenue of 7522.70 was below that amount by 590.14. In other words, the actual value of totalRevenue is *below* the line created by the linear model.
+
+Let's compare that to the second row, which indicates that when the value of Fuel_py1 is equal to .502, the fitted value of totalRevenue is 6116.85. This time, the actual value of totalRevenue of 7585.94 is above that amount by 1469.09 meaning that it falls *above* the line created by the linear model.
+
+## Business Management Application of Residuals  
+Residuals have an important use for business management If we think of the fitted values as a target, or expectation of what total quarterly revenue should be, then the residual tells us whether that revenue is more or less than expected. In other words, it can be thought of as a variance. So, rather than use the overall average as the benchmark, we can use a value that is customized based on prior year's performance.
+
+Let's create a new dataframe that we can use to identify the five store/quarter combinations that beat expectations by the most, as well as the five stores that missed expectations by the most. Notice that we don't have to manually calculate the fitted values or the residuals because they are saved in the results of the regression output.
+```{r}
+# Create a dataframe with residuals and identifying information
+resids2 <- trd %>%
+  select(site_name, quarter, Fuel_py1, totalRevenue)
+resids2$fittedRevenue = lm1$fitted.values
+resids2$residuals = lm1$residuals
+
+# Get the five best performing store/quarter combinations
+best <- resids2 %>%
+  arrange(desc(residuals)) %>%
+  .[1:5,]
+# Get the five worst performing store/quarter combinations
+worst <- resids2 %>%
+  arrange(residuals) %>%
+  .[1:5,] %>%
+  arrange(desc(residuals))
+
+# Combine the five best and worst into one dataframe and display them
+bestWorst <- bind_rows(best,worst)
+bestWorst
+```
+* Best stores  
+  * It looks like the store at 561 Gardendale beat their goal during all four periods for 2019 by at least $19,720.   
+  * The store at 4923 Commerce City also beat its expectation by about 14,500.  
+* Worst stores  
+  * The store at 446 Bessemer missed its expected quarterly revenue during all four quarters of 2019by at least $8,713.  
+  * The store at 187 Tallassee also missed its expected quarterly revenue by about $10,215.
+  
+If I trust those expectations, then as a manager, I may want to look into the two stores that underperformed during 2019 to work on improving their performance. In contrast, I may want to look into the two stores that outperformed during 2019 to find out if their best practices can be replicated in other locations.  
+
+## Predicting Future Values  
+This linear model can also be used to predict future values. Let's say that we want to find out what totalRevenue would be  for stores in which the percentage of sales from the same quarter during the previous year were 30%, 35%, 40%, 50%, and 55%. This could be useful for planning the number of employees to hire and how much inventory to stock.
+
+It's not too difficult to make these calculations by creating a new column because this is a simple model. However, this can become very cumbersome for more complex models, so it's worth learning how to use the `predict()` function to make predictions for out-of-sample observations.
+```{r}
+# Create a dataframe of new observations
+newObservations <- data.frame(storeName = c('1', '2', '3', '4', '5')
+                              , Fuel_py1 = c(.3, .35, .4, .5, .55))
+# Add a new column of predicted values
+newObservations$predictedRevenue = predict(lm1, newObservations)
+# Display the dataframe in this notebook
+newObservations
+```
+
+Creating predicted values is also an important part of validating the accuracy of a model by testing out its accuracy on observations that were not used to create the model. Thus, this predict function will come in handy in future lessons, as well.
+
+## Concluding Comments  
+In conclusion, we can use a regression model to predict future performance, as well as evaluate past performance. However, when we do that it’s important to make sure that we have a model that we can trust and that has a sufficiently high R-squared. 
+
+Residuals are a simple concept and can be used to identify observations that beat and missed expectations by the greatest amount. This is helpful for managing by exception.
+
+Making predictions helps forecast future performance and improve plans. The predict function is a simple way to create these predictions. This function will also come in handy for validating model accuracy using out-of-sample data.
+
+
+
+
+
+
+
+
+
+
+[1]: https://www.tidyverse.org/packages/

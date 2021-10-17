@@ -1,0 +1,28 @@
+{
+    "id": "5F63E64B",
+    "path": "~/Documents/iMBA Classes/MBA 561/Introduction to Business Analytics with R/Module 2/R Notebooks/Wills_R_Notebooks_Test.Rmd",
+    "project_path": null,
+    "type": "r_markdown",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1618799914417.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "tempName": "Untitled1",
+        "chunk_output_type": "inline",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "19,24",
+        "scrollLine": "14"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1618800735,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1618800735492,
+    "read_only": false,
+    "read_only_alternatives": []
+}

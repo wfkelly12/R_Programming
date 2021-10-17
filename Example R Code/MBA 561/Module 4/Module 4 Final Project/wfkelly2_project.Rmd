@@ -1,0 +1,137 @@
+MBA 561 Final Project
+---
+title: "wfkelly2_project"
+author: "William Kelly"
+date: "5/7/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Load Libraries
+```{r}
+library(tidyr) # For lots of data wrangling tasks
+library(magrittr) # For piping data into functions
+library(lubridate) # For dealing with dates
+library(stringr) # String functions
+library(forcats) #fct infreq functions 
+library(dplyr) # Data manipulation
+```
+
+
+# Q1 Read in ities.csv and max_temp.csv into Dataframes
+```{r}
+df <- read.csv("ities.csv") # Read ities.csv into data frame
+df_weather_weekly <- read.csv("max_temp.csv") # Read max_temp.csv into data frame
+```
+
+# Q2 Display Rows and Cols of df and df_weather_weekly
+```{r}
+dim(df) # Display Row/Col of df
+dim(df_weather_weekly) # Display Row/Col of df_weather_weekly
+```
+# Q3 Display structures of df and df_weather_weekly
+```{r}
+str(df) # Display structure of df
+str(df_weather_weekly) # Display structure of df_weather_weekly
+```
+Many of the Datatypes in df are character so it is difficult to do calculations
+unless you convert to factor type especially date. Also the price and total due
+are in decimal numeric format. In the df_weather_weekly data frame the WeekStarting
+is in character need to convert to factor in order to do calculations in freq.
+
+
+# Q4 Display summaries of df and df_weather_weekly
+```{r}
+summary(df) # Display summary of df
+summary(df_weather_weekly) # Display summary of df_weather_weekly
+```
+# Q5 Display missing values in df
+```{r}
+colSums(is.na(df)) # Display columns with missing values
+
+# Calculate mean Price of Chicken and Onion Kabob (C_O) and Beef and Squash Kabob (B_S)
+# Where Operation Type is Sale in order to fill in missing observations.
+C_O_kabob_sale <- df %>%
+  filter(LineItem=='Chicken and Onion Kabob' & OperationType=='SALE') %>%
+  summarise(mean(Price, na.rm = T))
+
+B_S_kabob_sale <- df %>%
+  filter(LineItem=='Beef and Squash Kabob' & OperationType=='SALE') %>%
+  summarise(mean(Price, na.rm = T))
+
+# Replace Line Items with Average Price values calculated above and Calc Total Due
+df %<>% mutate(
+  Price = case_when(
+    is.na(Price) & LineItem=='Chicken and Onion Kabob' ~ C_O_kabob_sale[1,1]
+    , is.na(Price) & LineItem=='Beef and Squash Kabob' ~ B_S_kabob_sale[1,1]
+    , T~Price
+  ),
+  TotalDue = Price*Quantity
+)
+summary(df)
+```
+Noticed NAs located at Line Item Chicken and Onion Kabob and Beef and Squash Kabob
+So Calculated the mean of those line items in Sale Operation Type
+Then used the case when to replace the NA Price and TotalDue
+Wanted to input in order to keep the records for each customer transaction.
+
+# Q6 Create Dataset df_daily aggregate df at daily level w/ Quantity & TotalDue
+```{r}
+df_daily <- df %>%
+  mutate(
+    Date = mdy(Date)
+    , Date = round_date(Date, 'day')
+  ) %>%
+  group_by(Date) %>%
+  summarise(Quantity = sum(Quantity)
+            , TotalDue = sum(TotalDue)) %>%
+  ungroup()
+```
+Used the sum function for the columns Quantity and TotalDue in order to calculate
+the total of cols Quantity and Total Due for each day to figure out which day of the year
+has the most frequency of purchases and understand consumers preferences.
+
+# Q7 Convert df_weather_weekly from wide to long
+```{r}
+df_weather_daily <- df_weather_weekly %>% 
+  pivot_longer(cols = Monday:Sunday
+               , names_to = 'day'
+               , values_to = 'max_temp')
+```
+
+# Q8 Merge/Join df_daily and df_weather_daily
+```{r}
+df_weather_daily %<>%     # Convert WeekStarting col to Date to create primary key
+  mutate(Date = mdy(WeekStarting))
+
+df_weather_daily$day <- as_factor(df_weather_daily$day) %>%
+  as.numeric()
+
+df_weather_daily$Date <- df_weather_daily$day + df_weather_daily$Date - 1 
+
+df_final <- df_daily %>%
+  inner_join(df_weather_daily, by = 'Date') %>%
+  arrange(desc(Date))
+```
+
+# Q9 Create Pair Plot for df_final
+```{r}
+#Pair Plot of Quantity, TotalDue, and max_temp from df_final
+plot(df_final[,c('Quantity', 'TotalDue', 'max_temp')], cex = .1)
+```
+
+From the pair plots shown there is a positive relationship b/t 'Quantity' & 'TotalDue'
+signifying that as the quantity goes up the total due variable goes up as well.
+Also there are several outliers w/ Quantity vs TotalDue at 0 and 1000(Q) & 15000(TD). 
+In addition, the relationship b/t max_temp & quantity and max_temp & TotalDue 
+don't have as much correlation it is spread throughout w/ max_temp ranging from 40 to 100.
+
+
+ 
+
+  
+
+

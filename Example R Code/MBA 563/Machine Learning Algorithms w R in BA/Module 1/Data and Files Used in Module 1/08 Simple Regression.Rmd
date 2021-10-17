@@ -1,0 +1,131 @@
+---
+title: "Simple Regression"
+output:
+  html_document:
+    df_print: paged
+---
+Linear models can be very effective tools for forecasting a business’s performance. Visually fitting a line to a scatter plot is effective, but it has two main drawbacks: first, it’s subjective. The line I draw could be different from the line you draw, and there’s not a great way to determine which line is best. The second problem with visually fitting a line is that it’s fairly labor intensive. Regression analysis is a powerful statistical technique that can help reduce these problems.
+
+Regression analysis is the workhorse of machine learning. The main objective of regression analysis is the same as our objective when visually drawing a line to the data: to find the parameters for a linear function using historical data. This can help us answer the main question of interest in our setting: How are quarterly sales affected by quarter of the year, region, and by product category (parent name)?
+
+Let’s jump right in and do some regression analyses in R, and then we’ll have a concrete scenario for discussing the terms and principles.
+
+## Preliminaries
+If you haven't already done so, then install the [tidyverse][1] collection of packages.
+
+You only need to install these packages once on the machine that you're using. If you have not already done so, then you can do so by uncommenting the code chunk below and running it. If you *have* already done so, then you should *not* run the next code chunk.
+```{r}
+# install.packages('tidyverse')
+```
+
+Load the tidyverse collection of packages.
+```{r}
+library(tidyverse)
+```
+
+Make sure that you have also downloaded the tecaRegressionData.rds file into the same folder in which this file is saved. Use the next code chunk to read in the data and load it as a dataframe object.
+```{r}
+trd <- readRDS('tecaRegressionData.rds')
+```
+
+## Regress totalRevenue on Fuel_py1 With a Scatter Plot  
+Let's first add a regression line to a scatter plot by using the stat_smooth function from the ggplot2 package. The "lm" value for the method parameter indicates that we are using a linear model to add a trendline to the scatter plot.
+```{r}
+ggplot(trd, aes(x = Fuel_py1, y = totalRevenue)) +
+  geom_point() +
+  stat_smooth(method = 'lm')
+```
+
+The line that is plotted on the chart is based on a model that was created by using an ordinary least squares regression algorithm, or OLS. The "least squares" part of OLS is just a way to explain that it's creating a line that reduces the sum of squared distances from each data point and the line. We don't need to go into why squared distance is used, rather than absolute distance. The important thing to remember at this point is that conceptually, this algorithm calculates the slope and intercept of a line that mathematically reduces the sum of the distance between all of the data points and the line. 
+
+## Regress totalRevenue on Fuel_py1 Using the lm() function  
+If we want to find out the parameter values for the line that is plotted on that graph, we can easily do so using the lm function. Here's how we can create a linear model to predict totalRevenue by regressing totalRevenue on Fuel_py1 from the trd dataframe.
+```{r}
+lm1 <- lm(totalRevenue ~ Fuel_py1, data = trd)
+```
+
+We can now see that there's a lm1 object in the Global Environment, and that it's a list of 12 items. We can get a summary of the key elements of this lm1 object by using the `summary()` function.
+```{r}
+summary(lm1)
+```
+
+Let's go through the elements of this summary.
+
+### Call  
+First, notice that the Call: portion at the top is a reminder of how these results were created. Of primary importance, it's good to be reminded that the dependent variable is totalRevenue.
+
+
+### Coefficients Table
+We will skip over the Residuals table for now. The next table Coefficients, is worth discussing. The most important part of this table is the coefficient estimates of the intercept and the Fuel_py1 variable, which are -11,510 and 35,097 respectively, which are somewhat similar to the values we found when we manually fit a line to the scatter plot. Using these parameters from regression, we have the following linear model: $\textrm{totalRevenue} = -11,150 + 35,097*\textrm{Fuel_py1}$.
+
+At first glance, the coefficient for the intercept appears to be inconsistent with the line on the scatter plot, but that's because the x-axis starts at .3 rather than at 0. If we expand the limits of the x-axis and the range of the linear model so that it goes to zero, then we can see that the line crosses the y-axis at the point that corresponds to the intercept coefficient of -11,510.
+
+```{r}
+ggplot(trd, aes(x = Fuel_py1, y = totalRevenue)) +
+  geom_point() +
+  expand_limits(x = c(0,1)) +
+  stat_smooth(method = 'lm', fullrange = T)
+```
+
+#### Statistical Significance of Coefficients
+Another part of this table that is worth pointing out is the Std. Error column, which stands for standard error. This column represents the amount of variation in the estimate, and is similar to a standard deviation. The larger the standard error, the less certain we are in the estimate.
+
+If you divide the coefficient estimate by the standard error, you get the t-value, which is in the third column. This corresponds to a distance from the center of a t-distribution. The t-value is used to calculate the value in the last column.
+
+The last column, Pr(>|t|), is also known as the p-value. This value is what tells us if we can be confident that the coefficient estimate is different from zero. If the p-value is less than .05 then typically we conclude that the coefficient estimates are statistically significant, meaning that we are confident that they are not due to chance. T-values that have an absolute value of 2 typically result in a p-value that is .05 or less.
+
+The statistical significance is important when making inferences and gaining understanding of relationships. You can see that the table below uses a series of asterisks and periods to quickly denote the level of statistical significance. In the case of this regression model, we can see that both coefficients for the intercept and the Fuel_py1 variable have p-values that are very small, and are therefore statistically significant.
+
+### Other Diagnostics in the Bottom Table
+The information under the bottom of the table is useful for prediction purposes. The residual standard error is similar to the average deviation between the actual data point and the line.
+
+#### R-Squared  
+The Multiple R-squared, often referred to simply R-squared, tells us how much variation in the dependent variable is explained by the independent variable.  In our case, 39.95% of the variation in totalRevenue is explained by Fuel_py1. The value of multiple R-squared can range from zero, to one. If the value is one, then the value of totalRevenue is perfectly predictable by Fuel_py1, and all of the dots would fall on the line. For prediction purposes, the confidence that we place in our predictions correspond to the R-squared.
+
+Why is it called R-squared? Well, correlation is often abbreviated by the letter R. So, R-squared is simply the squared correlation coefficient between totalRevenue and Fuel_py1. We can verify this by taking the correlation coefficient of 0.63 and raising it to the second power, which gives us approximately .3969. The small difference is due to rounding.
+
+#### F-statistic and p-value  
+The last piece of information for now is to consider the p-value of < .2.2e-16 that corresponds to the F-statistic. This tells us whether or not the model improves predictions relative to using only the average value. A p-value of less than .05 is the typical cutoff point for concluding that the model explains more of the variation in totalRevenue than the mean of totalRevenue.
+
+## Regress totalRevenue on Juicetonics_py1 Using the lm() function  
+Now let's use the `lm()` function to evaluate the parameters when totalRevenue is regressed on Juicetonics_py1.
+```{r}
+lm2 <- lm(totalRevenue ~ Juicetonics_py1, data = trd)
+summary(lm2)
+```
+
+The coefficient estimates on the intercept and Juicetonics_py1 variable are 14,295.8 and -150,275.5 respectively. Based on the very small p-values, these are statistically significant suggesting that we can be confident that they are different from zero.
+
+The R-squared value is only 0.027. Remember that this is equal to the squared value of the correlation coefficient of -.1647. This R-squared value indicates that only 2.7% of the variation of totalRevenue is explained by Juicetonics_py1 relative to 39.95% of the variation that is explained by Fuel_py1. 
+
+While 2.7% is not very much, it's still an improvement over using only the mean. This is indicated by the p-value on the F-statistic of .000085, which is much smaller than .05.
+
+## Regress totalRevenue on Juicetonics_py1 With a Scatter Plot  
+For comparison purposes, let's now use a scatter plot to regress totalRevenue on a different independent variable, Juicetonics_py1. We'll visualize them on the same plot to make the comparison easier.
+```{r}
+trd %>% 
+  pivot_longer(cols = c(Fuel_py1, Juicetonics_py1), names_to = 'parent_name', values_to = 'pctRev_py1') %>%
+  ggplot(aes(x = pctRev_py1, y = totalRevenue)) +
+  geom_point() +
+  stat_smooth(aes(color = parent_name), method = 'lm', fullrange = T, se = F)
+
+```
+
+This plot highlights the positive versus negative relationships. It also makes it easier to see that there is less of a linear relationship between totalRevenue and Juicetonics_py1 relative to totalRevenue and Fuel_py1.
+
+## Concluding Comments
+To sum up, regression is an algorithm that accomplishes the same goal as visually fitting a line to a scatter plot. It creates a line that minimizes the distance between the points and the line. R-squared is an important diagnostic metric that indicates the amount of variation in the dependent variable that is explained by the independent variable.
+
+Let's consider a few important points in relation to using this algorithm for business analytics. First, the regression algorithm doesn’t know anything about the context, so it’s important to make sure that you’re using data that is representative of the population or else the model that results from the regression algorithm will be skewed towards outliers or that will not give helpful predictions.
+
+Second, it's important that you consider the question that you’re trying to answer. If the goal is to make a forecast, as it is in our example, then you should make sure that you consider only variables that can be reliably estimated in advance, like last year’s sales. You will also probably focus more on R-squared relative to the coefficient estimates.
+
+On the other hand, if the goal is to understand the relationship between variables, then you will probably focus more on the coefficient estimates because they can quantify how the dependent variable changes with a one unit change in the independent variable. The p-values for the coefficient estimates help you know know how confident you can be in those coefficient estimates.
+
+
+
+
+
+
+
+[1]: https://www.tidyverse.org/packages/

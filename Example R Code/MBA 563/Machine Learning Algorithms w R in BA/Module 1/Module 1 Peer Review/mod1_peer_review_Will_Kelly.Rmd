@@ -1,0 +1,131 @@
+---
+title: "mod1_peer_review_Bike_Share"
+author: "William Kelly"
+date: "7/7/2021"
+output: html_document
+---
+
+# Load Libraries
+```{r}
+library(tidyverse)
+library(lubridate)
+library(GGally)
+```
+
+# Read in Bike Sharing Dataset "day.csv"
+```{r}
+df <- read.csv("day.csv")
+```
+
+# Structure and Summary of Data
+```{r}
+str(df)
+summary(df)
+```
+
+# Convert dteday to month_name column
+```{r}
+df$dteday <- ymd(df$dteday)
+df$month_name <- as.character(month(df$dteday, label = TRUE))
+```
+
+# Simple Linear Regression cnt (dep) & month_name (indep)
+```{r}
+model1 <- lm(cnt ~ month_name, data = df)
+summary(model1)
+```
+
+The R Squared value is 0.3906 or 39.06% of the variation in cnt explained by month_name.
+And the adjusted R Squared is 38.1% which shows that the fitted values are below the actual values of 39.06%. This shows a positive correlation & also show less variation in the regression model meaning less variation in dependent variable explained by indep variable.
+Also the P-Value is small showing more statistical confidence in the model.
+
+# GGpairs Plot for month_name and cnt
+```{r}
+ggpairs(df
+        , columns = c(16,17) # Only include month_name and cnt
+        , aes(color = month_name # Let's see if we can identify any difference among campaign. 
+              , alpha = .4 # Makes the colors partially transparent
+              )
+        )
+```
+
+
+# Predict which month set as reference and cnt (April is Reference)
+```{r}
+ggplot(model1, aes(x = month_name, y = cnt)) +
+  geom_point() +
+  expand_limits(x = c(0,1)) +
+  stat_smooth(method = 'lm', fullrange = T)
+
+newObservations <- data.frame(month_name = 'Apr'
+                              , cnt = c(2000, 3000, 4000) )
+
+newObservations$predictedCnt = predict(model1, newObservations)
+
+```
+
+As shown in the summary of Model1, April is set as the reference month.
+The predicted count for April would be, cnt = 4484.9
+
+
+# Use Coefficients to estimate cnt for months of January and June
+```{r}
+cnt_Jan <- 4484.9 + -2308.6
+cnt_Jan
+cnt_Jun <- 4484.9 + 1287.5
+cnt_Jun
+```
+
+# Multiple Linear Regression cnt (dep) & temp/month_name (indep)
+```{r}
+model2 <- lm(cnt ~ temp + month_name, data = df)
+```
+
+# Summary of Model2
+```{r}
+summary(model2)
+```
+
+***Explain why the R-squared is different from the two simple regression models
+
+Model2 is different from Model1 due to adding in the temp into the Linear Regression Model.
+Since temp has a higher coefficient meaning higher correlation, the R squared value is a little bit higher than the R squared in Model1.
+
+***Compare the coefficient estimates for the month_nameJan variable in Model1 and Model2. 
+
+With regular text explain why the coefficient estimates are different.
+Model1 Jan Coefficient is -2308.6 while Model2 Jan coeff is -852.31.
+They are different because when adding in the Temp variable, the correlation increases which is shown by the increase in R squared causing a better correlation in Model2 Jan coeff. 
+
+
+***With either a code chunk or regular text, use the coefficient estimates from Model2 to report the predicted cnt for the month of January when the temperature is .25
+```{r}
+cnt_Jan_Temp = 1554.39 + -852.31 + 0.25 * 6235.14
+cnt_Jan_Temp
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 

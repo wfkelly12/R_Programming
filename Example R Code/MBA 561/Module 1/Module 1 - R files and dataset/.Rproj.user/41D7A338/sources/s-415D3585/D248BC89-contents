@@ -1,0 +1,26 @@
+#############GETTING TO KNOW YOUR DATA PART 1#############
+# Read in data----
+df <- read.csv('jan17Items.csv', stringsAsFactors = F, header = T)
+dfw <- read.csv('jan17Weather.csv', stringsAsFactors = F, header = T, sep = '\t')
+
+# Explore Structure of Data Frame----
+
+##Summary of Data
+str(df)
+str(dfw)
+
+##Dimensions
+dim(df)
+dim(dfw)
+
+##Rows
+nrow(df)
+nrow(dfw)
+
+##Columns
+ncol(df)
+ncol(dfw)
+
+##Names of Columns
+names(df)
+names(dfw)
